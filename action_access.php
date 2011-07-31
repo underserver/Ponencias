@@ -36,6 +36,5 @@ if( $_validator->validate() && $login ==1 ){
 		$err = $err.";".$e[$i]["field"];
 	}
 	header( 'Location: ./admin_access.php?id='.base64_encode( "0" ).'&tk='.base64_encode($err) );
-	
 }
 ?>
