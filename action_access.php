@@ -1,5 +1,5 @@
 <?php
-// Just a Test
+// Just a Test, now from netbeans
 /**********************************************************************
  *  Author : Sergio Ceron Figueroa (sxceron@laciudadx.com)
  *  Alias  : sxceron
