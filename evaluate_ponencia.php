@@ -41,22 +41,24 @@ $sql .= "order by ponencias.ponencia_fecha";
 $ponencias = $db->get_results($sql);    
 ?>
 
-<div id="content"><?php if( isset( $_GET[ "id" ] ) ){ ?>
+<div id="content">
+<?php if( isset( $_GET[ "id" ] ) ){ ?>
 <div align="center" class="msg">
 <div class="bl3">
 <div class="br">
 <div class="tl">
 <div class="tr2">
-<?=$_i18n[ "newproducte".base64_decode( $_GET[ "id" ] ) ]?>
+<?=$_i18n[ "st_" . $_GET[ "id" ] ]?>
 </div>
 </div>
 </div>
 </div>
 </div>
-<?php }
+<?php 
+}
 $fields = " ".base64_decode( $_GET[ "tk" ] );
 ?>
-<form action="#" method="post"
+<form action="action_evaluateponencia.php" method="post"
 	id="settings" enctype="multipart/form-data">
 	<input type="hidden" name="at" value="7cf0ac816f615996-1128ad98933">
 <table>
@@ -68,7 +70,7 @@ $fields = " ".base64_decode( $_GET[ "tk" ] );
 		<td><span class="details"> <?=$ponencias[0]->ponencia_titulo?></span></span></td>
 	</tr>
 	<tr>
-		<th>Fecha de presentación:</th>
+		<th>Fecha de presentaciÃ³n:</th>
 		<td><span class="details"> <?=$ponencias[0]->ponencia_fecha?></span></td>
 	</tr>
 	<tr>
@@ -100,24 +102,24 @@ $fields = " ".base64_decode( $_GET[ "tk" ] );
 <td style="border-left: 1px solid #ccc; padding-left: 30px;padding-right: 100px;" valign="top">
 <table>
 	<tr>
-		<td class="eval">Evaluación:</td>
+		<td class="eval">EvaluaciÃ³n:</td>
 	</tr>
 	<tr>
-		<td class="left">Calificación:</td>
+		<td class="left">CalificaciÃ³n:</td>
 	</tr>
-	<tr>
+	<tr class="<?=( strpos( $fields, 'calif' ) ? "err" : "" )?>">
     <td>
-      <span class="radio"><input type="radio" name="rate" value="0" id="rate1" /> <br>&nbsp;&nbsp;0</span>
-      <span class="radio"><input type="radio" name="rate" value="1" id="rate2" /> <br>&nbsp;&nbsp;1</span>
-      <span class="radio"><input type="radio" name="rate" value="2" id="rate3" /> <br>&nbsp;&nbsp;2</span>
-      <span class="radio"><input type="radio" name="rate" value="3" id="rate4" /> <br>&nbsp;&nbsp;3</span>
-      <span class="radio"><input type="radio" name="rate" value="4" id="rate5" /> <br>&nbsp;&nbsp;4</span>
-      <span class="radio"><input type="radio" name="rate" value="5" id="rate1" /> <br>&nbsp;&nbsp;5</span>
-      <span class="radio"><input type="radio" name="rate" value="6" id="rate2" /> <br>&nbsp;&nbsp;6</span>
-      <span class="radio"><input type="radio" name="rate" value="7" id="rate3" /> <br>&nbsp;&nbsp;7</span>
-      <span class="radio"><input type="radio" name="rate" value="8" id="rate4" /> <br>&nbsp;&nbsp;8</span>
-      <span class="radio"><input type="radio" name="rate" value="9" id="rate5" /> <br>&nbsp;&nbsp;9</span>
-      <span class="radio"><input type="radio" name="rate" value="10" id="rate5" /> <br>&nbsp;&nbsp;10</span>
+      <span class="radio"><input type="radio" name="calif" value="0" id="rate1"  <?=($ponencias[0]->ponencia_calif==0?"selected":"")?>/> <br>&nbsp;&nbsp;0</span>
+      <span class="radio"><input type="radio" name="calif" value="1" id="rate2"  <?=($ponencias[0]->ponencia_calif==1?"selected":"")?> /> <br>&nbsp;&nbsp;1</span>
+      <span class="radio"><input type="radio" name="calif" value="2" id="rate3"  <?=($ponencias[0]->ponencia_calif==2?"selected":"")?> /> <br>&nbsp;&nbsp;2</span>
+      <span class="radio"><input type="radio" name="calif" value="3" id="rate4"  <?=($ponencias[0]->ponencia_calif==3?"selected":"")?> /> <br>&nbsp;&nbsp;3</span>
+      <span class="radio"><input type="radio" name="calif" value="4" id="rate5"  <?=($ponencias[0]->ponencia_calif==4?"selected":"")?> /> <br>&nbsp;&nbsp;4</span>
+      <span class="radio"><input type="radio" name="calif" value="5" id="rate1"  <?=($ponencias[0]->ponencia_calif==5?"selected":"")?> /> <br>&nbsp;&nbsp;5</span>
+      <span class="radio"><input type="radio" name="calif" value="6" id="rate2"  <?=($ponencias[0]->ponencia_calif==6?"selected":"")?> /> <br>&nbsp;&nbsp;6</span>
+      <span class="radio"><input type="radio" name="calif" value="7" id="rate3"  <?=($ponencias[0]->ponencia_calif==7?"selected":"")?> /> <br>&nbsp;&nbsp;7</span>
+      <span class="radio"><input type="radio" name="calif" value="8" id="rate4"  <?=($ponencias[0]->ponencia_calif==8?"selected":"")?> /> <br>&nbsp;&nbsp;8</span>
+      <span class="radio"><input type="radio" name="calif" value="9" id="rate5"  <?=($ponencias[0]->ponencia_calif==9?"selected":"")?> /> <br>&nbsp;&nbsp;9</span>
+      <span class="radio"><input type="radio" name="calif" value="10" id="rate5" <?=($ponencias[0]->ponencia_calif==10?"selected":"")?> /> <br>&nbsp;&nbsp;10</span>
     </td>
 	</tr>
 	<tr>
@@ -129,11 +131,16 @@ $fields = " ".base64_decode( $_GET[ "tk" ] );
 	<tr>
 		<td class="left">Dictamen:</td>
 	</tr>
-	<tr>
-		<td><input type="file" name="dictamen"></td>
+	<tr class="<?=( strpos( $fields, 'dictamen' ) ? "err" : "" )?>">
+		<td>
+			<input type="file" name="dictamen">
+		</td>
 	</tr>
 	<tr>
-		<td colspan="2" align="center"><a href="admin_editponencia.php?pid=<?=$pid?>" class="button senddictamen">Editar</a></td>
+		<td colspan="2" align="center">
+			<input type="hidden" name="pid" value="<?=$_GET["pid"]?>">
+			<a href="javascript:document.forms[0].submit();" class="button senddictamen">Enviar dictamen</a>
+		</td>
 	</tr>
 </table>
 </td>

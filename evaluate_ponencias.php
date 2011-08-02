@@ -78,7 +78,7 @@ $ponencias = $db->get_results($sql);
 		<th id="header">Titulo</th>
 		<th id="header"><?=$_i18n["date"]?></th>
 		<th id="header">Eje tematico</th>
-		<th id="header">Acción</th>
+		<th id="header">AcciÃ³n</th>
 	</tr>
 	<?php for( $i = 0, $subtotal = 0; $i < count($ponencias); $i++){
 		?>
@@ -99,7 +99,7 @@ $ponencias = $db->get_results($sql);
 if( $i == 0 ){
 	?>
 	<tr class="" id="ARTICLE_COLLECTION_SELECTION_0">
-		<td colspan="7" align="center"><em>No tiene ninguna ponencia asiganda para evaluación</em></td>
+		<td colspan="7" align="center"><em>No tiene ninguna ponencia asiganda para evaluaciÃ³n</em></td>
 	</tr>
 	<?php } ?>
 
