@@ -14,7 +14,7 @@ include_once "./includes/security.php";
 
 $sselected = 3; $subtitle = "Panel de administracion";$selected = 0;
 $items = array( $_i18n["menu1"], "Ponencias", "Usuarios", "Nueva ponencia", "Nuevo usuario"  );
-$links = array( "./adminpanel.php", "./adminpanel_sales.php", "./adminpanel_products.php","./adminpanel_categories.php", "./adminpanel_users.php" );
+$links = array( "./adminpanel.php", "./adminpanel_sales.php", "./adminpanel_users.php","./adminpanel_categories.php", "./adminpanel_users.php" );
 include("includes/header.php");
 ?>
 
@@ -74,7 +74,7 @@ $processed = $db->get_var("select count(*) from compras where compra_estado=2");
 	<h3><a href="adminpanel_products.php">Ponencias pendientes</a>
 	</h3>
 	<span class="beta"><?=$articles?> </span> <span> - <?=$_i18n["admin.active"]?></span>
-	<p><a href="#" class="greenlink"> Lista de ponencias pendientes de revisión </a>
+	<p><a href="#" class="greenlink"> Lista de ponencias pendientes de revisiï¿½n </a>
 	</p>
 	</li>
 	<li class=""><a href="ChatSettings" class="calendar"><span><?=$_i18n["categories.submenu"]?></span></a>

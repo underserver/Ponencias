@@ -3,10 +3,10 @@
  *  Author : Sergio Ceron Figueroa (sxceron@laciudadx.com)
  *  Alias  : sxceron
  *  Web    : http://www.dotrow.info
- *  Name   : jShop v1.0
- *  Desc   : Da de alta un nuevo usuario como cliente en modo rapido
+ *  Name   : Ponencias v1.0
+ *  Desc   : Da de alta un nuevo usuario en modo rapido
  * 			 name		: Obligatorio (nombre)
- * 			 password	: Obligatorio (contraseña)
+ * 			 password	: Obligatorio (contraseï¿½a)
  *
 ***********************************************************************/
 // Include file headers
@@ -19,7 +19,7 @@ header( "Location: ./login.php" );
 
 $_validator = new Validator();
 $_validator->setMethod( "POST" );
-$_validator->setVars( array( "name:required", "password:required" ) );
+$_validator->setVars( array( "name:required", "password:required", "type:required" ) );
 
 if( $_validator->validate() ){
 	$values = $_validator->getValues();
@@ -29,9 +29,9 @@ if( $_validator->validate() ){
 		exit(0);
 	}
 
-	$sql  = "insert into usuarios(pago_nombre,usuario_nombre,usuario_password,usuario_alias) ";
-	$sql .= " values('".$values[ "name" ]."','".$values[ "name" ]."'";
-	$sql .= ",'".md5($values[ "password" ])."','".$values[ "name" ]."')";
+	$sql  = "insert into usuarios(usuario_alias,usuario_password,usuario_tipo) ";
+	$sql .= " values('".$values[ "name" ]."'";
+	$sql .= ",'".md5($values[ "password" ])."','".$values[ "type" ]."')";
 	$db->query($sql);
 	header( 'Location: ./adminpanel_users.php?id='.base64_encode( "0" ) );
 }else{

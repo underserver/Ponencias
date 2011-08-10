@@ -8,6 +8,7 @@
  *
 ***********************************************************************/
 // Include file headers
+include_once "./includes/utils.php";
 include_once "./includes/validator.php";
 include_once "./includes/settings.php";
 include_once "./includes/db.php";
@@ -53,17 +54,32 @@ $fields = " ".base64_decode( $_GET[ "tk" ] );
 			name="password" value="" id="" size="30"> </span> <?php if( strpos( $fields, 'password' ) ){?><br>
 		<span class="errormsg" id="errormsg_0"> <?=$_i18n["emptyfield"]?> </span><?php } ?></td>
 	</tr>
+	<tr>
+		<th>Tipo: <font color="red">*</font></th>
+		<td><span class="errorbox-good">
+			<select name="type">
+				<option value="0">Ponente/Conferencista</option>
+				<option value="1">Coautor</option>
+				<option value="2">Asistente</option>
+				<option value="3">Evaluador</option>
+			</select> 
+			 </span> <?php if( strpos( $fields, 'type' ) ){?><br>
+		<span class="errormsg" id="errormsg_0"> <?=$_i18n["emptyfield"]?> </span><?php } ?></td>
+	</tr>
 	<tr class="finalrow">
 		<th></th>
-		<td><input value="<?=$_i18n["savechange"]?>" class="mainbutton"
+		<td><input value="Agregar usuario" class="mainbutton"
 			onclick="clear_isset_monitoring();" type="submit"></td>
 	</tr>
 </table>
 </form>
-</div>
+
+<p>
+	<hr>
+</p>
 
 <?php
-$usuarios = $db->get_results("select * from usuarios where usuario_role=0" );
+$usuarios = $db->get_results("select * from usuarios where usuario_tipo <> 1" );
 ?>
 <form id="list" name="deleteItems"
 	action="adminpanel_process.php?sale=<?=base64_decode($values["cid"])?>"
@@ -87,15 +103,13 @@ $usuarios = $db->get_results("select * from usuarios where usuario_role=0" );
 			onclick="cbTbl.selectAll(this); updateDeleteButtons(this);"
 			type="checkbox"></th>
 		<th id="header" style="width: 30%"><?=$_i18n["name"]?></th>
+		<th id="header">Tipo</th>
+		<th id="header">Ponencias</th>
 		<th id="header"><?=$_i18n["lastaccess"]?></th>
-		<th id="header"><?=$_i18n["admin.salesp"]?></th>
-		<th id="header"><?=$_i18n["admin.onhold"]?></th>
-		<th id="header" style="width: 5%" align="right"><?=$_i18n["admin.userole"]?></th>
 	</tr>
 	<?php for( $i = 0;$i < count($usuarios); $i++){
-		$salesp = $db->get_results("select * from compras where compra_estado=2 and usuario_id=".$usuarios[$i]->usuario_id." group by compra_numero");
-		$onhold = $db->get_results("select * from compras where compra_estado=1 and usuario_id=".$usuarios[$i]->usuario_id." group by compra_numero");
-		?>
+		$userPonencias = $db->get_results("select * from ponencias where usuario_id=".$usuarios[$i]->usuario_id);
+	?>
 	<tr class="" id="ARTICLE_COLLECTION_SELECTION_<?=$i?>">
 		<td></td>
 		<td><input value="true"
@@ -103,11 +117,10 @@ $usuarios = $db->get_results("select * from usuarios where usuario_role=0" );
 			onclick="cbTbl.selectOne(this); updateDeleteButtons(this);"
 			type="checkbox"></td>
 		<td><a href="javascript:void(0)"
-			onclick="go( 'adminpanel_edituser.php?user=<?=base64_encode($usuarios[$i]->usuario_id)?>' );return false"><?=$usuarios[$i]->usuario_nombre?></a></td>
+			onclick="go( 'adminpanel_edituser.php?user=<?=base64_encode($usuarios[$i]->usuario_id)?>' );return false"><?=$usuarios[$i]->usuario_alias?></a></td>
+		<td><?=getTipoUsuario($usuarios[$i]->usuario_tipo)?></td>
+		<td><?=count($userPonencias)?></td>
 		<td><?=(trim($usuarios[$i]->usuario_ultimoacceso) != "" ? $usuarios[$i]->usuario_ultimoacceso : $_i18n["notavailable"])?></td>
-		<td><?=count($salesp)?></td>
-		<td><?=count($onhold)?></td>
-		<td><?=$usuarios[$i]->usuario_role?></td>
 	</tr>
 	<?php
 }
@@ -134,7 +147,7 @@ if( $i == 0 ){
 </table>
 </form>
 </div>
-
+</div>
 	<?php include("./includes/foot.php");?>
 </body>
 </html>

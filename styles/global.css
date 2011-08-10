@@ -37,7 +37,7 @@
 	body {
 		font-family:  Arial, Helvetica, sans-serif;
 		font-size:1.2em;
-		margin:0;
+		margin:0 auto;
 		padding:.5em 1.5em 1.5em 1.5em;
 		min-width:730px;
 		background:#FFF;
@@ -328,7 +328,7 @@
 		}
 		
 	div#nav2 h2{
-    font-family: "Myriad Pro";
+    font-family: "Actor", "Myriad Pro";
     font-size: 16px;
     font-weight: normal;
     color: #fff;
@@ -366,11 +366,12 @@
 /* content - general */
 
 	div#content{
-    width:982px;
+		background-color: #fff;
+    	width:982px;
 		padding:20px 20px;
 		border-left: 1px solid #485C5A;
 		border-right: 1px solid #485C5A;
-		}
+	}
 		
 	div#content p{
 		padding-bottom:1.5em;
@@ -1217,7 +1218,7 @@ form input.rounded{
 }
 
 div.section {
-font-family: "Myriad Pro";
+font-family: "Actor", "Myriad Pro";
 font-size: 16px;
 border-bottom: 1px solid #CCC;
 text-align:left;
@@ -1319,8 +1320,8 @@ a.file{
   height: 21px;
   background-image: url('img/file.png');
   background-repeat: no-repeat;
-  font-family: "Lucida Grande";
-  font-size: 10px;
+  font-family: "Marvel", "Lucida Grande";
+  font-size: 11px;
   color: #fff;
   font-weight: bold;
   text-transform: uppercase;

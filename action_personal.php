@@ -29,7 +29,7 @@ if( $_validator->validate() && $login ==1 ){
 
 	$sql = "update usuarios set usuario_nombre='".$values['user_name']."', usuario_apellidos='".$values['user_lastname'];
 	$sql .= "', usuario_nacimiento='".$values['user_born']."', usuario_direccion='".$values['user_address'];
-	$sql .=	"', usuario_telefono='".$values['user_phone']."', usuario_correo='".$values['user_mail']."', usuario_compartido=".(isset($_POST['shared'])?"1":"0")." where usuario_id=".$_SESSION["user_id"];
+	$sql .=	"', usuario_telefono='".$values['user_phone']."', usuario_correo='".$values['user_mail']."' where usuario_id=".$_SESSION["user_id"];
 	if(isset($_POST['shared']) ){
 		$db->query( "update usuarios set pago_nombre='".$values['user_name']." ".$values['user_lastname']."', pago_direccion='".$values['user_address']."', pago_telefono='".$values['user_phone']."' where usuario_id=".$_SESSION["user_id"] );
 	}

@@ -70,7 +70,7 @@ $fields = " ".base64_decode( $_GET[ "tk" ] );
 		<td><span class="details"> <?=$ponencias[0]->ponencia_titulo?></span></span></td>
 	</tr>
 	<tr>
-		<th>Fecha de presentación:</th>
+		<th>Fecha de presentaci&oacute;n:</th>
 		<td><span class="details"> <?=$ponencias[0]->ponencia_fecha?></span></td>
 	</tr>
 	<tr>
@@ -102,10 +102,10 @@ $fields = " ".base64_decode( $_GET[ "tk" ] );
 <td style="border-left: 1px solid #ccc; padding-left: 30px;padding-right: 100px;" valign="top">
 <table>
 	<tr>
-		<td class="eval">Evaluación:</td>
+		<td class="eval">Evaluaci&oacute;n:</td>
 	</tr>
 	<tr>
-		<td class="left">Calificación:</td>
+		<td class="left">Calificaci&oacute;n:</td>
 	</tr>
 	<tr class="<?=( strpos( $fields, 'calif' ) ? "err" : "" )?>">
     <td>

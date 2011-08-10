@@ -56,7 +56,7 @@ $fields = " ".base64_decode( $_GET[ "tk" ] );
 		</td>
 	</tr>
 	<tr>
-		<th>Fecha de presentación:</th>
+		<th>Fecha de presentaci&oacute;n:</th>
 		<td><span class="errorbox-good"> <input type="text" class="rounded" value="<?=$_GET["date"]?>"
 			name="date" id="expire" size="30"> <input type="button"
 			value="Calendario"

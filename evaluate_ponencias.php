@@ -78,7 +78,7 @@ $ponencias = $db->get_results($sql);
 		<th id="header">Titulo</th>
 		<th id="header"><?=$_i18n["date"]?></th>
 		<th id="header">Eje tematico</th>
-		<th id="header">Acción</th>
+		<th id="header">Acci&oacute;n</th>
 	</tr>
 	<?php for( $i = 0, $subtotal = 0; $i < count($ponencias); $i++){
 		?>

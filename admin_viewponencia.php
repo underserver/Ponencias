@@ -58,7 +58,7 @@ $fields = " ".base64_decode( $_GET[ "tk" ] );
 		<td><span class="details"> <?=$ponencias[0]->ponencia_titulo?></span></span></td>
 	</tr>
 	<tr>
-		<th>Fecha de presentación:</th>
+		<th>Fecha de presentaci&oacute;n:</th>
 		<td><span class="details"> <?=$ponencias[0]->ponencia_fecha?></span></td>
 	</tr>
 	<tr>

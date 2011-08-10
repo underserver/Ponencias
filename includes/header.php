@@ -20,6 +20,10 @@
         <script type="text/javascript" src="jscripts/modal/js/modal-message.js"></script>
         <script type="text/javascript" src="jscripts/modal/js/ajax-dynamic-content.js"></script>
         <script type="text/javascript" src="jscripts/cpanel.js"></script>
+        
+        <link href='http://fonts.googleapis.com/css?family=Marvel' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Actor' rel='stylesheet' type='text/css'>
+
     </head>
     <body>   
     <div id="header"> <div id="logo"> 
