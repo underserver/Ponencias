@@ -1,4 +1,4 @@
-﻿<?phP
+﻿<?php
 class PonenciaManager{
 	public static function registrar($ponencia){
 		$ponencia->setStatus(PonenciaStatus::SIN_ASIGNAR);
@@ -19,8 +19,22 @@ class PonenciaManager{
 		PonenciaDao::persist($ponencia);
 	}
 	
-	public static function finalizarEvaluacion($ponencia, $status){
-		$ponencia->setStatus(status);
+	public static function evaluar($ponencia, $evaluador, $_evaluacion){
+		$evaluacion = EvaluacionDao::findByQuery("ponencia_id=$ponencia->getId() and evaluador_id=$evaluador->getId()");
+		$evaluacion->setDictamen($_evaluacion->getDictamen());
+		$evaluacion->setObservaciones($_evaluacion->getObservaciones());
+		$evaluacion->setCalificacion($_evaluacion->getCalificacion());
+		$evaluacion->setFecha();
+		EvaluacionDao::persist($evaluacion);
+	}
+	
+	public static function finalizarEvaluacion($ponencia, $aprobada = false){
+		if( $aporobada ){
+			$ponencia->setStatus(PonenciaStatus::APROBADA);
+		}else{
+			$ponencia->setStatus(PonenciaStatus::RECHAZADA);
+		}
+		EvaluacionDao::persist($evaluacion);
 		PonenciaDao::persist($ponencia);
 	}
 	
