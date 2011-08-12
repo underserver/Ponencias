@@ -1,8 +1,8 @@
 <?php
 include_once "../model/Ponencia.php";
-class PonenciaDao{
+class PonenciaDao implements Dao{
 	
-	public function deleteAll($ponencias){
+	public static function deleteAll($ponencias){
 		foreach( $ponencias as $ponencia ){
 			try{
 				delete($ponencia);
@@ -10,15 +10,15 @@ class PonenciaDao{
 		}
 	}
 	
-	public function save($ponencia){
+	public static function save($ponencia){
 		try{
 			$sql  = "insert into ponencias(ponencia_titulo, ponencia_resumen, ponencia_archivo2, ponencia_archivo2, ponencia_estado, ponencia_observaciones, usuario_id, ponencia_fecha, ponencia_ejetematico, ponencia_sala, ponencia_hora) ";
 		  	$sql .= "values('$ponencia->getTitulo()','$ponencia->getResumen()' ";
 		 	$sql .= ",'$ponencia->getArchivoConNombres()','$ponencia->getArchivoSinNombres()'";
 			$sql .= ",'$ponencia->getStatus()','$ponencia->getObservaciones()'";
 			$sql .= ",'$ponencia->getPonente()->getId()','$ponencia->getFecha()'";
-		 	$sql .= ",'$usuario->getEjeTematico()','$usuario->getSala()'";
-		  	$sql .= ",'$usuario->getHora()')";
+		 	$sql .= ",'$ponencia->getEjeTematico()','$ponencia->getSala()'";
+		  	$sql .= ",'$ponencia->getHora()')";
 			
 			$db->query($sql);
 		}catch(Exception $e){
@@ -26,7 +26,7 @@ class PonenciaDao{
     	}
 	}
 	
-	public function update($ponencia){
+	public static function update($ponencia){
 		try{
 			$sql  = "update ponencias set";
 		  	$sql .= "       ponencia_titulo = '$ponencia->getTitulo()',";
@@ -39,7 +39,8 @@ class PonenciaDao{
 			$sql .= "       ponencia_fecha = '$ponencia->getFecha()',";
 			$sql .= "       ponencia_ejetematico = '$ponencia->getEjeTematico()',";
 			$sql .= "       ponencia_sala = '$ponencia->getSala()',";
-			$sql .= "       usuario_hora = '$ponencia->getHora()',";
+			$sql .= "       usuario_hora = '$ponencia->getHora()'";
+			$sql .= " where ponencia_id = $ponencia->getId()";
 			
 			$db->query($sql);
 		}catch(Exception $e){
@@ -47,7 +48,7 @@ class PonenciaDao{
     	}
 	}
 	
-    public function persist($ponencia){
+    public static function persist($ponencia){
     	if( !isset($ponencia->getId()) ){
 			save($ponencia);
 		}else{
@@ -55,7 +56,7 @@ class PonenciaDao{
 		}
     } 
 	
-    public function delete($ponencia){
+    public static function delete($ponencia){
     	try {
     		$db->query("delete from ponencias where ponencia_id=$ponencia->getId()");
     	}catch(Exception $e){
@@ -63,12 +64,12 @@ class PonenciaDao{
     	}
     }
 	
-    public function findByQuery($query){
+    public static function findByQuery($query){
     	$ponencias = array();
     	try{
-	    	$rows = $db->get_results( $query );
+	    	$rows = $db->get_results( "select * from ponencias where $query" );
 			foreach( $rows as $row ){
-				$ponencias[] = findById($row->ponencia_id);
+				$ponencias[] = new Ponencia($row);
 			}
 		}catch(Exception $e){
     		throw $e;
@@ -76,21 +77,21 @@ class PonenciaDao{
 		return $ponencias;
     } 
 	
-    public function merge($ponencia){
+    public static function merge($ponencia){
     	echo "Merge [Ponencia]: Not Implemented";
     }
 	
-    public function findAll(){
+    public static function findAll(){
     	$ponencias = array();
     	try{
-    		$ponencias = findByQuery( "select * from ponencias" );
+    		$ponencias = findByQuery( "1=1" );
 		}catch(Exception $e){
     		throw $e;
     	}
 		return $ponencias;
     }
 	
-    public function findById($id){
+    public static function findById($id){
     	try{
 	    	$row = $db->get_results( "select * from ponencias where ponencia_id=$id" );
 			return new Ponencia($row);

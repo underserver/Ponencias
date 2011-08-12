@@ -46,11 +46,11 @@ class Ponencia{
 	public function getId(){ return $id; }
 	public function getTitulo(){ return $titulo; }
 	public function getStatus(){ return $status; }
-	public function getRresumen(){ return $resumen; }
+	public function getResumen(){ return $resumen; }
 	public function getArchivoConNombre(){ return $archivoConNombre; }
 	public function getArchivSinNombre(){ return $archivoSinNombre; }
 	public function getObservaciones(){ return $observaciones; }
-	public function getPonente(){ $dao = new UsuarioDao(); return $dao->findById($ponenteId); }
+	public function getPonente(){ return UsuarioDao::findById($ponenteId); }
 	public function getFecha(){ return $fecha; }
 	public function getEjeTematico(){ return $ejeTematico; }
 	public function getSala(){ return $sala; }
