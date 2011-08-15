@@ -33,7 +33,19 @@ class Evaluacion{
   	public function getObservaciones(){ return $observaciones; }
   	public function getDictamen(){ return $dictamen; }
   	public function getFecha(){ return $fecha; }
-  	public function getPonencia(){ return PonenciaDao::findById($ponencia_id); }
-  	public function getEvaluador(){ return UsuarioDao::findById($evaluador_id); }
+  	public function getPonencia(){ 
+  		$ponencia = PonenciaDao::findById($ponencia_id); 
+  		if( isset($ponencia) ){
+  			return $ponencia;
+  		}
+  		return new Ponencia();
+  	}
+  	public function getEvaluador(){ 
+  		$evaluador = UsuarioDao::findById($evaluador_id); 
+  		if( isset($evaluador) ){
+  			return $evaluador;
+  		}
+  		return new Usuario();
+  	}
 }
 ?>
