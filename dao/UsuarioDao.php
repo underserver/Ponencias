@@ -6,7 +6,9 @@ class UsuarioDao implements Dao{
 		foreach( $usuarios as $usuario ){
 			try{
 				delete($usuario);
-			}catch(Exception $e){}
+			}catch(TransactionException $te){
+				throw $te;
+			}
 		}
 	}
 	
@@ -21,7 +23,7 @@ class UsuarioDao implements Dao{
 			
 			$db->query($sql);
 		}catch(Exception $e){
-    		throw $e;
+    		throw new TransactionExcepion($e->getMessage(), $usuario, TransactionExcepion::SAVE_CODE, $e);
     	}
 	}
 	
@@ -41,35 +43,40 @@ class UsuarioDao implements Dao{
 			
 			$db->query($sql);
 		}catch(Exception $e){
-    		throw $e;
+    		throw new TransactionExcepion($e->getMessage(), $usuario, TransactionExcepion::UPDATE_CODE, $e);
     	}
 	}
 	
     public static function persist($usuario){
-    	if( !isset($usuario->getId()) ){
-			save($usuario);
-		}else{
-			update($usuario);
-		}
+       try{
+        	if( !isset($usuario->getId()) ){
+    			save($usuario);
+    		}else{
+    			update($usuario);
+    		}
+       }catch(TransactionException $te){
+		  throw $te;
+	   }		
     } 
 	
     public static function delete($usuario){
     	try {
     		$db->query("delete from usuarios where usuario_id=$usuario->getId()");
     	}catch(Exception $e){
-    		throw $e;
+    		throw new TransactionExcepion($e->getMessage(), $usuario, TransactionExcepion::DELETE_CODE, $e);
     	}
     }
 	
     public static function findByQuery($query){
     	$users = array();
+    	$sql = "select * from usuarios where $query";
     	try{
-	    	$rows = $db->get_results( "select * from usuarios where $query" );
+	    	$rows = $db->get_results( $sql );
 			foreach( $rows as $row ){
 				$users[] = new Usuario($row);
 			}
 		}catch(Exception $e){
-    		throw $e;
+    		throw new QueryException($e->getMessage(), $sql, 0, $e);
     	}
 		return $users;
     } 
@@ -82,19 +89,22 @@ class UsuarioDao implements Dao{
     	$users = array();
     	try{
     		$users = findByQuery( "1=1" );
-		}catch(Exception $e){
-    		throw $e;
+		}catch(QueryException $qe){
+    		throw $qe;
     	}
 		return $users;
     }
 	
     public static function findById($id){
+       $sql = "select * from usuarios where usuario_id=$id";
+       $usuario = new Usuario();
     	try{
-	    	$row = $db->get_results( "select * from usuarios where usuario_id=$id" );
-			return new Usuario($row);
+	    	$row = $db->get_results( $sql );
+			$usuario = new Usuario($row);
 		}catch(Exception $e){
-    		throw $e;
+    		throw new QueryException($e->getMessage(), $sql, 0, $e);
     	}
+    	return $usuario;
     }
 }
 ?>

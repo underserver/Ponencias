@@ -6,7 +6,9 @@ class PonenciaDao implements Dao{
 		foreach( $ponencias as $ponencia ){
 			try{
 				delete($ponencia);
-			}catch(Exception $e){}
+			}catch(TransactionException $te){
+				throw $te;
+			}
 		}
 	}
 	
@@ -22,7 +24,7 @@ class PonenciaDao implements Dao{
 			
 			$db->query($sql);
 		}catch(Exception $e){
-    		throw $e;
+    		throw new TransactionExcepion($e->getMessage(), $ponencia, TransactionExcepion::SAVE_CODE, $e);
     	}
 	}
 	
@@ -44,15 +46,19 @@ class PonenciaDao implements Dao{
 			
 			$db->query($sql);
 		}catch(Exception $e){
-    		throw $e;
+    		throw new TransactionExcepion($e->getMessage(), $ponencia, TransactionExcepion::UPDATE_CODE, $e);
     	}
 	}
 	
     public static function persist($ponencia){
-    	if( !isset($ponencia->getId()) ){
-			save($ponencia);
-		}else{
-			update($ponencia);
+       try{
+        	if( !isset($ponencia->getId()) ){
+    			save($ponencia);
+    		}else{
+    			update($ponencia);
+    		}
+		}catch(TransactionException $te){
+		   throw $te;
 		}
     } 
 	
@@ -60,19 +66,20 @@ class PonenciaDao implements Dao{
     	try {
     		$db->query("delete from ponencias where ponencia_id=$ponencia->getId()");
     	}catch(Exception $e){
-    		throw $e;
+    		throw new TransactionExcepion($e->getMessage(), $ponencia, TransactionExcepion::DELETE_CODE, $e);
     	}
     }
 	
     public static function findByQuery($query){
     	$ponencias = array();
+    	$sql = "select * from ponencias where $query";
     	try{
-	    	$rows = $db->get_results( "select * from ponencias where $query" );
+	    	$rows = $db->get_results( $sql );
 			foreach( $rows as $row ){
 				$ponencias[] = new Ponencia($row);
 			}
 		}catch(Exception $e){
-    		throw $e;
+    		throw new QueryException($e->getMessage(), $sql, 0, $e);
     	}
 		return $ponencias;
     } 
@@ -85,18 +92,21 @@ class PonenciaDao implements Dao{
     	$ponencias = array();
     	try{
     		$ponencias = findByQuery( "1=1" );
-		}catch(Exception $e){
-    		throw $e;
+		}catch(QueryException $qe){
+    		throw $qe;
     	}
 		return $ponencias;
     }
 	
     public static function findById($id){
+       $sql = "select * from ponencias where ponencia_id=$id";
+       $ponencia = new Ponencia();
     	try{
-	    	$row = $db->get_results( "select * from ponencias where ponencia_id=$id" );
-			return new Ponencia($row);
+	    	$row = $db->get_results( $sql );
+			$ponencia = new Ponencia($row);
 		}catch(Exception $e){
-    		throw $e;
+    		throw new QueryException($e->getMessage(), $sql, 0, $e);
     	}
+    	return $ponencia;
     }
 }

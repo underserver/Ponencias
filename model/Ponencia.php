@@ -50,7 +50,13 @@ class Ponencia{
 	public function getArchivoConNombre(){ return $archivoConNombre; }
 	public function getArchivSinNombre(){ return $archivoSinNombre; }
 	public function getObservaciones(){ return $observaciones; }
-	public function getPonente(){ return UsuarioDao::findById($ponenteId); }
+	public function getPonente(){ 
+		$ponente = UsuarioDao::findById($ponenteId); 
+		if( isset($ponente) ){
+			return $ponente;
+		}
+		return new Usuario();
+	}
 	public function getFecha(){ return $fecha; }
 	public function getEjeTematico(){ return $ejeTematico; }
 	public function getSala(){ return $sala; }
