@@ -1,5 +1,5 @@
 ﻿<?php
-class TransactionException extends Exception
+class TransactionException extends GenericException
 {
 	private $entity;
 	public function __construct($message, $entity, $code = 0, Exception $previous = null) {
@@ -15,7 +15,7 @@ class TransactionException extends Exception
 
 	// algo para el usuario
 	public function i18n() {
-        echo sprintf(i18n("TRANSACTIONEXCEPTION.0x$this->code"]), get_class($entity));
+        echo sprintf(i18n("TRANSACTIONEXCEPTION.0x$this->code"), get_class($entity));
 	}
 	
 	public static $SAVE_CODE   = 0x1;

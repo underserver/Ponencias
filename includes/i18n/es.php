@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $_i18n[ "title" ] = "Sistema de Gestion de Ponencias";
 $_i18n[ "menu1" ] = "Inicio";
 $_i18n[ "menu2" ] = "Ponencias";
@@ -40,7 +40,7 @@ $_i18n[ "born" ] = "Fecha de nacimiento";
 $_i18n[ "phone" ] = "Telefono";
 $_i18n[ "mail" ] = "Correo";
 $_i18n[ "email" ] = "Correo";
-$_i18n[ "institution" ] = "Instituci�n";
+$_i18n[ "institution" ] = "Institución";
 $_i18n[ "save" ] = "Guardar";
 $_i18n[ "savechange" ] = "Guardar cambios";
 $_i18n[ "cancel" ] = "Cancelar";
@@ -133,10 +133,8 @@ $_i18n[ "editcategory" ] = "Editar categoria";
 $_i18n[ "editproduct" ] = "Editar producto";
 $_i18n[ "edituser" ] = "Editar usuario";
 $_i18n[ "users.info" ] = "Agregue nuevos usuarios como clientes, simplemente edite los datos de la cuenta";
-
 $_i18n[ "st_0x33" ] = "Ocurrió un problema al subir el archivo %s, por favor intente mas tarde.";
 $_i18n[ "st_0x34" ] = "El formato del archivo %s no esta permitido.";
 $_i18n[ "st_0x51" ] = "La ponencia no puede ser evaluada.";
-
 $_i18n[ "st_0x2" ]  = "Debe llenar todos los campos obligatorios.";
 ?>

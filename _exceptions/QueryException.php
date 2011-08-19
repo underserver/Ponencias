@@ -1,5 +1,5 @@
 ﻿<?php
-class QueryException extends Exception
+class QueryException extends GenericException
 {
 	private $sql;
 	public function __construct($message, $sql, $code = 0, Exception $previous = null) {
@@ -15,7 +15,7 @@ class QueryException extends Exception
 
 	// algo para el usuario
 	public function i18n() {
-        echo sprintf(i18n("QUERYEXCEPTION.0x$this->code"]), $sql);
+        echo sprintf(i18n("QUERYEXCEPTION.0x$this->code"), $sql);
 	}
 }
 ?>

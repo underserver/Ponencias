@@ -1,5 +1,8 @@
 ﻿<?php
+include_once "../dao/UsuarioDao.php";
+
 class UsuarioManager{
+
 	public static function registrarAdministrador($usuario){
 		try{
 			$usuario->setTipo(UsuarioType::ADMINISTRADOR);

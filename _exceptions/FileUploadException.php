@@ -1,5 +1,5 @@
 ﻿<?php
-class FileUploadException extends Exception
+class FileUploadException extends GenericException
 {
 	private $name;
 	public function __construct($message, $name, $code = 0, Exception $previous = null) {

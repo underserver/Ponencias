@@ -11,7 +11,7 @@
 <div id="navigation">
 <ul>
 	<li class="<?=$sselected == 1 ? "selected" : ""?>">
-    <a href="."	title="<?=$_i18n["menu1"]?>"> <?=$_i18n["menu1"]?> </a>
+    <a href="."	title="<?=$_i18n["menu1"]?>"> <?=i18n("menu1")?> </a>
 	</li>
 	<li class="<?=$sselected == 2 ? "selected" : ""?>">
     <a href="ponencias.php" title="<?=$_i18n["menu2"]?>"><?=$_i18n["menu2"]?></a>

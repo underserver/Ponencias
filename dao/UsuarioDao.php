@@ -1,5 +1,6 @@
 <?php
 include_once "../model/Usuario.php";
+
 class UsuarioDao implements Dao{
 	
 	public static function deleteAll($usuarios){
