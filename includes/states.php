@@ -1,0 +1,10 @@
+<?php
+$OK = "0x1";
+$ERR_FIELDS_REQUIRED = "0x2";
+
+$ERR_FILE_EXT   = "0x33";
+$ERR_FILE_MOVE  = "0x34";
+$ERR_FILE_SIZE  = "0x35";
+
+$ERR_PONENCIA_WRONG_STATE = "0x51";
+?>
