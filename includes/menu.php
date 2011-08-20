@@ -11,10 +11,10 @@
 <div id="navigation">
 <ul>
 	<li class="<?=$sselected == 1 ? "selected" : ""?>">
-    <a href="."	title="<?=$_i18n["menu1"]?>"> <?=i18n("menu1")?> </a>
+    <a href="."	title=""> <?=i18n("menu1")?> </a>
 	</li>
 	<li class="<?=$sselected == 2 ? "selected" : ""?>">
-    <a href="ponencias.php" title="<?=$_i18n["menu2"]?>"><?=$_i18n["menu2"]?></a>
+    <a href="ponencias.php" title=""><?=i18n("menu2")?></a>
 	</li>
 	<?php if ( isset($_SESSION[ 'user_id' ]) ){?>
 	<?if( $_SESSION['user_role'] == 2 ){?>
@@ -23,7 +23,7 @@
 	</li>
 	<?} else if( $_SESSION['user_role'] == 1 ){?>
 	<li class="<?=$sselected == 3 ? "selected" : ""?>">
-    <a href="adminpanel.php" title="<?=$_i18n["menu3"]?>"><?=$_i18n["menu3"]?></a>
+    <a href="adminpanel.php" title=""><?=i18n("menu3")?></a>
 	</li>
 	<?} else if( $_SESSION['user_role'] == 3 ){?>
 	<li class="<?=$sselected == 3 ? "selected" : ""?>">

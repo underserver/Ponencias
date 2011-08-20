@@ -9,6 +9,5 @@
  ***********************************************************************/
 include_once dirname(__FILE__)."/config.php";
 include_once dirname(__FILE__)."/session.php";
-include_once dirname(__FILE__)."/i18n/es.php";
 include_once dirname(__FILE__)."/i18n/i18n.php";
 ?>
