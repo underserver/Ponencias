@@ -12,19 +12,19 @@ class Usuario{
 	private $telefono;
 	private $direccion;
 	
-	public function __construct(){}
-		
-	public function __construct($row){
-		$this->id = $row["usuario_id"];
-		$this->nombre = $row["usuario_nombre"];
-		$this->apellidos = $row["usuario_apellidos"];
-		$this->correo = $row["usuario_correo"];
-		$this->alias = $row["usuario_alias"];
-		$this->password = $row["usuario_password"];
-		$this->tipo = $row["usuario_tipo"];
-		$this->fechaNacimiento = $row["usuario_nacimiento"];
-		$this->telefono = $row["usuario_telefono"];
-		$this->direccion = $row["usuario_direccion"];
+	public function __construct($row = NULL){
+		if( $row != NULL ){
+			$this->id = $row["usuario_id"];
+			$this->nombre = $row["usuario_nombre"];
+			$this->apellidos = $row["usuario_apellidos"];
+			$this->correo = $row["usuario_correo"];
+			$this->alias = $row["usuario_alias"];
+			$this->password = $row["usuario_password"];
+			$this->tipo = $row["usuario_tipo"];
+			$this->fechaNacimiento = $row["usuario_nacimiento"];
+			$this->telefono = $row["usuario_telefono"];
+			$this->direccion = $row["usuario_direccion"];
+		}
 	}
 	
 	public function setId($id){ $this->id = $id; }

@@ -18,12 +18,14 @@ abstract class ViewController{
 		return $_GET["_action"];
 	}
 	
-	protected function render($view){
-		if (file_exists('view/'.$view.'.php')){
-			$this->currentView = $view;
-			include('view/'.$view.'.php');
-		} else {
-			throw new ViewException($view, ViewException::NOT_FOUND);
+	protected function render($pageView){
+		try{
+			print($pageView->header());
+			print($pageView->menu());
+			//print($pageView->content());
+			$this->currentView = $pageView;
+		} catch(ViewException $ve) {
+			throw $ve;
 		}
 	}
 	

@@ -1,9 +1,7 @@
 ﻿<?php
-include_once "../services/UsuarioManager.php";
+include_once dirname(__FILE__)."/../services/UsuarioManager.php";
 
 class UsuarioController{
-
-    private $session = $_SESSION;
     
     public static function registrar($usuario){
     	 try{
@@ -43,7 +41,7 @@ class UsuarioController{
     	try{
 	    	if( UsuarioManager::alreadyRegistered($usuario) ){
 	    		if( UsuarioManager::checkPassword($usuario) ){
-	    			$session["usuario_id"] = $usuarios = UsuarioDao::findByQuery("usuario_alias='$usuario->getAlias()'")[0]->getId();
+	    			//$_SESSION["usuario_id"] = UsuarioDao::findByQuery("usuario_alias='$usuario->getAlias()'")[0]->getId();
 	    			return $LOGIN_OK;
 	    		} else {
 	    			return $LOGIN_WRONG_PASSWORD;
@@ -58,8 +56,8 @@ class UsuarioController{
     
     public static function usuarioActual(){
     	try{
-    		if( isset($session["usuario_id"]) ){
-    			return UsuarioManager::obtener($session["usuario_id"]);
+    		if( isset($_SESSION["usuario_id"]) ){
+    			return UsuarioManager::obtener($_SESSION["usuario_id"]);
        		}
        }catch(QueryException $qe){
        		throw $qe;

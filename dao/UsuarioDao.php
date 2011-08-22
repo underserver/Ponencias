@@ -1,5 +1,6 @@
 <?php
-include_once "../model/Usuario.php";
+include_once dirname(__FILE__)."/Dao.php";
+include_once dirname(__FILE__)."/../model/Usuario.php";
 
 class UsuarioDao implements Dao{
 	
@@ -50,7 +51,8 @@ class UsuarioDao implements Dao{
 	
     public static function persist($usuario){
        try{
-        	if( !isset($usuario->getId()) ){
+       		$id = $usuario->getId();
+        	if( !empty($id) ){
     			save($usuario);
     		}else{
     			update($usuario);

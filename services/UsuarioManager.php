@@ -1,5 +1,5 @@
 ﻿<?php
-include_once "../dao/UsuarioDao.php";
+include_once dirname(__FILE__)."/../dao/UsuarioDao.php";
 
 class UsuarioManager{
 
