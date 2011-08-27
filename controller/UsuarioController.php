@@ -7,9 +7,9 @@ class UsuarioController{
     	 try{
 	        $usuarioActual = usuarioActual();
 	        if( UsuarioManager::alreadyRegistered($usuario) ){
-	        	return 0x1;
+					return $REGISTER_USER_EXIST;
 	        } else {
-				switch( $usuario->getTipo() ){
+					switch( $usuario->getTipo() ){
 		            case UsuarioType::PONENTE:
 		                UsuarioManager::registrarPonente($usuario);
 		                return $REGISTER_OK;
@@ -24,24 +24,24 @@ class UsuarioController{
 		                return $REGISTER_OK;
 		            case UsuarioType::ADMINISTRADOR:
 		                if( $usuarioActual->getTipo() == UsuarioType::ADMINISTRADOR ){
-		                    UsuarioManager::registrarAdministrador($usuario);
-		                    return $REGISTER_OK;
+									UsuarioManager::registrarAdministrador($usuario);
+									return $REGISTER_OK;
 		                }else{
-						     throw new NoPermissionException("Register Admin User");
+									throw new NoPermissionException("Register Admin User");
 		                }
 		                break;
 		       }
 	   	    }
     	}catch(TransactionException $te){
 			throw $te;
-		}
+      }
     }
     
     public static function inciarSesion($usuario){
     	try{
 	    	if( UsuarioManager::alreadyRegistered($usuario) ){
 	    		if( UsuarioManager::checkPassword($usuario) ){
-	    			//$_SESSION["usuario_id"] = UsuarioDao::findByQuery("usuario_alias='$usuario->getAlias()'")[0]->getId();
+	    			$_SESSION["usuario_id"] = UsuarioDao::findByQuery("usuario_alias='$usuario->getAlias()'")[0]->getId();
 	    			return $LOGIN_OK;
 	    		} else {
 	    			return $LOGIN_WRONG_PASSWORD;
@@ -52,17 +52,6 @@ class UsuarioController{
     	}catch(QueryException $qe){
     		throw $qe;
     	}
-    }
-    
-    public static function usuarioActual(){
-    	try{
-    		if( isset($_SESSION["usuario_id"]) ){
-    			return UsuarioManager::obtener($_SESSION["usuario_id"]);
-       		}
-       }catch(QueryException $qe){
-       		throw $qe;
-       }
-       return new Usuario();
     }
     
     public static function validar($usuario){
