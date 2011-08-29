@@ -1,5 +1,5 @@
 ﻿<?php
-require dirname(__FILE__)."/Renderable.php";
+require_once dirname(__FILE__)."/Renderable.php";
 class MenuItem implements Renderable{
 	private $key;
 	private $url;
@@ -23,18 +23,18 @@ class MenuItem implements Renderable{
 	public function getSubitems(){ return $this->subitems; }
 	public function getHtml(){
 		if( count($this->getSubitems()) > 0 ){
-			$menu   = '<li class="'.($this->isSelected() ? 'selected' : '').'" id="services">';
-			$menu  .= '<a href="javascript:showItem(\'servicelist\');">'.i18n("menu4").'<img src="styles/arrow.gif" alt=""></a>';
-			$menu  .= '	<ul id="servicelist">';
+			$menu   = "<li class='".($this->isSelected() ? "selected" : "")."' id='services'>\n";
+			$menu  .= "<a href='javascript:showItem(\"servicelist\");'>".$this->getLabel()."<img src='styles/arrow.gif' alt=''></a>\n";
+			$menu  .= "	<ul id='servicelist'>\n";
 			foreach( $this->subitems as $subitem ){
 				$menu  .= $subitem->getHtml();
 			}
-			$menu  .= '	</ul>';
+			$menu  .= "	</ul>\n";
 		} else {
-			$menu   = '<li class="'.($this->isSelected() ? 'selected' : '').'">';
-			$menu  .= '   <a href="'.$this->getUrl().'">'.$this->getLabel().'</a>';
+			$menu   = "<li class='".($this->isSelected() ? "selected" : "")."'>\n";
+			$menu  .= "   <a href='".$this->getUrl()."'>".$this->getLabel()."</a>\n";
 		}
-		$menu  .= '</li>';
+		$menu  .= "</li>\n";
 		
 		return $menu;
 	}

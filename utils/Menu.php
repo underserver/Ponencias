@@ -1,6 +1,7 @@
 ﻿<?php
-require dirname(__FILE__)."/../enums/UsuarioType.php";
-require dirname(__FILE__)."/Renderable.php";
+require_once dirname(__FILE__)."/../enums/UsuarioType.php";
+require_once dirname(__FILE__)."/Renderable.php";
+
 class Menu implements Renderable{
 	private $items;
 	private $userType;
@@ -11,36 +12,40 @@ class Menu implements Renderable{
 		$this->viewId = $viewId;
 		
 		$this->items = array();
-		$this->items[] = new MenuItem("inicio", 		".", 						UsuarioType::$TODOS);
-		$this->items[] = new MenuItem("ponencias", 	"ponencias.php", 			UsuarioType::$TODOS);
-		$this->items[] = new MenuItem("misponencias", "admin_ponencias.php", 	UsuarioType::$PONENTE);
-		$this->items[] = new MenuItem("adminpanel", 	"adminpanel.php", 		UsuarioType::$ADMINISTRADOR);
-		$this->items[] = new MenuItem("evaluar", 		"adminpanel.php", 		UsuarioType::$EVALUADOR);
+		$this->items[] = new MenuItem("inicio", 				".", 						UsuarioType::$TODOS);
+		$this->items[] = new MenuItem("ponencias", 			"ponencias.php", 			UsuarioType::$TODOS);
+		$this->items[] = new MenuItem("misponencias", 		"admin_ponencias.php", 	UsuarioType::$PONENTE);
+		$this->items[] = new MenuItem("adminpanel", 		"adminpanel.php", 			UsuarioType::$ADMINISTRADOR);
+		$this->items[] = new MenuItem("evaluar", 			"adminpanel.php", 			UsuarioType::$EVALUADOR);
 		
-		$item = new MenuItem("cuenta", 		"adminpanel.php", 			UsuarioType::$TODOS);
-		$item = $item->addSubitem(new MenuItem("personal",	"admin_persona.php", 	UsuarioType::$TODOS));
-		$item = $item->addSubitem(new MenuItem("acceso", 	"admin_access.php", 	UsuarioType::$TODOS));
-		$item = $item->addSubitem(new MenuItem("logoff", 	"logoff.php", 			UsuarioType::$TODOS));
+		$this->items[] = new MenuItem("registro", 			"register.php", 			UsuarioType::$PUBLICO);
+		
+		$item = new MenuItem("cuenta", 						"adminpanel.php", 			UsuarioType::$REGISTRADO);
+		$item = $item->addSubitem(new MenuItem("personal",	"admin_persona.php", 		UsuarioType::$REGISTRADO));
+		$item = $item->addSubitem(new MenuItem("acceso", 	"admin_access.php", 		UsuarioType::$REGISTRADO));
+		$item = $item->addSubitem(new MenuItem("logoff", 	"logoff.php", 				UsuarioType::$REGISTRADO));
 		$this->items[] = $item;
-		
-		$this->items[] = new MenuItem("registro", 		"register.php", 			UsuarioType::$PUBLICO);
 	}
 	
 	public function getItems(){ return $this->items; }
 	public function getViewId(){ return $this->viewId; }
 	
 	public function getHtml(){
-		$html  = '<div id="navigation">';
-		$html .= '		<ul>';
+		$html  = "<div id='navigation'>\n";
+		$html .= "		<ul>\n";
 		foreach( $this->items as $item ){
-			if( $item->getRole() == $this->userType ){
+			if( $item->getRole() == $this->userType || 
+				$item->getRole() == UsuarioType::$TODOS || (
+										$item->getRole() == UsuarioType::$REGISTRADO && $this->userType != UsuarioType::$PUBLICO 
+									  ) 
+				)
+			{
 				$item->setSelected( $item->getKey() == $this->viewId );
 				$html .= $item->getHtml();
 			}
 		}
-		$html .= '		</ul>';
-		$html .= '		<div class="clear"></div>';
-		$html .= '</div>';
+		$html .= "		</ul>\n";
+		$html .= "</div>\n";
 		
 		return $html;
 	}

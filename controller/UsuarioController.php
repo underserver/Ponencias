@@ -41,7 +41,8 @@ class UsuarioController{
     	try{
 	    	if( UsuarioManager::alreadyRegistered($usuario) ){
 	    		if( UsuarioManager::checkPassword($usuario) ){
-	    			$_SESSION["usuario_id"] = UsuarioDao::findByQuery("usuario_alias='$usuario->getAlias()'")[0]->getId();
+	    			$usuarios = UsuarioDao::findByQuery("usuario_alias='$usuario->getAlias()'");
+	    			$_SESSION["usuario_id"] = $usuarios[0]->getId();
 	    			return $LOGIN_OK;
 	    		} else {
 	    			return $LOGIN_WRONG_PASSWORD;

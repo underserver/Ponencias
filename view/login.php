@@ -1,29 +1,5 @@
-<?php
-/**********************************************************************
- *  Author : Sergio Ceron Figueroa (sxceron@laciudadx.com)
- *  Alias  : sxceron
- *  Web    : http://www.dotrow.info
- *  Name   : jShop v1.0
- *  Desc   : Formulario para iniciar sesion
- *
-***********************************************************************/
-$sselected = 1; $subtitle = $_i18n["login.submenu"]; $selected = $_GET[ "sm" ];
-$items = array( $_i18n["login.submenu"], $_i18n["register.submenu"] ); $links = array( "./login.php", "./register.php" );
-include("./includes/header.php");
-?>
-<div align="center" id="content"><?php if( isset( $_GET[ "id" ] ) ){ ?>
-<div align="center" class="msg">
-<div class="bl3">
-<div class="br">
-<div class="tl">
-<div class="tr2"><?=$_i18n[ "logine".base64_decode( $_GET[ "id" ] ) ]?>
-</div>
-</div>
-</div>
-</div>
-</div>
-<br>
-<?php } $fields = " ".base64_decode( $_GET[ "tk" ] );	?>
+<?php global $usuarios;?>
+
 <style>
 .f {
 	border-top: solid 1px #bbbbbb;
@@ -87,9 +63,9 @@ include("./includes/header.php");
 				cellspacing="0">
 				<tbody>
 					<tr>
-						<th align="right" nowrap="nowrap"><?=$_i18n[ "user" ]?> :&nbsp;&nbsp;&nbsp;&nbsp;</th>
+						<th align="right" nowrap="nowrap"><?=i18n("user")?> :&nbsp;&nbsp;&nbsp;&nbsp;</th>
 						<td><input name="userName" size="35" type="text" class="rounded"> <?php if( strpos( $fields, 'userName' ) ){?><br>
-						<span class="errormsg" id="errormsg_0"> <?=$_i18n[ "error.required" ]?>
+						<span class="errormsg" id="errormsg_0"> <?=$i18n[ "error.required" ]?>
 						</span><?php } ?></td>
 					</tr>
 					<tr>
@@ -106,7 +82,7 @@ include("./includes/header.php");
 						<td colspan="2" height="8"></td>
 					</tr>
 					<tr>
-						<th align="right" nowrap="nowrap"><?=$_i18n[ "pass" ]?> :&nbsp;&nbsp;&nbsp;&nbsp;</th>
+						<th align="right" nowrap="nowrap"><?=i18n("pass")?> :&nbsp;&nbsp;&nbsp;&nbsp;</th>
 						<td><input name="userPassword" size="35" type="password" class="rounded"> <?php if( strpos( $fields, 'userPassword' ) ){?><br>
 						<span class="errormsg" id="errormsg_0"> <?=$_i18n[ "error.required" ]?>
 						</span><?php } ?></td>
@@ -120,7 +96,7 @@ include("./includes/header.php");
 					</tr>
 					<tr>
 						<td></td>
-						<td><input value="<?=$_i18n[ "access" ]?>" type="submit"></td>
+						<td><input value="<?=i18n("access")?>" type="submit">a<?=$usuarios[0]->getAlias()?></td>
 						<td></td>
 					</tr>
 				</tbody>
@@ -138,7 +114,3 @@ include("./includes/header.php");
 	  }
 	  // -->
 	</script>
-<?php include("./includes/foot.php");?>
-
-</body>
-</html>

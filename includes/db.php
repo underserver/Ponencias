@@ -15,5 +15,5 @@ include_once "./includes/ezsql/mysql/ez_sql_mysql.php";
 
 // Initialise database object and establish a connection
 // at the same time - db_user / db_password / db_name / db_host
-$db = new ezSQL_mysql($_config[ "db_user" ],$_config[ "db_pass" ], $_config[ "db_name" ], $_config[ "db_host" ]);
+$db = new ezSQL_mysql("root", "root", "jshop", "localhost");
 ?>

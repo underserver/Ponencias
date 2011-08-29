@@ -15,6 +15,8 @@ class UsuarioDao implements Dao{
 	}
 	
 	public static function save($usuario){
+		require dirname(__FILE__)."/../includes/db.php";
+		
 		try{
 			$sql  = "insert into usuarios(usuario_nombre, usuario_apellidos, usuario_correo, usuario_telefono, usuario_direccion, usuario_nacimiento, usuario_alias, usuario_password, usuario_tipo) ";
 		  	$sql .= "values('$usuario->getNombre()','$usuario->getApellidos()' ";
@@ -30,6 +32,8 @@ class UsuarioDao implements Dao{
 	}
 	
 	public static function update($usuario){
+		require dirname(__FILE__)."/../includes/db.php";
+		
 		try{
 			$sql  = "update usuarios set";
 		  	$sql .= "       usuario_nombre = '$usuario->getNombre()',";
@@ -63,6 +67,8 @@ class UsuarioDao implements Dao{
     } 
 	
     public static function delete($usuario){
+		require dirname(__FILE__)."/../includes/db.php";
+		
     	try {
     		$db->query("delete from usuarios where usuario_id=$usuario->getId()");
     	}catch(Exception $e){
@@ -71,6 +77,8 @@ class UsuarioDao implements Dao{
     }
 	
     public static function findByQuery($query){
+		require dirname(__FILE__)."/../includes/db.php";
+		
     	$users = array();
     	$sql = "select * from usuarios where $query";
     	try{
@@ -91,7 +99,7 @@ class UsuarioDao implements Dao{
     public static function findAll(){
     	$users = array();
     	try{
-    		$users = findByQuery( "1=1" );
+    		$users = UsuarioDao::findByQuery( "1=1" );
 		}catch(QueryException $qe){
     		throw $qe;
     	}
@@ -99,6 +107,8 @@ class UsuarioDao implements Dao{
     }
 	
     public static function findById($id){
+		require dirname(__FILE__)."/../includes/db.php";
+		
        $sql = "select * from usuarios where usuario_id=$id";
        $usuario = new Usuario();
     	try{

@@ -11,13 +11,13 @@ class Evaluacion{
 	public function __construct(){}
 	
   	public function __construct($row){
-  		$this->id = $row["evaluacion_id"];
-  		$this->calificacion = $row["evaluacion_calificacion"];
-  		$this->observaciones = $row["evaluacion_observaciones"];
-  		$this->dictamen = $row["evaluacion_dictamen"];
-  		$this->fecha = $row["evaluacion_fecha"];
-  		$this->ponencia_id = $row["ponencia_id"];
-  		$this->evaluador_id = $row["evaluador_id"];
+  		$this->id = $row->evaluacion_id;
+  		$this->calificacion = $row->evaluacion_calificacion;
+  		$this->observaciones = $row->evaluacion_observaciones;
+  		$this->dictamen = $row->evaluacion_dictamen;
+  		$this->fecha = $row->evaluacion_fecha;
+  		$this->ponencia_id = $row->ponencia_id;
+  		$this->evaluador_id = $row->evaluador_id;
   	}
   	
   	public function setId($id){ $this->id = $id; }
@@ -28,20 +28,20 @@ class Evaluacion{
   	public function setPonencia($ponencia){ $this->ponencia_id = $ponencia->getId(); }
   	public function setEvaluador($evaluador){ $this->evaluador_id = $evaluador->getId(); }
   	
-  	public function getId(){ return $id; }
-  	public function getCalificacion(){ return $calificacion; }
-  	public function getObservaciones(){ return $observaciones; }
-  	public function getDictamen(){ return $dictamen; }
-  	public function getFecha(){ return $fecha; }
+  	public function getId(){ return $this->id; }
+  	public function getCalificacion(){ return $this->calificacion; }
+  	public function getObservaciones(){ return $this->observaciones; }
+  	public function getDictamen(){ return $this->dictamen; }
+  	public function getFecha(){ return $this->fecha; }
   	public function getPonencia(){ 
-  		$ponencia = PonenciaDao::findById($ponencia_id); 
+  		$ponencia = PonenciaDao::findById($this->ponencia_id); 
   		if( isset($ponencia) ){
   			return $ponencia;
   		}
   		return new Ponencia();
   	}
   	public function getEvaluador(){ 
-  		$evaluador = UsuarioDao::findById($evaluador_id); 
+  		$evaluador = UsuarioDao::findById($this->evaluador_id); 
   		if( isset($evaluador) ){
   			return $evaluador;
   		}

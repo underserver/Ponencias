@@ -1,19 +1,23 @@
 <?php
 include_once "./includes/settings.php";
 include_once "./includes/db.php";
-include_once "./controller/ViewController.php";
-include_once "./controller/UsuarioController.php";
-include_once "./pages/PageView.php";
+include_once "./view/PageView.php";
+include_once "./services/UsuarioManager.php";
 
-class LoginView extends ViewController{
+class LoginView extends PageView{
+
+	public function __construct(){
+		parent::__construct();
+	}
 	
 	public function handleRequest(){
-		$usuario = UsuarioController::usuarioActual();
-		$pageView = new PageView("inicio", $usuario);
-		$pageView->setContent("login");
-		$this->render($pageView);
+		global $usuarios;
+		
+		$usuarios=UsuarioManager::listar();
+		$this->setContent(new HtmlPage("./view/login.php"));
 	}
 }
 
-new LoginView();
+$view = new LoginView();
+$view->renderAll();
 ?>

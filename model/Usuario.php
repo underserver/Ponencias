@@ -14,16 +14,16 @@ class Usuario{
 	
 	public function __construct($row = NULL){
 		if( $row != NULL ){
-			$this->id = $row["usuario_id"];
-			$this->nombre = $row["usuario_nombre"];
-			$this->apellidos = $row["usuario_apellidos"];
-			$this->correo = $row["usuario_correo"];
-			$this->alias = $row["usuario_alias"];
-			$this->password = $row["usuario_password"];
-			$this->tipo = $row["usuario_tipo"];
-			$this->fechaNacimiento = $row["usuario_nacimiento"];
-			$this->telefono = $row["usuario_telefono"];
-			$this->direccion = $row["usuario_direccion"];
+			$this->id = $row->usuario_id;
+			$this->nombre = $row->usuario_nombre;
+			$this->apellidos = $row->usuario_apellidos;
+			$this->correo = $row->usuario_correo;
+			$this->alias = $row->usuario_alias;
+			$this->password = $row->usuario_password;
+			$this->tipo = $row->usuario_tipo;
+			$this->fechaNacimiento = $row->usuario_nacimiento;
+			$this->telefono = $row->usuario_telefono;
+			$this->direccion = $row->usuario_direccion;
 		}
 	}
 	
@@ -38,16 +38,16 @@ class Usuario{
 	public function setTelefono($telefono){ $this->telefono = $telefono; }
 	public function setDireccion($direccion){ $this->direccion = $direccion; }
 	
-	public function getId(){ return $id; }
-	public function getNombre(){ return $nombre; }
-	public function getApellidos(){ return $apellidos; }
-	public function getCorreo(){ return $correo; }
-	public function getAlias(){ return $alias; }
-	public function getPassword(){ return $password; }
-	public function getTipo(){ return $tipo; }
-	public function getFechaNacimiento(){ return $fechaNacimiento; }
-	public function getTelefono(){ return $telefono; }
-	public function getDireccion(){ return $direccion; }
+	public function getId(){ return $this->id; }
+	public function getNombre(){ return $this->nombre; }
+	public function getApellidos(){ return $this->apellidos; }
+	public function getCorreo(){ return $this->correo; }
+	public function getAlias(){ return $this->alias; }
+	public function getPassword(){ return $this->password; }
+	public function getTipo(){ return $this->tipo; }
+	public function getFechaNacimiento(){ return $rhis->fechaNacimiento; }
+	public function getTelefono(){ return $this->telefono; }
+	public function getDireccion(){ return $this->direccion; }
 	
 }
 ?>

@@ -21,9 +21,9 @@ class SubmenuItem implements Renderable{
 	public function getHtml(){
 		
 		if( $this->isSelected() ){
-			$html  = '<li class="selected">'. $this->getLabel() .'</li>';
+			$html  = "<li class='selected'>". $this->getLabel() ."</li>\n";
 		} else {
-			$html  = '<li class=""><a href="'. $this->getUrl() .'">'. $this->getLabel() .'</a></li>';
+			$html  = "<li class=''><a href='". $this->getUrl() ."'>". $this->getLabel() ."</a></li>\n";
 		}
 		
 		return $html;

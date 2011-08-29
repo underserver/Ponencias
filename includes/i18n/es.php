@@ -1,9 +1,10 @@
 ﻿<?php
 $_i18n[ "title" ] = "Sistema de Gestion de Ponencias";
-$_i18n[ "menu1" ] = "Inicio";
-$_i18n[ "menu2" ] = "Ponencias";
+$_i18n[ "inicio" ] = "Inicio";
+$_i18n[ "ponencias" ] = "Ponencias";
 $_i18n[ "menu3" ] = "Administrador";
 $_i18n[ "menu4" ] = "Mi cuenta";
+$_i18n[ "registro" ] = "Registrarse";
 $_i18n[ "menu41" ] = "Datos personales";
 $_i18n[ "menu42" ] = "Informacion de acceso";
 $_i18n[ "ponencias" ] = "Ponencias";
