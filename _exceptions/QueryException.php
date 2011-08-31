@@ -1,4 +1,6 @@
 ﻿<?php
+include_once dirname(__FILE__)."/GenericException.php";
+
 class QueryException extends GenericException
 {
 	private $sql;

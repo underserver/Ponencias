@@ -1,4 +1,7 @@
 ﻿<?php
+include_once dirname(__FILE__)."/../enums/UsuarioType.php";
+include_once dirname(__FILE__)."/../_exceptions/TransactionException.php";
+include_once dirname(__FILE__)."/../_exceptions/QueryException.php";
 include_once dirname(__FILE__)."/../dao/UsuarioDao.php";
 
 class UsuarioManager{

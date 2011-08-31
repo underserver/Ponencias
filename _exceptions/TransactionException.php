@@ -1,4 +1,6 @@
 ﻿<?php
+include_once dirname(__FILE__)."/GenericException.php";
+
 class TransactionException extends GenericException
 {
 	private $entity;

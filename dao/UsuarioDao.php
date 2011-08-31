@@ -7,7 +7,7 @@ class UsuarioDao implements Dao{
 	public static function deleteAll($usuarios){
 		foreach( $usuarios as $usuario ){
 			try{
-				delete($usuario);
+				UsuarioDao::delete($usuario);
 			}catch(TransactionException $te){
 				throw $te;
 			}
@@ -57,9 +57,9 @@ class UsuarioDao implements Dao{
        try{
        		$id = $usuario->getId();
         	if( !empty($id) ){
-    			save($usuario);
+    			UsuarioDao::save($usuario);
     		}else{
-    			update($usuario);
+    			UsuarioDao::update($usuario);
     		}
        }catch(TransactionException $te){
 		  throw $te;

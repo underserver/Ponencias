@@ -1,6 +1,6 @@
 ﻿<?php
-class GenericException extends Exception
+abstract class GenericException extends Exception
 {
-	protected function i18n();
+	abstract protected function i18n();
 }
 ?>

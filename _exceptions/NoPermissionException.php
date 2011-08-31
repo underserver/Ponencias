@@ -1,4 +1,6 @@
 ﻿<?php
+include_once dirname(__FILE__)."/GenericException.php";
+
 class NoPermissionException extends GenericException
 {
     public function __construct($message, $code = 0, Exception $previous = null) {

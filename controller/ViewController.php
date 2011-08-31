@@ -9,12 +9,12 @@ abstract class ViewController{
 		$this->usuarioActual = new Usuario();
 		$this->usuarioActual->setTipo(UsuarioType::$PUBLICO);
 		
-		/*if( isset($_SESSION["usuario_id"]) ){
+		if( isset($_SESSION["usuario_id"]) ){
 			try{
 				$this->usuarioActual = UsuarioManager::obtener($_SESSION["usuario_id"]); 
 			}catch(QueryException $qe){
 			}
-		}*/
+		}
 	}
 	
 	public function getUsuarioActual(){ return $this->usuarioActual; }

@@ -1,5 +1,12 @@
 ﻿<?php
+include_once dirname(__FILE__)."/../enums/PonenciaStatus.php";
+include_once dirname(__FILE__)."/../_exceptions/TransactionException.php";
+include_once dirname(__FILE__)."/../_exceptions/QueryException.php";
+include_once dirname(__FILE__)."/../dao/EvaluacionDao.php";
+include_once dirname(__FILE__)."/../dao/PonenciaDao.php";
+
 class PonenciaManager{
+
 	public static function registrar($ponencia){
 		try{
     		$ponencia->setStatus(PonenciaStatus::SIN_ASIGNAR);

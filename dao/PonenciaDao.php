@@ -1,11 +1,13 @@
 <?php
-include_once "../model/Ponencia.php";
+include_once dirname(__FILE__)."/Dao.php";
+include_once dirname(__FILE__)."/../model/Ponencia.php";
+
 class PonenciaDao implements Dao{
 	
 	public static function deleteAll($ponencias){
 		foreach( $ponencias as $ponencia ){
 			try{
-				delete($ponencia);
+				PonenciaDao::delete($ponencia);
 			}catch(TransactionException $te){
 				throw $te;
 			}
@@ -13,6 +15,8 @@ class PonenciaDao implements Dao{
 	}
 	
 	public static function save($ponencia){
+		require dirname(__FILE__)."/../includes/db.php";
+		
 		try{
 			$sql  = "insert into ponencias(ponencia_titulo, ponencia_resumen, ponencia_archivo2, ponencia_archivo2, ponencia_estado, ponencia_observaciones, usuario_id, ponencia_fecha, ponencia_ejetematico, ponencia_sala, ponencia_hora) ";
 		  	$sql .= "values('$ponencia->getTitulo()','$ponencia->getResumen()' ";
@@ -29,6 +33,8 @@ class PonenciaDao implements Dao{
 	}
 	
 	public static function update($ponencia){
+		require dirname(__FILE__)."/../includes/db.php";
+		
 		try{
 			$sql  = "update ponencias set";
 		  	$sql .= "       ponencia_titulo = '$ponencia->getTitulo()',";
@@ -53,9 +59,9 @@ class PonenciaDao implements Dao{
     public static function persist($ponencia){
        try{
         	if( !isset($ponencia->getId()) ){
-    			save($ponencia);
+    			PonenciaDao::save($ponencia);
     		}else{
-    			update($ponencia);
+    			PonenciaDao::update($ponencia);
     		}
 		}catch(TransactionException $te){
 		   throw $te;
@@ -63,6 +69,8 @@ class PonenciaDao implements Dao{
     } 
 	
     public static function delete($ponencia){
+		require dirname(__FILE__)."/../includes/db.php";
+		
     	try {
     		$db->query("delete from ponencias where ponencia_id=$ponencia->getId()");
     	}catch(Exception $e){
@@ -71,6 +79,8 @@ class PonenciaDao implements Dao{
     }
 	
     public static function findByQuery($query){
+		require dirname(__FILE__)."/../includes/db.php";
+		
     	$ponencias = array();
     	$sql = "select * from ponencias where $query";
     	try{
@@ -91,7 +101,7 @@ class PonenciaDao implements Dao{
     public static function findAll(){
     	$ponencias = array();
     	try{
-    		$ponencias = findByQuery( "1=1" );
+    		$ponencias = PonenciaDao::findByQuery( "1=1" );
 		}catch(QueryException $qe){
     		throw $qe;
     	}
@@ -99,8 +109,10 @@ class PonenciaDao implements Dao{
     }
 	
     public static function findById($id){
-       $sql = "select * from ponencias where ponencia_id=$id";
-       $ponencia = new Ponencia();
+		require dirname(__FILE__)."/../includes/db.php";
+		
+      $sql = "select * from ponencias where ponencia_id=$id";
+      $ponencia = new Ponencia();
     	try{
 	    	$row = $db->get_results( $sql );
 			$ponencia = new Ponencia($row);

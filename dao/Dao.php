@@ -8,6 +8,6 @@ interface Dao{
 	public static function findByQuery($query);
 	public static function merge($entity);
 	public static function findAll();
-   	public static function findById($id);
+   public static function findById($id);
 }
 ?>

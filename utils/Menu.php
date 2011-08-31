@@ -25,6 +25,8 @@ class Menu implements Renderable{
 		$item = $item->addSubitem(new MenuItem("acceso", 	"admin_access.php", 		UsuarioType::$REGISTRADO));
 		$item = $item->addSubitem(new MenuItem("logoff", 	"logoff.php", 				UsuarioType::$REGISTRADO));
 		$this->items[] = $item;
+		
+		echo json_encode($this->items[0]);
 	}
 	
 	public function getItems(){ return $this->items; }

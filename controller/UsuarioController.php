@@ -1,5 +1,8 @@
 ﻿<?php
+include_once dirname(__FILE__)."/../enums/UsuarioType.php";
+include_once dirname(__FILE__)."/../_exceptions/NoPermissionException.php";
 include_once dirname(__FILE__)."/../services/UsuarioManager.php";
+include_once dirname(__FILE__)."/../dao/UsuarioDao.php";
 
 class UsuarioController{
     

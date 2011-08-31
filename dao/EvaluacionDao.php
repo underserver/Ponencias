@@ -1,11 +1,13 @@
 <?php
-include_once "../model/Evaluacion.php";
+include_once dirname(__FILE__)."/Dao.php";
+include_once dirname(__FILE__)."/../model/Evaluacion.php";
+
 class EvaluacionDao implements Dao{
 	
 	public static function deleteAll($evaluaciones){
 		foreach( $evaluaciones as $evaluacion ){
 			try{
-				delete($evaluacion);
+				EvaluacionDao::delete($evaluacion);
 			}catch(TransactionException $te){
 				throw $te;
 			}
@@ -45,9 +47,9 @@ class EvaluacionDao implements Dao{
     public static function persist($evaluacion){
        try{
         	if( !isset($evaluacion->getId()) ){
-    			save($evaluacion);
+    			EvaluacionDao::save($evaluacion);
     		}else{
-    			update($evaluacion);
+    			EvaluacionDao::update($evaluacion);
     		}
 		}catch(TransactionException $te){
 		  throw $te;
@@ -83,7 +85,7 @@ class EvaluacionDao implements Dao{
     public static function findAll(){
     	$evaluaciones = array();
     	try{
-    		$evaluaciones = findByQuery( "1=1" );
+    		$evaluaciones = EvaluacionDao::findByQuery( "1=1" );
 		}catch(QueryException $qe){
     		throw $qe;
     	}
