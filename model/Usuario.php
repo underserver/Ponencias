@@ -24,6 +24,10 @@ class Usuario{
 			$this->fechaNacimiento = $row->usuario_nacimiento;
 			$this->telefono = $row->usuario_telefono;
 			$this->direccion = $row->usuario_direccion;
+		} else {
+			$this->id = 0;
+			$this->alias = 'Usuario';
+			$this->tipo = UsuarioType::$PUBLICO;
 		}
 	}
 	

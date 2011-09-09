@@ -2,25 +2,25 @@
 require_once dirname(__FILE__)."/../model/Usuario.php";
 
 abstract class ViewController{
-	private $usuarioActual;
-	private $vistaActual;
+	private $usuario;
 	
 	public function __construct(){
-		$this->usuarioActual = new Usuario();
-		$this->usuarioActual->setTipo(UsuarioType::$PUBLICO);
+		$this->usuario = new Usuario();
+		$this->usuario->setTipo(UsuarioType::$PUBLICO);
 		
 		if( isset($_SESSION["usuario_id"]) ){
 			try{
-				$this->usuarioActual = UsuarioManager::obtener($_SESSION["usuario_id"]); 
+				$this->usuario = UsuarioManager::obtener($_SESSION["usuario_id"]); 
 			}catch(QueryException $qe){
+				$this->usuario = new Usuario();
 			}
 		}
 	}
 	
-	public function getUsuarioActual(){ return $this->usuarioActual; }
-	public function getVistaActual(){ return $this->vistaActual; }
+	public function getUsuario(){ return $this->usuario; }
+	public function getQueryParameter($param){ return $_GET[$param]; }
+	public function getPostParameter($param){ return $_POST[$param]; }
 	
 	public function setUsuarioActual($usuarioActual){ $this->usuarioActual = $usuarioActual; }
-	public function setVistaActual($vistaActual){ $this->vistaActual = $vistaActual; }
 }
 ?>

@@ -5,14 +5,9 @@ require_once dirname(__FILE__)."/Renderable.php";
 class Submenu implements Renderable{
 	private $items;
 	private $subtitle;
-	public function __construct($items, $subtitle){
-		//$this->items = $items;
+	public function __construct($items = array(), $subtitle){
 		$this->subtitle = $subtitle;
-		
-		$this->items = array();
-		$this->items[] = new SubmenuItem("Test1", 		".", 						UsuarioType::$TODOS);
-		$this->items[] = new SubmenuItem("Test2", 		"ponencias.php", 			UsuarioType::$TODOS);
-		$this->items[] = new SubmenuItem("Test3", 		"admin_ponencias.php", 	UsuarioType::$PONENTE);
+		$this->items = $items;
 	}
 	
 	public function getItems(){ return $this->items; }
@@ -36,6 +31,7 @@ class Submenu implements Renderable{
 	}
 	
 	public function setItems($items){ $this->items = $items; }
+	public function addItem($item){ $this->items[] = $item; }
 	public function setSubtitle($subtitle){ $this->subtitle = $subtitle; }
 }
 ?>
