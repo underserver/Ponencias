@@ -6,6 +6,7 @@ class Menu implements Renderable{
 	private $items;
 	private $userType;
 	private $viewId;
+	private $selectedItem;
 	
 	public function __construct($userType, $viewId){
 		$this->userType = $userType;
@@ -31,6 +32,7 @@ class Menu implements Renderable{
 	
 	public function getItems(){ return $this->items; }
 	public function getViewId(){ return $this->viewId; }
+	public function getSelectedItem(){ return $this->selectedItem; }
 	
 	public function getHtml(){
 		$html  = "<div id='navigation'>\n";
@@ -42,7 +44,11 @@ class Menu implements Renderable{
 									  ) 
 				)
 			{
-				$item->setSelected( $item->getKey() == $this->viewId );
+				$selected = $item->getKey() == $this->viewId;
+				if( $selected ){
+					$item->setSelected( true );
+					$this->selectedItem = $item;
+				}
 				$html .= $item->getHtml();
 			}
 		}

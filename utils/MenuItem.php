@@ -6,13 +6,15 @@ class MenuItem implements Renderable{
 	private $role;
 	private $selected;
 	private $subitems;
+	private $submenu;
 	
-	public function __construct($key, $url, $role){
+	public function __construct($key, $url, $role, $submenu = array()){
 		$this->key = $key;
 		$this->url = $url;
 		$this->role = $role;
 		$this->selected = false;
 		$this->subitems = array();
+		$this->submenu = $submenu;
 	}
 	
 	public function getKey(){ return $this->key; }
