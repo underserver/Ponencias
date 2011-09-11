@@ -8,7 +8,7 @@ class MenuItem implements Renderable{
 	private $subitems;
 	private $submenu;
 	
-	public function __construct($key, $url, $role, $submenu = array()){
+	public function __construct($key, $url, $role, $submenu = new Submenu()){
 		$this->key = $key;
 		$this->url = $url;
 		$this->role = $role;
@@ -23,6 +23,7 @@ class MenuItem implements Renderable{
 	public function isSelected(){ return $this->selected; }
 	public function getLabel(){ return i18n($this->key); }
 	public function getSubitems(){ return $this->subitems; }
+	public function getSubmenu(){ return $this->submenu; }
 	public function getHtml(){
 		if( count($this->getSubitems()) > 0 ){
 			$menu   = "<li class='".($this->isSelected() ? "selected" : "")."' id='services'>\n";
@@ -46,6 +47,7 @@ class MenuItem implements Renderable{
 	public function setRole($role){ $this->role = $role; }
 	public function setSelected($selected){ $this->selected = $selected; }
 	public function setSubitems($subitems){ $this->subitems = $subitems; }
+	public function setSubmenu($submenu){ $this->submenu = $submenu; }
 	public function addSubitem($subitem){ $this->subitems[] = $subitem; return $this;}
 }
 ?>

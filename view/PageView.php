@@ -20,8 +20,23 @@ abstract class PageView extends ViewController{
 		
 		$this->header 	 = dirname(__FILE__)."/../includes/header.inc";
 		$this->footer 	 = dirname(__FILE__)."/../includes/footer.inc";
-		$this->menu 	 = new Menu($this->getUsuarioActual()->getTipo(), "inicio");
-		$this->submenu  = new Submenu(NULL, "Inicio");
+		
+		$menuitems = array();
+		$menuitems[] = new MenuItem("inicio", 			".", 							UsuarioType::$TODOS);
+		$menuitems[] = new MenuItem("ponencias", 		"ponencias.php", 			UsuarioType::$TODOS);
+		$menuitems[] = new MenuItem("misponencias", 	"admin_ponencias.php", 	UsuarioType::$PONENTE);
+		$menuitems[] = new MenuItem("adminpanel", 		"adminpanel.php", 		UsuarioType::$ADMINISTRADOR);
+		$menuitems[] = new MenuItem("evaluar", 			"adminpanel.php", 		UsuarioType::$EVALUADOR);
+		
+		$menuitems[] = new MenuItem("registro", 		"register.php", 			UsuarioType::$PUBLICO);
+		
+		$subitem = new MenuItem("cuenta", 							"adminpanel.php", 	UsuarioType::$REGISTRADO);
+		$subitem = $subitem->addSubitem(new MenuItem("personal",	"admin_persona.php", UsuarioType::$REGISTRADO));
+		$subitem = $subitem->addSubitem(new MenuItem("acceso", 	"admin_access.php", 	UsuarioType::$REGISTRADO));
+		$subitem = $subitem->addSubitem(new MenuItem("logoff", 	"logoff.php", 			UsuarioType::$REGISTRADO));
+		$menuitems[] = $subitem;
+		
+		$this->menu 	 = new Menu($menuitems, $this);
 		$this->messages = array();
 		$this->content  = NULL;
 	}
@@ -56,14 +71,17 @@ abstract class PageView extends ViewController{
 
 	public function getHeader(){ return new HtmlPage($this->header); }
 	public function getMenu(){	return $this->menu; }
-	public function getSubmenu(){ return $this->submenu; }
+	public function getSubmenu(){ return $this->getMenu()->getSelecteItem()->getSubmenu(); }
 	public function getMessages(){ return $this->messages; }
 	public function getContent(){ return $this->content; }
 	public function getFooter(){ return new HtmlPage($this->footer); }
 	
+	public function getAction(){
+		return $this->getQueryParameter("action");
+	}
+	
 	public function setContent($content){ $this->content = $content; }
 	public function setMenu($menu){ $this->menu = $menu; }
-	public function setSubmenu($submenu){ $this->submenu = $submenu; }
 	public function setMessages($messages){ $this->messages = $messages; }
 	public function addMessage($message){ $this->messages[] = $message; }
 	public function setFooter($footer){ $this->footer = $footer; }

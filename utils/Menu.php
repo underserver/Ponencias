@@ -5,34 +5,22 @@ require_once dirname(__FILE__)."/Renderable.php";
 class Menu implements Renderable{
 	private $items;
 	private $userType;
-	private $viewId;
-	private $selectedItem;
 	
-	public function __construct($userType, $viewId){
-		$this->userType = $userType;
+	public function __construct($items = array(), $pageView){
+		$this->userType = $pageView->getUsuario()->getTipo();
 		$this->viewId = $viewId;
-		
-		$this->items = array();
-		$this->items[] = new MenuItem("inicio", 				".", 						UsuarioType::$TODOS);
-		$this->items[] = new MenuItem("ponencias", 			"ponencias.php", 			UsuarioType::$TODOS);
-		$this->items[] = new MenuItem("misponencias", 		"admin_ponencias.php", 	UsuarioType::$PONENTE);
-		$this->items[] = new MenuItem("adminpanel", 		"adminpanel.php", 			UsuarioType::$ADMINISTRADOR);
-		$this->items[] = new MenuItem("evaluar", 			"adminpanel.php", 			UsuarioType::$EVALUADOR);
-		
-		$this->items[] = new MenuItem("registro", 			"register.php", 			UsuarioType::$PUBLICO);
-		
-		$item = new MenuItem("cuenta", 						"adminpanel.php", 			UsuarioType::$REGISTRADO);
-		$item = $item->addSubitem(new MenuItem("personal",	"admin_persona.php", 		UsuarioType::$REGISTRADO));
-		$item = $item->addSubitem(new MenuItem("acceso", 	"admin_access.php", 		UsuarioType::$REGISTRADO));
-		$item = $item->addSubitem(new MenuItem("logoff", 	"logoff.php", 				UsuarioType::$REGISTRADO));
-		$this->items[] = $item;
-		
-		echo json_encode($this->items[0]);
+		$this->items = $items;
 	}
 	
 	public function getItems(){ return $this->items; }
-	public function getViewId(){ return $this->viewId; }
-	public function getSelectedItem(){ return $this->selectedItem; }
+	public function getSelectedItem() {
+		foreach( $this->items as $item ){
+			if( $item->isSelected() ){
+				$selectedItem = $item;
+			}
+		}
+		return $selectedItem;
+	}
 	
 	public function getHtml(){
 		$html  = "<div id='navigation'>\n";
@@ -44,11 +32,7 @@ class Menu implements Renderable{
 									  ) 
 				)
 			{
-				$selected = $item->getKey() == $this->viewId;
-				if( $selected ){
-					$item->setSelected( true );
-					$this->selectedItem = $item;
-				}
+				$item->setSelected( $item->getKey() == $this->viewId );
 				$html .= $item->getHtml();
 			}
 		}
@@ -59,7 +43,21 @@ class Menu implements Renderable{
 	}
 	
 	public function setItems($items){ $this->items = $items; }
-	public function setViewId($viewId){ $this->viewId = $viewId; }
+	public function setSelectedItem($key){
+		foreach( $this->items as $item ){
+			if( $item->getKey() == $key ){
+				$item->setSelected( true );
+			}
+		}
+	}
+	
+	public function setSelectedSubItem($key){
+		foreach( $this->getSelectedItem()->getSubmenu()->getItems() as $item ){
+			if( $item->getKey() == $key ){
+				$item->setSelected( true );
+			}
+		}
+	}
 	
 }
 ?>
