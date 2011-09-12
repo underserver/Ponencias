@@ -1,11 +1,11 @@
-﻿<?php
-require_once dirname(__FILE__)."/../utils/Menu.php";
-require_once dirname(__FILE__)."/../utils/MenuItem.php";
-require_once dirname(__FILE__)."/../utils/Submenu.php";
-require_once dirname(__FILE__)."/../utils/SubmenuItem.php";
-require_once dirname(__FILE__)."/../utils/HtmlPage.php";
-require_once dirname(__FILE__)."/../_exceptions/ViewException.php";
-require_once dirname(__FILE__)."/../controller/ViewController.php";
+<?php
+require_once dirname(__FILE__).'/../utils/Menu.php';
+require_once dirname(__FILE__).'/../utils/MenuItem.php';
+require_once dirname(__FILE__).'/../utils/Submenu.php';
+require_once dirname(__FILE__).'/../utils/SubmenuItem.php';
+require_once dirname(__FILE__).'/../utils/HtmlPage.php';
+require_once dirname(__FILE__).'/../_exceptions/ViewException.php';
+require_once dirname(__FILE__).'/../controller/ViewController.php';
 
 abstract class PageView extends ViewController{
 	private $header;
@@ -21,17 +21,20 @@ abstract class PageView extends ViewController{
 		$this->header 	 = dirname(__FILE__)."/../includes/header.inc";
 		$this->footer 	 = dirname(__FILE__)."/../includes/footer.inc";
 		
+		$subInicio = array();
+		$subInicio[] = new SubmenuItem("inicio", 		".", 						UsuarioType::$TODOS);
+		
 		$menuitems = array();
-		$menuitems[] = new MenuItem("inicio", 			".", 							UsuarioType::$TODOS);
+		$menuitems[] = new MenuItem("inicio", 			".", 						UsuarioType::$TODOS, new Submenu($subInicio, ""));
 		$menuitems[] = new MenuItem("ponencias", 		"ponencias.php", 			UsuarioType::$TODOS);
 		$menuitems[] = new MenuItem("misponencias", 	"admin_ponencias.php", 	UsuarioType::$PONENTE);
-		$menuitems[] = new MenuItem("adminpanel", 		"adminpanel.php", 		UsuarioType::$ADMINISTRADOR);
-		$menuitems[] = new MenuItem("evaluar", 			"adminpanel.php", 		UsuarioType::$EVALUADOR);
+		$menuitems[] = new MenuItem("adminpanel", 		"adminpanel.php", 			UsuarioType::$ADMINISTRADOR);
+		$menuitems[] = new MenuItem("evaluar", 			"adminpanel.php", 			UsuarioType::$EVALUADOR);
 		
 		$menuitems[] = new MenuItem("registro", 		"register.php", 			UsuarioType::$PUBLICO);
 		
-		$subitem = new MenuItem("cuenta", 							"adminpanel.php", 	UsuarioType::$REGISTRADO);
-		$subitem = $subitem->addSubitem(new MenuItem("personal",	"admin_persona.php", UsuarioType::$REGISTRADO));
+		$subitem = new MenuItem("cuenta", 							"adminpanel.php", 		UsuarioType::$REGISTRADO);
+		$subitem = $subitem->addSubitem(new MenuItem("personal",	"admin_persona.php", 	UsuarioType::$REGISTRADO));
 		$subitem = $subitem->addSubitem(new MenuItem("acceso", 	"admin_access.php", 	UsuarioType::$REGISTRADO));
 		$subitem = $subitem->addSubitem(new MenuItem("logoff", 	"logoff.php", 			UsuarioType::$REGISTRADO));
 		$menuitems[] = $subitem;
@@ -71,7 +74,7 @@ abstract class PageView extends ViewController{
 
 	public function getHeader(){ return new HtmlPage($this->header); }
 	public function getMenu(){	return $this->menu; }
-	public function getSubmenu(){ return $this->getMenu()->getSelecteItem()->getSubmenu(); }
+	public function getSubmenu(){ return $this->getMenu()->getSelectedItem()->getSubmenu(); }
 	public function getMessages(){ return $this->messages; }
 	public function getContent(){ return $this->content; }
 	public function getFooter(){ return new HtmlPage($this->footer); }

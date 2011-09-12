@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 require_once dirname(__FILE__)."/../enums/UsuarioType.php";
 require_once dirname(__FILE__)."/Renderable.php";
 
@@ -26,6 +26,7 @@ class Submenu implements Renderable{
 		}
 		$html  .= "</div>\n";
 		$html .= "<div class='clear'></div>\n";
+		$html .= "<div align='center' id='content'>";
 		
 		return $html;
 	}

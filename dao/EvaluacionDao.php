@@ -23,8 +23,8 @@ class EvaluacionDao implements Dao{
 			
 			$db->query($sql);
 		}catch(Exception $e){
-    		throw new TransactionExcepion($e->getMessage(), $evaluacion, TransactionExcepion::SAVE_CODE, $e);
-    	}
+    			throw new TransactionExcepion($e->getMessage(), $evaluacion, TransactionExcepion::SAVE_CODE, $e);
+    		}
 	}
 	
 	public static function update($evaluacion){
@@ -40,68 +40,68 @@ class EvaluacionDao implements Dao{
 			
 			$db->query($sql);
 		}catch(Exception $e){
-    		throw new TransactionExcepion($e->getMessage(), $evaluacion, TransactionExcepion::UPDATE_CODE, $e);
-    	}
+    			throw new TransactionExcepion($e->getMessage(), $evaluacion, TransactionExcepion::UPDATE_CODE, $e);
+    		}
 	}
 	
-    public static function persist($evaluacion){
-       try{
-        	if( !isset($evaluacion->getId()) ){
-    			EvaluacionDao::save($evaluacion);
-    		}else{
-    			EvaluacionDao::update($evaluacion);
-    		}
+	public static function persist($evaluacion){
+		try{
+			if( !isset($evaluacion->getId()) ){
+				EvaluacionDao::save($evaluacion);
+			}else{
+				EvaluacionDao::update($evaluacion);
+			}
 		}catch(TransactionException $te){
-		  throw $te;
+			throw $te;
 		}
-    } 
+	} 
 	
-    public static function delete($evaluacion){
-    	try {
-    		$db->query("delete from evaluaciones where evaluacion_id=$evaluacion->getId()");
-    	}catch(Exception $e){
-    		throw new TransactionExcepion($e->getMessage(), $evaluacion, TransactionExcepion::DELETE_CODE, $e);
-    	}
-    }
+	public static function delete($evaluacion){
+		try {
+			$db->query("delete from evaluaciones where evaluacion_id=$evaluacion->getId()");
+		}catch(Exception $e){
+			throw new TransactionExcepion($e->getMessage(), $evaluacion, TransactionExcepion::DELETE_CODE, $e);
+		}
+	}
 	
-    public static function findByQuery($query){
-    	$evaluaciones = array();
-    	$sql = "select * from evaluaciones where $query";
-    	try{
-	    	$rows = $db->get_results( $sql );
+	public static function findByQuery($query){
+		$evaluaciones = array();
+		$sql = "select * from evaluaciones where $query";
+		try{
+			$rows = $db->get_results( $sql );
 			foreach( $rows as $row ){
 				$evaluaciones[] = new Evaluacion($row);
 			}
 		}catch(Exception $e){
-    		throw new QueryException($e->getMessage(), $sql, 0, $e);
-    	}
+			throw new QueryException($e->getMessage(), $sql, 0, $e);
+		}
 		return $evaluaciones;
-    } 
+	} 
 	
-    public static function merge($evaluacion){
-    	echo "Merge [Evaluacion]: Not Implemented";
-    }
+	public static function merge($evaluacion){
+		echo "Merge [Evaluacion]: Not Implemented";
+	}
 	
-    public static function findAll(){
-    	$evaluaciones = array();
-    	try{
-    		$evaluaciones = EvaluacionDao::findByQuery( "1=1" );
+	public static function findAll(){
+		$evaluaciones = array();
+		try{
+			$evaluaciones = EvaluacionDao::findByQuery( "1=1" );
 		}catch(QueryException $qe){
-    		throw $qe;
-    	}
+			throw $qe;
+		}
 		return $evaluaciones;
-    }
+	}
 	
-    public static function findById($id){
-       $sql = "select * from evaluaciones where evaluacion_id=$id";
-       $evaluacion = new Evaluacion();
-    	try{
-	    	$row = $db->get_results( $sql );
+	public static function findById($id){
+		$sql = "select * from evaluaciones where evaluacion_id=$id";
+		$evaluacion = new Evaluacion();
+		try{
+			$row = $db->get_results( $sql );
 			$evaluacion = new Evaluacion($row);
 		}catch(Exception $e){
-    		throw new QueryException($e->getMessage(), $sql, 0, $e);
-    	}
-    	return $evaluacion;
-    }
+			throw new QueryException($e->getMessage(), $sql, 0, $e);
+		}
+		return $evaluacion;
+	}
 }
 ?>

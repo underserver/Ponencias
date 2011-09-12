@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 require_once dirname(__FILE__)."/../model/Usuario.php";
 
 abstract class ViewController{
@@ -20,6 +20,7 @@ abstract class ViewController{
 	public function getUsuario(){ return $this->usuario; }
 	public function getQueryParameter($param){ return $_GET[$param]; }
 	public function getPostParameter($param){ return $_POST[$param]; }
+	public function redirect($view){ header("Location: /" . $view); }
 	
 	public function setUsuarioActual($usuarioActual){ $this->usuarioActual = $usuarioActual; }
 }

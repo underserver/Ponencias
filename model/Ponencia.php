@@ -1,6 +1,5 @@
 <?php
 class Ponencia{
-	
 	private $id;
 	private $titulo;
 	private $status;

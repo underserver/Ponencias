@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 require_once dirname(__FILE__)."/Renderable.php";
 class MenuItem implements Renderable{
 	private $key;
@@ -8,13 +8,17 @@ class MenuItem implements Renderable{
 	private $subitems;
 	private $submenu;
 	
-	public function __construct($key, $url, $role, $submenu = new Submenu()){
+	public function __construct($key, $url, $role, $submenu = NULL){
 		$this->key = $key;
 		$this->url = $url;
 		$this->role = $role;
 		$this->selected = false;
 		$this->subitems = array();
-		$this->submenu = $submenu;
+		if( $submenu != null ){
+			$this->submenu = $submenu;
+		}else{
+			$this->submenu = new Submenu(array(), "");
+		}
 	}
 	
 	public function getKey(){ return $this->key; }

@@ -27,8 +27,8 @@ class UsuarioDao implements Dao{
 			
 			$db->query($sql);
 		}catch(Exception $e){
-    		throw new TransactionExcepion($e->getMessage(), $usuario, TransactionExcepion::SAVE_CODE, $e);
-    	}
+    			throw new TransactionExcepion($e->getMessage(), $usuario, TransactionExcepion::SAVE_CODE, $e);
+    		}
 	}
 	
 	public static function update($usuario){
@@ -49,75 +49,75 @@ class UsuarioDao implements Dao{
 			
 			$db->query($sql);
 		}catch(Exception $e){
-    		throw new TransactionExcepion($e->getMessage(), $usuario, TransactionExcepion::UPDATE_CODE, $e);
-    	}
+    			throw new TransactionExcepion($e->getMessage(), $usuario, TransactionExcepion::UPDATE_CODE, $e);
+		}
 	}
 	
-    public static function persist($usuario){
-       try{
-       		$id = $usuario->getId();
-        	if( !empty($id) ){
-    			UsuarioDao::save($usuario);
-    		}else{
-    			UsuarioDao::update($usuario);
-    		}
-       }catch(TransactionException $te){
-		  throw $te;
-	   }		
-    } 
+	public static function persist($usuario){
+		try{
+			$id = $usuario->getId();
+			if( !empty($id) ){
+				UsuarioDao::save($usuario);
+			}else{
+				UsuarioDao::update($usuario);
+			}
+		}catch(TransactionException $te){
+			throw $te;
+		}		
+	} 
 	
-    public static function delete($usuario){
+	public static function delete($usuario){
 		require dirname(__FILE__)."/../includes/db.php";
 		
-    	try {
-    		$db->query("delete from usuarios where usuario_id=$usuario->getId()");
-    	}catch(Exception $e){
-    		throw new TransactionExcepion($e->getMessage(), $usuario, TransactionExcepion::DELETE_CODE, $e);
-    	}
-    }
+		try {
+			$db->query("delete from usuarios where usuario_id=$usuario->getId()");
+		}catch(Exception $e){
+			throw new TransactionExcepion($e->getMessage(), $usuario, TransactionExcepion::DELETE_CODE, $e);
+		}
+	}
 	
-    public static function findByQuery($query){
+	public static function findByQuery($query){
 		require dirname(__FILE__)."/../includes/db.php";
 		
-    	$users = array();
-    	$sql = "select * from usuarios where $query";
-    	try{
-	    	$rows = $db->get_results( $sql );
+		$users = array();
+		$sql = "select * from usuarios where $query";
+		try{
+			$rows = $db->get_results( $sql );
 			foreach( $rows as $row ){
 				$users[] = new Usuario($row);
 			}
 		}catch(Exception $e){
-    		throw new QueryException($e->getMessage(), $sql, 0, $e);
-    	}
+    			throw new QueryException($e->getMessage(), $sql, 0, $e);
+    		}
 		return $users;
-    } 
+	} 
 	
-    public static function merge($usuario){
-    	echo "Merge [Usuario]: Not Implemented";
-    }
+	public static function merge($usuario){
+		echo "Merge [Usuario]: Not Implemented";
+	}
 	
-    public static function findAll(){
-    	$users = array();
-    	try{
-    		$users = UsuarioDao::findByQuery( "1=1" );
+	public static function findAll(){
+		$users = array();
+		try{
+			$users = UsuarioDao::findByQuery( "1=1" );
 		}catch(QueryException $qe){
-    		throw $qe;
-    	}
+			throw $qe;
+		}
 		return $users;
-    }
+	}
 	
-    public static function findById($id){
+	public static function findById($id){
 		require dirname(__FILE__)."/../includes/db.php";
 		
-       $sql = "select * from usuarios where usuario_id=$id";
-       $usuario = new Usuario();
-    	try{
-	    	$row = $db->get_results( $sql );
+		$sql = "select * from usuarios where usuario_id=$id";
+		$usuario = new Usuario();
+		try{
+			$row = $db->get_results( $sql );
 			$usuario = new Usuario($row);
 		}catch(Exception $e){
-    		throw new QueryException($e->getMessage(), $sql, 0, $e);
-    	}
-    	return $usuario;
-    }
+			throw new QueryException($e->getMessage(), $sql, 0, $e);
+		}
+		return $usuario;
+	}
 }
 ?>

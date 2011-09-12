@@ -8,6 +8,7 @@
  *
  ***********************************************************************/
 ?>
+</div>
 <div id="footer">
 <p><a href="/http://www.laciudadx.com/about">Acerca de nosotros</a> -
 <a href="mailto:sxceron@laciudadx.com">Sugerencias</a> - <a

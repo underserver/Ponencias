@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 class UsuarioType{
 	public static $TODOS			= 0;
 	public static $ADMINISTRADOR	= 1;

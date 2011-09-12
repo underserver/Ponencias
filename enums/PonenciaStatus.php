@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 class PonenciaStatus{
 	public static $SIN_ASIGNAR		= 1;
 	public static $EN_EVALUACION		= 2;

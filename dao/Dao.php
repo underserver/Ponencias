@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 interface Dao{
 	public static function deleteAll($entities);
 	public static function save($entity);
@@ -8,6 +8,6 @@ interface Dao{
 	public static function findByQuery($query);
 	public static function merge($entity);
 	public static function findAll();
-   public static function findById($id);
+	public static function findById($id);
 }
 ?>

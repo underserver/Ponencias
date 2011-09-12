@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 include_once dirname(__FILE__)."/../enums/UsuarioType.php";
 include_once dirname(__FILE__)."/../_exceptions/TransactionException.php";
 include_once dirname(__FILE__)."/../_exceptions/QueryException.php";
@@ -55,8 +55,8 @@ class UsuarioManager{
 		try{
 			return UsuarioDao::findById($id);
 		}catch(QueryException $qe){
-    		throw $qe;
-    	}
+    			throw $qe;
+    		}
 	}
 	
 	public static function eliminar($usuario){
@@ -71,8 +71,8 @@ class UsuarioManager{
 		try{
 			return UsuarioDao::findAll();
 		}catch(QueryException $qe){
-    		throw $qe;
-    	}
+    			throw $qe;
+    		}
 	}
 	
 	public static function actualizar($usuario){
@@ -90,21 +90,22 @@ class UsuarioManager{
 				return true;
 			}
 		}catch(QueryException $qe){
-    		return true;
-    	}
+    			return true;
+    		}
 		return false;
 	}
 	
 	public static function checkPassword($_usuario){
 		try{
-			$usuario = UsuarioDao::findByQuery("usuario_alias='$_usuario->getAlias()'");
-			if( $usuario->getPassword() == $_usuario->getPassword() ){
+			$alias = $_usuario->getAlias();
+			$usuario = UsuarioDao::findByQuery("usuario_alias='$alias'");
+			if( $usuario[0]->getPassword() == $_usuario->getPassword() ){
 				return true;
 			}
 		}catch(QueryException $qe){
+    			return false;
+    		}
     		return false;
-    	}
-    	return false;
 	}
 }
 ?>

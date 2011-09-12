@@ -28,8 +28,8 @@ class PonenciaDao implements Dao{
 			
 			$db->query($sql);
 		}catch(Exception $e){
-    		throw new TransactionExcepion($e->getMessage(), $ponencia, TransactionExcepion::SAVE_CODE, $e);
-    	}
+    			throw new TransactionExcepion($e->getMessage(), $ponencia, TransactionExcepion::SAVE_CODE, $e);
+    		}
 	}
 	
 	public static function update($ponencia){
@@ -52,73 +52,73 @@ class PonenciaDao implements Dao{
 			
 			$db->query($sql);
 		}catch(Exception $e){
-    		throw new TransactionExcepion($e->getMessage(), $ponencia, TransactionExcepion::UPDATE_CODE, $e);
-    	}
+    			throw new TransactionExcepion($e->getMessage(), $ponencia, TransactionExcepion::UPDATE_CODE, $e);
+    		}
 	}
 	
-    public static function persist($ponencia){
-       try{
-        	if( !isset($ponencia->getId()) ){
-    			PonenciaDao::save($ponencia);
-    		}else{
-    			PonenciaDao::update($ponencia);
-    		}
+	public static function persist($ponencia){
+		try{
+			if( !isset($ponencia->getId()) ){
+				PonenciaDao::save($ponencia);
+			}else{
+				PonenciaDao::update($ponencia);
+			}
 		}catch(TransactionException $te){
-		   throw $te;
+			throw $te;
 		}
-    } 
+	} 
 	
-    public static function delete($ponencia){
+	public static function delete($ponencia){
 		require dirname(__FILE__)."/../includes/db.php";
 		
-    	try {
-    		$db->query("delete from ponencias where ponencia_id=$ponencia->getId()");
-    	}catch(Exception $e){
-    		throw new TransactionExcepion($e->getMessage(), $ponencia, TransactionExcepion::DELETE_CODE, $e);
-    	}
-    }
+		try {
+			$db->query("delete from ponencias where ponencia_id=$ponencia->getId()");
+		}catch(Exception $e){
+			throw new TransactionExcepion($e->getMessage(), $ponencia, TransactionExcepion::DELETE_CODE, $e);
+		}
+	}
 	
-    public static function findByQuery($query){
+	public static function findByQuery($query){
 		require dirname(__FILE__)."/../includes/db.php";
-		
-    	$ponencias = array();
-    	$sql = "select * from ponencias where $query";
-    	try{
-	    	$rows = $db->get_results( $sql );
+
+		$ponencias = array();
+		$sql = "select * from ponencias where $query";
+		try{
+			$rows = $db->get_results( $sql );
 			foreach( $rows as $row ){
 				$ponencias[] = new Ponencia($row);
 			}
 		}catch(Exception $e){
-    		throw new QueryException($e->getMessage(), $sql, 0, $e);
-    	}
+			throw new QueryException($e->getMessage(), $sql, 0, $e);
+		}
 		return $ponencias;
-    } 
+	} 
 	
-    public static function merge($ponencia){
-    	echo "Merge [Ponencia]: Not Implemented";
-    }
+	public static function merge($ponencia){
+		echo "Merge [Ponencia]: Not Implemented";
+	}
 	
-    public static function findAll(){
-    	$ponencias = array();
-    	try{
-    		$ponencias = PonenciaDao::findByQuery( "1=1" );
+	public static function findAll(){
+		$ponencias = array();
+		try{
+			$ponencias = PonenciaDao::findByQuery( "1=1" );
 		}catch(QueryException $qe){
-    		throw $qe;
-    	}
+			throw $qe;
+		}
 		return $ponencias;
-    }
+	}
 	
-    public static function findById($id){
+	public static function findById($id){
 		require dirname(__FILE__)."/../includes/db.php";
 		
-      $sql = "select * from ponencias where ponencia_id=$id";
-      $ponencia = new Ponencia();
-    	try{
-	    	$row = $db->get_results( $sql );
+		$sql = "select * from ponencias where ponencia_id=$id";
+		$ponencia = new Ponencia();
+		try{
+			$row = $db->get_results( $sql );
 			$ponencia = new Ponencia($row);
 		}catch(Exception $e){
-    		throw new QueryException($e->getMessage(), $sql, 0, $e);
-    	}
-    	return $ponencia;
-    }
+			throw new QueryException($e->getMessage(), $sql, 0, $e);
+		}
+		return $ponencia;
+	}
 }

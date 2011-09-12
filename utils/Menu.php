@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 require_once dirname(__FILE__)."/../enums/UsuarioType.php";
 require_once dirname(__FILE__)."/Renderable.php";
 
@@ -8,7 +8,6 @@ class Menu implements Renderable{
 	
 	public function __construct($items = array(), $pageView){
 		$this->userType = $pageView->getUsuario()->getTipo();
-		$this->viewId = $viewId;
 		$this->items = $items;
 	}
 	
@@ -16,10 +15,9 @@ class Menu implements Renderable{
 	public function getSelectedItem() {
 		foreach( $this->items as $item ){
 			if( $item->isSelected() ){
-				$selectedItem = $item;
+				return $item;
 			}
 		}
-		return $selectedItem;
 	}
 	
 	public function getHtml(){
@@ -32,7 +30,6 @@ class Menu implements Renderable{
 									  ) 
 				)
 			{
-				$item->setSelected( $item->getKey() == $this->viewId );
 				$html .= $item->getHtml();
 			}
 		}
@@ -54,9 +51,13 @@ class Menu implements Renderable{
 	public function setSelectedSubItem($key){
 		foreach( $this->getSelectedItem()->getSubmenu()->getItems() as $item ){
 			if( $item->getKey() == $key ){
-				$item->setSelected( true );
+				$item->setSelected( "true" );
 			}
 		}
+	}
+	
+	public function setTitle($title){
+		$this->getSelectedItem()->getSubmenu()->setSubtitle($title);
 	}
 	
 }

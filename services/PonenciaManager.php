@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 include_once dirname(__FILE__)."/../enums/PonenciaStatus.php";
 include_once dirname(__FILE__)."/../_exceptions/TransactionException.php";
 include_once dirname(__FILE__)."/../_exceptions/QueryException.php";
@@ -9,8 +9,8 @@ class PonenciaManager{
 
 	public static function registrar($ponencia){
 		try{
-    		$ponencia->setStatus(PonenciaStatus::SIN_ASIGNAR);
-    		PonenciaDao::persist($ponencia);
+			$ponencia->setStatus(PonenciaStatus::SIN_ASIGNAR);
+			PonenciaDao::persist($ponencia);
 		}catch(TransactionException $te){
 			throw $te;
 		}
@@ -30,8 +30,8 @@ class PonenciaManager{
 			$ponencia->setStatus(PonenciaStatus::EN_EVALUACION);
 			PonenciaDao::persist($ponencia);
 		}catch(QueryException $qe){
-    		throw $qe;
-    	}catch(TransactionException $te){
+    			throw $qe;
+    		}catch(TransactionException $te){
 			throw $te;
 		}
 	}
@@ -45,8 +45,8 @@ class PonenciaManager{
 			$evaluacion->setFecha();
 			EvaluacionDao::persist($evaluacion);
 		}catch(QueryException $qe){
-    		throw $qe;
-    	}catch(TransactionException $te){
+    			throw $qe;
+    		}catch(TransactionException $te){
 			throw $te;
 		}
 	}
@@ -69,8 +69,8 @@ class PonenciaManager{
 		try{
 			return PonenciaDao::findById($ponencia);
 		}catch(QueryException $qe){
-    		throw $qe;
-    	}
+    			throw $qe;
+    		}
 	}
 	
 	public static function eliminar($ponencia){
@@ -97,8 +97,8 @@ class PonenciaManager{
 				$evaluadores[] = $evaluacion->getEvaluador();
 			}
 		}catch(QueryException $qe){
-    		throw $qe;
-    	}
+    			throw $qe;
+    		}
 		return $evaluadores;
 	}
 	
