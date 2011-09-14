@@ -58,7 +58,8 @@ class PonenciaDao implements Dao{
 	
 	public static function persist($ponencia){
 		try{
-			if( !isset($ponencia->getId()) ){
+			$id = $ponencia->getId();
+			if( !empty($id) ){
 				PonenciaDao::save($ponencia);
 			}else{
 				PonenciaDao::update($ponencia);
@@ -72,7 +73,8 @@ class PonenciaDao implements Dao{
 		require dirname(__FILE__)."/../includes/db.php";
 		
 		try {
-			$db->query("delete from ponencias where ponencia_id=$ponencia->getId()");
+			$id = $ponencia->getId();
+			$db->query("delete from ponencias where ponencia_id=$id");
 		}catch(Exception $e){
 			throw new TransactionExcepion($e->getMessage(), $ponencia, TransactionExcepion::DELETE_CODE, $e);
 		}

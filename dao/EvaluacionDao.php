@@ -46,7 +46,8 @@ class EvaluacionDao implements Dao{
 	
 	public static function persist($evaluacion){
 		try{
-			if( !isset($evaluacion->getId()) ){
+			$id = $evaluacion->getId();
+			if( !empty($id) ){
 				EvaluacionDao::save($evaluacion);
 			}else{
 				EvaluacionDao::update($evaluacion);
@@ -58,7 +59,8 @@ class EvaluacionDao implements Dao{
 	
 	public static function delete($evaluacion){
 		try {
-			$db->query("delete from evaluaciones where evaluacion_id=$evaluacion->getId()");
+			$id = $evaluacion->getId();
+			$db->query("delete from evaluaciones where evaluacion_id=$id");
 		}catch(Exception $e){
 			throw new TransactionExcepion($e->getMessage(), $evaluacion, TransactionExcepion::DELETE_CODE, $e);
 		}

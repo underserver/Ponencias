@@ -13,21 +13,21 @@ class Ponencia{
 	private $sala;
 	private $hora;
 	
-	public function __construct(){}
-	
-  	public function __construct($row){
-    	$this->id = $row->ponencia_id;
-		$this->titulo = $row->ponencia_titulo;
-		$this->status = $row->ponencia_estado;
-		$this->resumen = $row->ponencia_resumen;
-		$this->archivoConNombre = $row->ponencia_archivo1;
-		$this->archivoSinNombre = $row->ponencia_archivo2;
-		$this->observaciones = $row->ponencia_observaciones;
-		$this->ponenteId = $row->usuario_id;
-		$this->fecha = $row->ponencia_fecha;
-		$this->ejeTematico = $row->ponencia_ejetematico;
-		$this->sala = $row->ponencia_sala;
-		$this->hora = $row->ponencia_hora;
+  	public function __construct($row = NULL){
+		if( $row != NULL ){
+	    		$this->id = $row->ponencia_id;
+			$this->titulo = $row->ponencia_titulo;
+			$this->status = $row->ponencia_estado;
+			$this->resumen = $row->ponencia_resumen;
+			$this->archivoConNombre = $row->ponencia_archivo1;
+			$this->archivoSinNombre = $row->ponencia_archivo2;
+			$this->observaciones = $row->ponencia_observaciones;
+			$this->ponenteId = $row->usuario_id;
+			$this->fecha = $row->ponencia_fecha;
+			$this->ejeTematico = $row->ponencia_ejetematico;
+			$this->sala = $row->ponencia_sala;
+			$this->hora = $row->ponencia_hora;
+		}
   	}
 	
 	public function setId($id){ $this->id = $id; }

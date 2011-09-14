@@ -7,17 +7,17 @@ class Evaluacion{
 	private $fecha;
 	private $ponencia_id;
 	private $evaluador_id;
-	
-	public function __construct(){}
-	
-	public function __construct($row){
-		$this->id = $row->evaluacion_id;
-		$this->calificacion = $row->evaluacion_calificacion;
-		$this->observaciones = $row->evaluacion_observaciones;
-		$this->dictamen = $row->evaluacion_dictamen;
-		$this->fecha = $row->evaluacion_fecha;
-		$this->ponencia_id = $row->ponencia_id;
-		$this->evaluador_id = $row->evaluador_id;
+		
+	public function __construct($row = NULL){
+		if( $row != NULL ){
+			$this->id = $row->evaluacion_id;
+			$this->calificacion = $row->evaluacion_calificacion;
+			$this->observaciones = $row->evaluacion_observaciones;
+			$this->dictamen = $row->evaluacion_dictamen;
+			$this->fecha = $row->evaluacion_fecha;
+			$this->ponencia_id = $row->ponencia_id;
+			$this->evaluador_id = $row->evaluador_id;
+		}
 	}
   	
 	public function setId($id){ $this->id = $id; }
