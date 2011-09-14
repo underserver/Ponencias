@@ -59,6 +59,10 @@ class Menu implements Renderable{
 	public function setTitle($title){
 		$this->getSelectedItem()->getSubmenu()->setSubtitle($title);
 	}
+
+	public function getComponentId() {
+		return "Menu";
+	}
 	
 }
 ?>

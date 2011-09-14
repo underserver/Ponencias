@@ -4,6 +4,7 @@ require_once dirname(__FILE__).'/includes/session.php';
 require_once dirname(__FILE__).'/includes/i18n/i18n.php';
 require_once dirname(__FILE__).'/includes/db.php';
 require_once dirname(__FILE__).'/view/PageView.php';
+require_once dirname(__FILE__).'/utils/Message.php';
 require_once dirname(__FILE__).'/controller/UsuarioController.php';
 
 class LoginView extends PageView{
@@ -24,8 +25,16 @@ class LoginView extends PageView{
 			$usuario = new Usuario();
 			$usuario->setAlias($this->getPostParameter("userName"));
 			$usuario->setPassword($this->getPostParameter("userPassword"));
-			if( UsuarioController::inciarSesion($usuario) == UsuarioController::$LOGIN_OK ){
+			
+			$login = UsuarioController::inciarSesion($usuario);
+			if( $login == UsuarioController::$LOGIN_OK ){
 				$this->redirect("Index.php");
+			} else if ( $login == UsuarioController::$LOGIN_NO_USER_EXIST ) {
+				$this->addMessage(new Message("El usuario no existe", Message::$ERROR));
+				$this->setContent(new HtmlPage("./view/index.php"));
+			} else if ( $login == UsuarioController::$LOGIN_WRONG_PASSWORD ) {
+				$this->addMessage(new Message("Contraseña incorrecta", Message::$ERROR));
+				$this->setContent(new HtmlPage("./view/index.php"));
 			}
 		} else {
 			$this->setContent(new HtmlPage("./view/index.php"));

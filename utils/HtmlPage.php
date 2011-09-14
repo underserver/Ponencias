@@ -18,5 +18,9 @@ class HtmlPage implements Renderable{
 			throw new ViewException($file, ViewException::$NOT_FOUND);
 		}
 	}
+
+	public function getComponentId() {
+		return "HtmlPage";
+	}
 }
 ?>

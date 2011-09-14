@@ -39,7 +39,7 @@ abstract class PageView extends ViewController{
 		$subitem = $subitem->addSubitem(new MenuItem("logoff", 	"logoff.php", 			UsuarioType::$REGISTRADO));
 		$menuitems[] = $subitem;
 		
-		$this->menu 	 = new Menu($menuitems, $this);
+		$this->menu	= new Menu($menuitems, $this);
 		$this->messages = array();
 		$this->content  = NULL;
 	}
@@ -49,23 +49,25 @@ abstract class PageView extends ViewController{
 			if( $renderable instanceof Renderable ){
 				echo($renderable->getHtml());
 			} else {
-				print $renderable . " is not renderable";
+				print $renderable->getComponentId() . " is not renderable";
 			}
 		} catch(ViewException $ve) {
 			print $ve->i18n();
+		} catch(Exception $e) {
+			print "Error al renderizar la vista";
 		}
 	}
 	
 	public function renderAll(){
 		try{
 			$this->handleRequest();
-      	} catch (GenericException $ge) {
+      		} catch (GenericException $ge) {
 			$this->addMessage( new Message($ge->i18n(), Message::$WARN, true, $ge) );
-      	}
+      		}
 		$this->render($this->getHeader());
 		$this->render($this->getMenu());
 		$this->render($this->getSubmenu());
-		foreach($this->getMessages() as $message){
+		foreach($this->messages as $message){
 			$this->render($message);
 		}		
 		$this->render($this->getContent());
@@ -86,7 +88,7 @@ abstract class PageView extends ViewController{
 	public function setContent($content){ $this->content = $content; }
 	public function setMenu($menu){ $this->menu = $menu; }
 	public function setMessages($messages){ $this->messages = $messages; }
-	public function addMessage($message){ $this->messages[] = $message; }
+	public function addMessage($message){  $this->messages[] = $message; }
 	public function setFooter($footer){ $this->footer = $footer; }
 	
 	abstract protected function handleRequest();

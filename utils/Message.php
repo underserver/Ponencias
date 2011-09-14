@@ -5,9 +5,9 @@ class Message implements Renderable{
 	private $showDetails;
   
 	public function __construct($message, $type, $showDetails=false, $exception=NULL){
-		$this->message = $message;
-		$this->type = $type;
-		$this->showDetails = $showDetails;
+		$this->message 		= $message;
+		$this->type 		= $type;
+		$this->showDetails 	= $showDetails;
 	}
 	
 	public function getMessage(){ return $this->message; }
@@ -26,11 +26,16 @@ class Message implements Renderable{
 		$html .= '		</div>';
 		$html .= '	</div>';
 		$html .= '</div>';
+		return $html;
 	}
 	
 	public function setMessage($message){ $this->message = $message; }
 	public function setType($type){ $this->type = $type; }
 	public function setShowDetails($showDetails){ $this->showDetails = $showDetails; }
+
+	public function getComponentId() {
+		return "Message";
+	}
 
   	public static $ERROR = 1;
   	public static $WARN  = 2;

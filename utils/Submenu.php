@@ -34,5 +34,9 @@ class Submenu implements Renderable{
 	public function setItems($items){ $this->items = $items; }
 	public function addItem($item){ $this->items[] = $item; }
 	public function setSubtitle($subtitle){ $this->subtitle = $subtitle; }
+
+	public function getComponentId() {
+		return "Submenu";
+	}
 }
 ?>

@@ -53,5 +53,9 @@ class MenuItem implements Renderable{
 	public function setSubitems($subitems){ $this->subitems = $subitems; }
 	public function setSubmenu($submenu){ $this->submenu = $submenu; }
 	public function addSubitem($subitem){ $this->subitems[] = $subitem; return $this;}
+
+	public function getComponentId() {
+		return "MenuItem";
+	}
 }
 ?>

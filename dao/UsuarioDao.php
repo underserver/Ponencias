@@ -83,6 +83,9 @@ class UsuarioDao implements Dao{
 		$sql = "select * from usuarios where $query";
 		try{
 			$rows = $db->get_results( $sql );
+			if( $rows == NULL ){
+	    			return array();
+			}
 			foreach( $rows as $row ){
 				$users[] = new Usuario($row);
 			}

@@ -33,5 +33,9 @@ class SubmenuItem implements Renderable{
 	public function setUrl($url){ $this->url = $url; }
 	public function setRole($role){ $this->role = $role; }
 	public function setSelected($selected){ $this->selected = $selected; }
+
+	public function getComponentId() {
+		return "SubmenuItem";
+	}
 }
 ?>
