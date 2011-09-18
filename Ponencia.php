@@ -8,7 +8,7 @@ require_once dirname(__FILE__).'/controller/UsuarioController.php';
 require_once dirname(__FILE__).'/controller/PonenciaController.php';
 require_once dirname(__FILE__).'/controller/EvaluacionController.php';
 
-class LoginView extends PageView{
+class ViewPonencia extends PageView{
 
 	public function __construct(){
 		parent::__construct();
@@ -19,36 +19,41 @@ class LoginView extends PageView{
 		$this->getMenu()->setSelectedItem("inicio");
 
 		$action = $this->getQueryParameter("action");
-		if( $action == view ){
+		if( $action == edit ){
 			global $ponencia;
 			$id = $this->getQueryParameter("id");
 			$ponencia = PonenciaController::obtener($id);
 
-			$this->setContent(new HtmlPage("./view/Evaluador/ViewPonencia.php"));
+			$this->setContent(new HtmlPage("./view/Ponente/EditPonencia.php"));
 			$this->getMenu()->setSelectedSubItem("inicio");
 			$this->getMenu()->setTitle( $ponencia->getTitulo() );
-		} else if( $action == evaluate ){
+		} else if( $action == persist ){
+			global $ponencia;
+			$id = $this->getPostParameter("id");
+			$ponencia = PonenciaController::obtener($id);
+
+			$ponencia->setTitulo($this->getPostParameter("titulo"));
+			$ponencia->setFecha($this->getPostParameter("fecha"));
+			$ponencia->setResumen($this->getPostParameter("resumen"));
+			$ponencia->setEjeTematico($this->getPostParameter("ejetematico"));
+
+			PonenciaController::guardar($ponencia);
+
+			$this->setContent(new HtmlPage("./view/Ponente/EditPonencia.php"));
+			$this->getMenu()->setSelectedSubItem("inicio");
+			$this->getMenu()->setTitle( $ponencia->getTitulo() );
+		} else {
 			global $ponencia, $evaluacion;
 			$id = $this->getQueryParameter("id");
 			$ponencia = PonenciaController::obtener($id);
 			$evaluacion = EvaluacionController::obtener($ponencia, $this->getUsuario());
-			if( $evaluacion->getId() == NULL ){
-				$this->addMessage(new Message("No se ha asignado ningun evaluador a la ponencia", 1));
-			}
 
-			$this->setContent(new HtmlPage("./view/Evaluador/EvaluatePonencia.php"));
+			$this->setContent(new HtmlPage("./view/Ponente/ViewPonencia.php"));
 			$this->getMenu()->setSelectedSubItem("inicio");
 			$this->getMenu()->setTitle( $ponencia->getTitulo() );
-		} else {
-			global $ponencias;
-			$ponencias = PonenciaController::listar($this->getUsuario());
-
-			$this->setContent(new HtmlPage("./view/Evaluador/ListPonencias.php"));
-			$this->getMenu()->setSelectedSubItem("inicio");
-			$this->getMenu()->setTitle("Evaluar Ponencias");
 		}
 	}
 }
-$view = new LoginView();
+$view = new ViewPonencia();
 $view->renderAll();
 ?>

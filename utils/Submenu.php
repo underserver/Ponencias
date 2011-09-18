@@ -26,7 +26,7 @@ class Submenu implements Renderable{
 		}
 		$html  .= "</div>\n";
 		$html .= "<div class='clear'></div>\n";
-		$html .= "<div align='center' id='content'>";
+		$html .= "<div id='content'>";
 		
 		return $html;
 	}

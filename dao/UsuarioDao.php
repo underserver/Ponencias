@@ -115,7 +115,7 @@ class UsuarioDao implements Dao{
 		$sql = "select * from usuarios where usuario_id=$id";
 		$usuario = new Usuario();
 		try{
-			$row = $db->get_results( $sql );
+			$row = $db->get_row( $sql );
 			$usuario = new Usuario($row);
 		}catch(Exception $e){
 			throw new QueryException($e->getMessage(), $sql, 0, $e);

@@ -47,7 +47,7 @@ class Ponencia{
 	public function getStatus(){ return $this->status; }
 	public function getResumen(){ return $this->resumen; }
 	public function getArchivoConNombre(){ return $this->archivoConNombre; }
-	public function getArchivSinNombre(){ return $this->archivoSinNombre; }
+	public function getArchivoSinNombre(){ return $this->archivoSinNombre; }
 	public function getObservaciones(){ return $this->observaciones; }
 	public function getPonente(){ 
 		$ponente = UsuarioDao::findById($this->ponenteId); 

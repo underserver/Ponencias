@@ -15,6 +15,7 @@ class EvaluacionDao implements Dao{
 	}
 	
 	public static function save($evaluacion){
+		require dirname(__FILE__)."/../includes/db.php";
 		try{
 			$sql  = "insert into evaluaciones(evaluacion_calificacion, evaluacion_dictamen, evaluacion_fecha, evaluacion_observaciones, ponencia_id, evaluador_id) ";
 		  	$sql .= "values('$evaluacion->getCalificacion()','$evaluacion->getDictamen()' ";
@@ -28,6 +29,7 @@ class EvaluacionDao implements Dao{
 	}
 	
 	public static function update($evaluacion){
+		require dirname(__FILE__)."/../includes/db.php";
 		try{
 			$sql  = "update evaluaciones set";
 		  	$sql .= "       evaluacion_calificacion = '$evaluacion->getCalificacion()',";
@@ -58,6 +60,7 @@ class EvaluacionDao implements Dao{
 	} 
 	
 	public static function delete($evaluacion){
+		require dirname(__FILE__)."/../includes/db.php";
 		try {
 			$id = $evaluacion->getId();
 			$db->query("delete from evaluaciones where evaluacion_id=$id");
@@ -67,10 +70,14 @@ class EvaluacionDao implements Dao{
 	}
 	
 	public static function findByQuery($query){
+		require dirname(__FILE__)."/../includes/db.php";
 		$evaluaciones = array();
 		$sql = "select * from evaluaciones where $query";
 		try{
 			$rows = $db->get_results( $sql );
+			if( $rows == NULL ){
+	    			return array();
+			}
 			foreach( $rows as $row ){
 				$evaluaciones[] = new Evaluacion($row);
 			}
@@ -95,10 +102,11 @@ class EvaluacionDao implements Dao{
 	}
 	
 	public static function findById($id){
+		require dirname(__FILE__)."/../includes/db.php";
 		$sql = "select * from evaluaciones where evaluacion_id=$id";
 		$evaluacion = new Evaluacion();
 		try{
-			$row = $db->get_results( $sql );
+			$row = $db->get_row( $sql );
 			$evaluacion = new Evaluacion($row);
 		}catch(Exception $e){
 			throw new QueryException($e->getMessage(), $sql, 0, $e);

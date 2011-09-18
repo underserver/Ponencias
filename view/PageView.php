@@ -5,6 +5,7 @@ require_once dirname(__FILE__).'/../utils/Submenu.php';
 require_once dirname(__FILE__).'/../utils/SubmenuItem.php';
 require_once dirname(__FILE__).'/../utils/HtmlPage.php';
 require_once dirname(__FILE__).'/../_exceptions/ViewException.php';
+require_once dirname(__FILE__).'/../utils/Message.php';
 require_once dirname(__FILE__).'/../controller/ViewController.php';
 
 abstract class PageView extends ViewController{
@@ -22,21 +23,21 @@ abstract class PageView extends ViewController{
 		$this->footer 	 = dirname(__FILE__)."/../includes/footer.inc";
 		
 		$subInicio = array();
-		$subInicio[] = new SubmenuItem("inicio", 		".", 						UsuarioType::$TODOS);
-		
+		$subInicio[] = new SubmenuItem("inicio", 		".", 					UsuarioType::$TODOS);
+			
 		$menuitems = array();
-		$menuitems[] = new MenuItem("inicio", 			".", 						UsuarioType::$TODOS, new Submenu($subInicio, ""));
+		$menuitems[] = new MenuItem("inicio", 			".", 					UsuarioType::$TODOS, new Submenu($subInicio, ""));
 		$menuitems[] = new MenuItem("ponencias", 		"ponencias.php", 			UsuarioType::$TODOS);
-		$menuitems[] = new MenuItem("misponencias", 	"admin_ponencias.php", 	UsuarioType::$PONENTE);
+		$menuitems[] = new MenuItem("misponencias", 		"admin_ponencias.php", 			UsuarioType::$PONENTE);
 		$menuitems[] = new MenuItem("adminpanel", 		"adminpanel.php", 			UsuarioType::$ADMINISTRADOR);
 		$menuitems[] = new MenuItem("evaluar", 			"adminpanel.php", 			UsuarioType::$EVALUADOR);
 		
 		$menuitems[] = new MenuItem("registro", 		"register.php", 			UsuarioType::$PUBLICO);
 		
-		$subitem = new MenuItem("cuenta", 							"adminpanel.php", 		UsuarioType::$REGISTRADO);
-		$subitem = $subitem->addSubitem(new MenuItem("personal",	"admin_persona.php", 	UsuarioType::$REGISTRADO));
-		$subitem = $subitem->addSubitem(new MenuItem("acceso", 	"admin_access.php", 	UsuarioType::$REGISTRADO));
-		$subitem = $subitem->addSubitem(new MenuItem("logoff", 	"logoff.php", 			UsuarioType::$REGISTRADO));
+		$subitem = new MenuItem("cuenta", 			"adminpanel.php", 			UsuarioType::$REGISTRADO);
+		$subitem = $subitem->addSubitem(new MenuItem("personal","admin_persona.php", 			UsuarioType::$REGISTRADO));
+		$subitem = $subitem->addSubitem(new MenuItem("acceso", 	"admin_access.php", 			UsuarioType::$REGISTRADO));
+		$subitem = $subitem->addSubitem(new MenuItem("logoff", 	"UsuarioLogin.php?action=logout", 	UsuarioType::$REGISTRADO));
 		$menuitems[] = $subitem;
 		
 		$this->menu	= new Menu($menuitems, $this);

@@ -67,7 +67,7 @@ class PonenciaManager{
 	
 	public static function obtener($ponencia){
 		try{
-			return PonenciaDao::findById($ponencia);
+			return PonenciaDao::findById($ponencia->getId());
 		}catch(QueryException $qe){
     			throw $qe;
     		}
@@ -81,12 +81,44 @@ class PonenciaManager{
 		}
 	}
 	
+	public static function getByPonente($id){
+		try{
+			return PonenciaDao::findByQuery("usuario_id=$id");
+		}catch(QueryException $qe){
+    			throw $qe;
+    		}
+	}
+	
+	public static function getByEvaluador($id){
+		try{
+			return PonenciaDao::findByQuery("ponencia_id in (select ponencia_id from evaluaciones where evaluador_id=$id)");
+		}catch(QueryException $qe){
+    			throw $qe;
+    		}
+	}
+
+	public static function getByCoautor($id){
+		try{
+			return PonenciaDao::findByQuery("ponencia_id in (select ponencia_id from ponencias_coautores where coautor_id=$id)");
+		}catch(QueryException $qe){
+    			throw $qe;
+    		}
+	}
+
+	public static function getByStatus($status){
+		try{
+			return PonenciaDao::findByQuery("ponencia_estado=$status");
+		}catch(QueryException $qe){
+    			throw $qe;
+    		}
+	}
+
 	public static function listar(){
 		try{
 			return PonenciaDao::findAll();
 		}catch(QueryException $qe){
-    		throw $qe;
-    	}
+    			throw $qe;
+    		}
 	}
 	
 	public static function getEvaluadores($ponencia){

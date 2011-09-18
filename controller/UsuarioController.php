@@ -58,6 +58,14 @@ class UsuarioController{
 			throw $qe;
 		}
 	}
+
+	public static function obtener($usuario){
+		if( $usuario->getId() != 0 ){
+			return UsuarioManager::obtener($usuario->getId());
+		} else {
+			return UsuarioManager::getByAlias($usuario->getAlias());
+		}
+	}
     
 	public static function validar($usuario){
 		

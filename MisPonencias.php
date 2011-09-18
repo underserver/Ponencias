@@ -8,7 +8,7 @@ require_once dirname(__FILE__).'/controller/UsuarioController.php';
 require_once dirname(__FILE__).'/controller/PonenciaController.php';
 require_once dirname(__FILE__).'/controller/EvaluacionController.php';
 
-class LoginView extends PageView{
+class MisPonencias extends PageView{
 
 	public function __construct(){
 		parent::__construct();
@@ -43,12 +43,12 @@ class LoginView extends PageView{
 			global $ponencias;
 			$ponencias = PonenciaController::listar($this->getUsuario());
 
-			$this->setContent(new HtmlPage("./view/Evaluador/ListPonencias.php"));
+			$this->setContent(new HtmlPage("./view/Ponente/ListPonencias.php"));
 			$this->getMenu()->setSelectedSubItem("inicio");
-			$this->getMenu()->setTitle("Evaluar Ponencias");
+			$this->getMenu()->setTitle("Mis Ponencias");
 		}
 	}
 }
-$view = new LoginView();
+$view = new MisPonencias();
 $view->renderAll();
 ?>

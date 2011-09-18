@@ -33,10 +33,10 @@
 			onclick="cbTbl.selectOne(this); updateDeleteButtons(this);"
 			type="checkbox"></td>
 		<td><a href="javascript:void(0)"
-			onclick="goto( 'admin_viewponencia.php?pid=<?=base64_encode($ponencias[$i]->ponencia_id)?>' );"><?=$ponencias[$i]->getTitulo()?></a></td>
+			onclick="goto( 'admin_viewponencia.php?id=<?=$ponencias[$i]->getId()?>&action=view' );"><?=$ponencias[$i]->getTitulo()?></a></td>
 		<td><?=$ponencias[$i]->getFecha()?></td>
 		<td><?=$ponencias[$i]->getEjeTematico()?></td>
-		<td style="width: 180px;"><a href="evaluate_ponencia.php?pid=<?=base64_encode($ponencias[$i]->ponencia_id)?>" class="button evaluateponencia">Evaluar</a></td>
+		<td style="width: 180px;"><a href="EvaluarPonencias.php?id=<?=$ponencias[$i]->getId()?>&action=evaluate" class="button evaluateponencia">Evaluar</a></td>
 	</tr>
 	<?php }
 	if( $i == 0 ){ ?>

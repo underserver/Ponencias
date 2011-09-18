@@ -4,7 +4,7 @@ include_once dirname(__FILE__)."/GenericException.php";
 class NoPermissionException extends GenericException
 {
     public function __construct($message, $code = 0, Exception $previous = null) {
-        parent::__construct($message, $code, $previous);
+        parent::__construct($message, $code);
     }
 
     // algo para el desarollador

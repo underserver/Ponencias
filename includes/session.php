@@ -7,6 +7,6 @@
  *  Desc   : Inicializa una sesion, y si ya existe la mantiene
  *
  ***********************************************************************/
-session_name( $_config["session_id"] );
+session_name( "jsessionid" );
 session_start();
 ?>

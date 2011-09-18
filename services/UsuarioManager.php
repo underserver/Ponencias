@@ -58,6 +58,16 @@ class UsuarioManager{
     			throw $qe;
     		}
 	}
+
+	public static function getByAlias($alias){
+		try{
+			$usuarios = UsuarioDao::findByQuery("usuario_alias='$alias'");
+			if( count($usuarios) )
+				return $usuarios[0];
+		}catch(QueryException $qe){
+    			throw $qe;
+    		}
+	}
 	
 	public static function eliminar($usuario){
 		try{

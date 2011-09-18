@@ -14,9 +14,6 @@ class LoginView extends PageView{
 	}
 	
 	public function handleRequest(){
-		global $usuarios;
-		
-		//$usuarios=UsuarioManager::listar();
 
 		$this->getMenu()->setSelectedItem("inicio");
 		
@@ -28,7 +25,8 @@ class LoginView extends PageView{
 			
 			$login = UsuarioController::inciarSesion($usuario);
 			if( $login == UsuarioController::$LOGIN_OK ){
-				$this->redirect("Index.php");
+				$this->setUsuarioActual(UsuarioController::obtener($usuario));
+				$this->redirect("EvaluarPonencias.php");
 			} else if ( $login == UsuarioController::$LOGIN_NO_USER_EXIST ) {
 				$this->addMessage(new Message("El usuario no existe", Message::$ERROR));
 				$this->setContent(new HtmlPage("./view/index.php"));
@@ -36,10 +34,17 @@ class LoginView extends PageView{
 				$this->addMessage(new Message("Contraseña incorrecta", Message::$ERROR));
 				$this->setContent(new HtmlPage("./view/index.php"));
 			}
+		} else if( $action == logout ){
+			$this->setUsuarioActual(new Usuario());
+			$this->redirect("UsuarioLogin.php");
 		} else {
-			$this->setContent(new HtmlPage("./view/index.php"));
-			$this->getMenu()->setSelectedSubItem("inicio");
-			$this->getMenu()->setTitle("Entrar al Sistema");
+			if( $this->getUsuario()->getTipo() == UsuarioType::$PUBLICO ){
+				$this->setContent(new HtmlPage("./view/index.php"));
+				$this->getMenu()->setSelectedSubItem("inicio");
+				$this->getMenu()->setTitle("Entrar al Sistema");
+			} else {
+				$this->redirect("EvaluarPonencias.php");
+			}
 		}
 	}
 }
