@@ -4,6 +4,7 @@ require_once dirname(__FILE__)."/../model/Usuario.php";
 abstract class ViewController{
 	private $usuario;
 	public function __construct(){
+		$this->usuario = new Usuario();
 		if( isset($_SESSION["uid"]) ){
 			try{
 				$this->usuario = UsuarioManager::obtener($_SESSION["uid"]); 
