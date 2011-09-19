@@ -16,7 +16,7 @@ class LoginView extends PageView{
 	
 	public function handleRequest(){
 
-		$this->getMenu()->setSelectedItem("inicio");
+		$this->getMenu()->setSelectedItem("evaluar");
 
 		$action = $this->getQueryParameter("action");
 		if( $action == view ){

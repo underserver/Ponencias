@@ -18,9 +18,9 @@ class EvaluacionDao implements Dao{
 		require dirname(__FILE__)."/../includes/db.php";
 		try{
 			$sql  = "insert into evaluaciones(evaluacion_calificacion, evaluacion_dictamen, evaluacion_fecha, evaluacion_observaciones, ponencia_id, evaluador_id) ";
-		  	$sql .= "values('$evaluacion->getCalificacion()','$evaluacion->getDictamen()' ";
-		 	$sql .= ",'$evaluacion->getFecha()','$evaluacion->getObservaciones()'";
-		 	$sql .= ",$evaluacion->getPonencia()->getId(),$evaluacion->getEvaluador()->getId());";
+		  	$sql .= "values('".$evaluacion->getCalificacion()."','".$evaluacion->getDictamen()."' ";
+		 	$sql .= ",'".$evaluacion->getFecha()."','".$evaluacion->getObservaciones()."'";
+		 	$sql .= ",".$evaluacion->getPonencia()->getId().",".$evaluacion->getEvaluador()->getId().")";
 			
 			$db->query($sql);
 		}catch(Exception $e){
@@ -32,13 +32,13 @@ class EvaluacionDao implements Dao{
 		require dirname(__FILE__)."/../includes/db.php";
 		try{
 			$sql  = "update evaluaciones set";
-		  	$sql .= "       evaluacion_calificacion = '$evaluacion->getCalificacion()',";
-		 	$sql .= "       evaluacion_dictamen = '$evaluacion->getDictamen()',";
-			$sql .= "       evaluacion_fecha = '$evaluacion->getFecha()',";
-			$sql .= "       evaluacion_observaciones = '$evaluacion->getObservaciones()',";
-			$sql .= "       ponencia_id = $evaluacion->getPonencia()->getId(),";
-			$sql .= "       evaluador_id = $evaluacion->getEvaluador()->getId()";
-			$sql .= " where evaluacion_id=$evaluacion->getId()";
+		  	$sql .= "       evaluacion_calificacion = '".$evaluacion->getCalificacion()."',";
+		 	$sql .= "       evaluacion_dictamen = '".$evaluacion->getDictamen()."',";
+			$sql .= "       evaluacion_fecha = '".$evaluacion->getFecha()."',";
+			$sql .= "       evaluacion_observaciones = '".$evaluacion->getObservaciones()."',";
+			$sql .= "       ponencia_id = ".$evaluacion->getPonencia()->getId().",";
+			$sql .= "       evaluador_id = ".$evaluacion->getEvaluador()->getId();
+			$sql .= " where evaluacion_id = ".$evaluacion->getId();
 			
 			$db->query($sql);
 		}catch(Exception $e){

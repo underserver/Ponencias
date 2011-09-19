@@ -19,11 +19,11 @@ class UsuarioDao implements Dao{
 		
 		try{
 			$sql  = "insert into usuarios(usuario_nombre, usuario_apellidos, usuario_correo, usuario_telefono, usuario_direccion, usuario_nacimiento, usuario_alias, usuario_password, usuario_tipo) ";
-		  	$sql .= "values('$usuario->getNombre()','$usuario->getApellidos()' ";
-		 	$sql .= ",'$usuario->getCorreo()','$usuario->getTelefono()'";
-			$sql .= ",'$usuario->getDireccion()','$usuario->getFechaNacimiento()'";
-		 	$sql .= ",'$usuario->getAlias()','$usuario->getPassword()'";
-		  	$sql .= ",'$usuario->getTipo()')";
+		  	$sql .= "values('".$usuario->getNombre()."','".$usuario->getApellidos()."' ";
+		 	$sql .= ",'".$usuario->getCorreo()."','".$usuario->getTelefono()."'";
+			$sql .= ",'".$usuario->getDireccion()."','".$usuario->getFechaNacimiento()."'";
+		 	$sql .= ",'".$usuario->getAlias()."','".$usuario->getPassword()."'";
+		  	$sql .= ",'".$usuario->getTipo()."')";
 			
 			$db->query($sql);
 		}catch(Exception $e){
@@ -36,16 +36,16 @@ class UsuarioDao implements Dao{
 		
 		try{
 			$sql  = "update usuarios set";
-		  	$sql .= "       usuario_nombre = '$usuario->getNombre()',";
-		 	$sql .= "       usuario_apellidos = '$usuario->getApellidos()',";
-			$sql .= "       usuario_correo = '$usuario->getCorreo()',";
-			$sql .= "       usuario_telefono = '$usuario->getTelefono()',";
-			$sql .= "       usuario_direccion = '$usuario->getDireccion()',";
-			$sql .= "       usuario_nacimiento = '$usuario->getFechaNacimiento()',";
-			$sql .= "       usuario_alias = '$usuario->getAlias()',";
-			$sql .= "       usuario_password = '$usuario->getPassword()',";
-			$sql .= "       usuario_tipo = '$usuario->getTipo()'";
-			$sql .= " where usuario_id=$usuario->getId()";
+		  	$sql .= "       usuario_nombre = '".$usuario->getNombre()."',";
+		 	$sql .= "       usuario_apellidos = '".$usuario->getApellidos()."',";
+			$sql .= "       usuario_correo = '".$usuario->getCorreo()."',";
+			$sql .= "       usuario_telefono = '".$usuario->getTelefono()."',";
+			$sql .= "       usuario_direccion = '".$usuario->getDireccion()."',";
+			$sql .= "       usuario_nacimiento = '".$usuario->getFechaNacimiento()."',";
+			$sql .= "       usuario_alias = '".$usuario->getAlias()."',";
+			$sql .= "       usuario_password = '".$usuario->getPassword()."',";
+			$sql .= "       usuario_tipo = '".$usuario->getTipo()."'";
+			$sql .= " where usuario_id=".$usuario->getId();
 			
 			$db->query($sql);
 		}catch(Exception $e){
@@ -56,7 +56,7 @@ class UsuarioDao implements Dao{
 	public static function persist($usuario){
 		try{
 			$id = $usuario->getId();
-			if( !empty($id) ){
+			if( empty($id) || $id == 0 ){
 				UsuarioDao::save($usuario);
 			}else{
 				UsuarioDao::update($usuario);

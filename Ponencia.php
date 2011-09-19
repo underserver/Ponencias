@@ -16,7 +16,7 @@ class ViewPonencia extends PageView{
 	
 	public function handleRequest(){
 
-		$this->getMenu()->setSelectedItem("inicio");
+		$this->getMenu()->setSelectedItem("misponencias");
 
 		$action = $this->getQueryParameter("action");
 		if( $action == edit ){
@@ -27,17 +27,28 @@ class ViewPonencia extends PageView{
 			$this->setContent(new HtmlPage("./view/Ponente/EditPonencia.php"));
 			$this->getMenu()->setSelectedSubItem("inicio");
 			$this->getMenu()->setTitle( $ponencia->getTitulo() );
+		} else if( $action == create ){
+			global $ponencia;
+			$ponencia = new Ponencia();
+
+			$this->setContent(new HtmlPage("./view/Ponente/EditPonencia.php"));
+			$this->getMenu()->setSelectedSubItem("inicio");
+			$this->getMenu()->setTitle( "Nueva Ponencia" );
 		} else if( $action == persist ){
 			global $ponencia;
 			$id = $this->getPostParameter("id");
-			$ponencia = PonenciaController::obtener($id);
+			if( !empty($id) ){
+				$ponencia = PonenciaController::obtener($id);
+			} else {
+				$ponencia = new Ponencia();
+			}
 
 			$ponencia->setTitulo($this->getPostParameter("titulo"));
 			$ponencia->setFecha($this->getPostParameter("fecha"));
 			$ponencia->setResumen($this->getPostParameter("resumen"));
 			$ponencia->setEjeTematico($this->getPostParameter("ejetematico"));
 
-			PonenciaController::guardar($ponencia);
+			$ponencia = PonenciaController::guardar($ponencia, $this->getUsuario());
 
 			$this->setContent(new HtmlPage("./view/Ponente/EditPonencia.php"));
 			$this->getMenu()->setSelectedSubItem("inicio");

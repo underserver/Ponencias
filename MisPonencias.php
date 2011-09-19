@@ -16,7 +16,7 @@ class MisPonencias extends PageView{
 	
 	public function handleRequest(){
 
-		$this->getMenu()->setSelectedItem("inicio");
+		$this->getMenu()->setSelectedItem("misponencias");
 
 		$action = $this->getQueryParameter("action");
 		if( $action == view ){

@@ -6,15 +6,6 @@ include_once dirname(__FILE__)."/../dao/EvaluacionDao.php";
 include_once dirname(__FILE__)."/../dao/PonenciaDao.php";
 
 class PonenciaManager{
-
-	public static function registrar($ponencia){
-		try{
-			$ponencia->setStatus(PonenciaStatus::SIN_ASIGNAR);
-			PonenciaDao::persist($ponencia);
-		}catch(TransactionException $te){
-			throw $te;
-		}
-	}
 	
 	public static function asignarEvaluador($ponencia, $evaluador){
 		try{
@@ -134,7 +125,7 @@ class PonenciaManager{
 		return $evaluadores;
 	}
 	
-	public static function actualizar($ponencia){
+	public static function guardar($ponencia){
 		try{
 			return PonenciaDao::persist($ponencia);
 		}catch(TransactionException $te){

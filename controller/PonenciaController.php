@@ -6,11 +6,6 @@ include_once dirname(__FILE__)."/../services/PonenciaManager.php";
 include_once dirname(__FILE__)."/../dao/PonenciaDao.php";
 
 class PonenciaController{
-    
-	public static function registrar($ponencia, $ponente){
-		$ponencia->setPonente($ponente);
-		PonenciaDao::persist($ponencia);
-	}
 
 	public static function eliminar($id){
 		$ponencia = new Ponencia();
@@ -36,8 +31,11 @@ class PonenciaController{
 		}
 	}
 
-	public static function guardar($ponencia){
-		PonenciaManager::actualizar($ponencia);
+	public static function guardar($ponencia, $usuario){
+		if( $usuario->getTipo() != UsuarioType::$ADMINISTRADOR ){
+			$ponencia->setPonente($usuario);
+		}
+		return PonenciaManager::guardar($ponencia);
 	}
 
 	public static function obtener($id){

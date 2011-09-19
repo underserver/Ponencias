@@ -1,7 +1,7 @@
 ﻿<?php global $ponencias;?>
 
 <ul class="inlinelist">
-	<li class="main1"><a href="#" onclick="document.location='admin_newponencia.php'">Nueva ponencia</a></li>
+	<li class="main1"><a href="Ponencia.php?action=create" onclick="document.location='admin_newponencia.php'">Nueva ponencia</a></li>
 	<li><a href="./">Ver otras ponencias</a></li>
 </ul>
 <p>Debe estar registrado como ponente o autor para crear una nueva ponencia</p>

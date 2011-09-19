@@ -27,14 +27,14 @@ abstract class PageView extends ViewController{
 			
 		$menuitems = array();
 		$menuitems[] = new MenuItem("inicio", 			".", 					UsuarioType::$TODOS, new Submenu($subInicio, ""));
-		$menuitems[] = new MenuItem("ponencias", 		"ponencias.php", 			UsuarioType::$TODOS);
-		$menuitems[] = new MenuItem("misponencias", 		"admin_ponencias.php", 			UsuarioType::$PONENTE);
-		$menuitems[] = new MenuItem("adminpanel", 		"adminpanel.php", 			UsuarioType::$ADMINISTRADOR);
-		$menuitems[] = new MenuItem("evaluar", 			"adminpanel.php", 			UsuarioType::$EVALUADOR);
+		$menuitems[] = new MenuItem("ponencias", 		"ponencias.php", 			UsuarioType::$PUBLICO);
+		$menuitems[] = new MenuItem("misponencias", 		"MisPonencias.php", 			UsuarioType::$PONENTE);
+		$menuitems[] = new MenuItem("adminpanel", 		"AdminPanel.php", 			UsuarioType::$ADMINISTRADOR);
+		$menuitems[] = new MenuItem("evaluar", 			"EvaluarPonencias.php",			UsuarioType::$EVALUADOR);
 		
-		$menuitems[] = new MenuItem("registro", 		"register.php", 			UsuarioType::$PUBLICO);
+		$menuitems[] = new MenuItem("registro", 		"Registro.php", 			UsuarioType::$PUBLICO);
 		
-		$subitem = new MenuItem("cuenta", 			"adminpanel.php", 			UsuarioType::$REGISTRADO);
+		$subitem = new MenuItem("cuenta", 			"#",		 			UsuarioType::$REGISTRADO);
 		$subitem = $subitem->addSubitem(new MenuItem("personal","admin_persona.php", 			UsuarioType::$REGISTRADO));
 		$subitem = $subitem->addSubitem(new MenuItem("acceso", 	"admin_access.php", 			UsuarioType::$REGISTRADO));
 		$subitem = $subitem->addSubitem(new MenuItem("logoff", 	"UsuarioLogin.php?action=logout", 	UsuarioType::$REGISTRADO));

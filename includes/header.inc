@@ -15,10 +15,8 @@
         <title><?=$_i18n["title"]?></title>   
         <link href="styles/global.css" type="text/css" rel="stylesheet">   
         <link href="styles/modal-message.css" type="text/css" rel="stylesheet">
-        <script type="text/javascript" src="jscripts/ajax.js"></script> 
-        <script type="text/javascript" src="jscripts/modal/js/ajax.js"></script>
-        <script type="text/javascript" src="jscripts/modal/js/modal-message.js"></script>
-        <script type="text/javascript" src="jscripts/modal/js/ajax-dynamic-content.js"></script>
+        <script type="text/javascript" src="jscripts/jquery.js"></script>
+        <script type="text/javascript" src="jscripts/jquery.validate.js"></script>
         <script type="text/javascript" src="jscripts/cpanel.js"></script>
         
         <link href='http://fonts.googleapis.com/css?family=Marvel' rel='stylesheet' type='text/css'>

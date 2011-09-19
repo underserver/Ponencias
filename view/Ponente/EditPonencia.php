@@ -1,3 +1,21 @@
+<script type="text/javascript">
+$().ready(function() {
+	$("#settings").validate({
+		rules: {
+			titulo: "required",
+			resumen: "required",
+			fecha: "required",
+			ejetematico: "required"
+		},
+		messages: {
+			titulo: "Especifique un titulo de la ponencia",
+			resumen: "Especifique un resumen breve de la ponencia",
+			fecha: "Especifique una fecha de presentacion",
+			ejetematico: "Especifique un eje tematico de la ponencia"
+		}
+	});
+});
+</script>
 <?php global $ponencia;?>
 <form action="Ponencia.php?action=persist" method="post" id="settings" enctype="multipart/form-data">
 <table>
