@@ -1,8 +1,5 @@
 <?php
-include_once dirname(__FILE__)."/../enums/UsuarioType.php";
-include_once dirname(__FILE__)."/../_exceptions/NoPermissionException.php";
-include_once dirname(__FILE__)."/../services/UsuarioManager.php";
-include_once dirname(__FILE__)."/../dao/UsuarioDao.php";
+include_once dirname(__FILE__)."/../_exceptions/FileUploadException.php";
 
 class FileUploadController{
     	
@@ -12,7 +9,7 @@ class FileUploadController{
 		$fsize = $_FILES[$filename]['size'];
 		$ftemp = $_FILES[$filename]['tmp_name'];
 		
-		if(in_array($ftype, $formats) && $file2_size < 3500000){
+		if(in_array($ftype, $formats) && $fsize < 3500000){
 			if(!move_uploaded_file($ftemp, "ponencias/" . $usuario->getAlias() . '/' . $fname )){
 				throw FileUploadException("Cant move file", $fname, 1);
 			}
@@ -20,3 +17,4 @@ class FileUploadController{
 			throw FileUploadException("Extension problem", $fname, 2);
 		}
 	}
+}
