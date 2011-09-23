@@ -39,6 +39,14 @@ class UsuarioController{
 			throw $te;
 		}
 	}
+
+	public static function guardar($usuario, $usuarioActual){
+		if( $usuario->getId() != $usuarioActual->getId || $usuarioActual->getTipo() == UsuarioType::$ADMINISTRADOR){	
+			return UsuarioManager::actualizar($usuario);
+		} else {
+			throw new NoPermissionException("Cant save user", 0x4);
+		}
+	}
     
 	public static function inciarSesion($usuario){
 		try{

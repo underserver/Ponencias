@@ -27,6 +27,8 @@ class Ponencia{
 			$this->ejeTematico = $row->ponencia_ejetematico;
 			$this->sala = $row->ponencia_sala;
 			$this->hora = $row->ponencia_hora;
+		} else {
+			$this->status = PonenciaStatus::$SIN_ASIGNAR;
 		}
   	}
 	

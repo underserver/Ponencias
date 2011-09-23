@@ -35,8 +35,8 @@ abstract class PageView extends ViewController{
 		$menuitems[] = new MenuItem("registro", 		"Registro.php", 			UsuarioType::$PUBLICO);
 		
 		$subitem = new MenuItem("cuenta", 			"#",		 			UsuarioType::$REGISTRADO);
-		$subitem = $subitem->addSubitem(new MenuItem("personal","admin_persona.php", 			UsuarioType::$REGISTRADO));
-		$subitem = $subitem->addSubitem(new MenuItem("acceso", 	"admin_access.php", 			UsuarioType::$REGISTRADO));
+		$subitem = $subitem->addSubitem(new MenuItem("personal","Usuario.php?action=personal", 		UsuarioType::$REGISTRADO));
+		$subitem = $subitem->addSubitem(new MenuItem("acceso", 	"Usuario.php?action=account", 		UsuarioType::$REGISTRADO));
 		$subitem = $subitem->addSubitem(new MenuItem("logoff", 	"UsuarioLogin.php?action=logout", 	UsuarioType::$REGISTRADO));
 		$menuitems[] = $subitem;
 		

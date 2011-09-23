@@ -23,7 +23,7 @@ $().ready(function() {
 	});
 });
 </script>
-<form action="Ponencia.php?action=persist" method="post" id="settings" enctype="multipart/form-data">
+<form action="Ponencia.php?action=persist" method="post" id="settings" name="settings" enctype="multipart/form-data">
 <table>
 	<tr>
 		<th>Titulo:</th>
@@ -64,11 +64,8 @@ $().ready(function() {
 	</tr>
 	<tr class="finalrow">
 		<th><input type="hidden" name="id" value="<?=$ponencia->getId()?>"></th>
-		<td><input value="Guardar" name="save"
-			class="mainbutton" onclick="clear_isset_monitoring();" type="submit">
-		<input value="Cancelar" class="cancel"
-			onclick="clear_isset_monitoring(); go('./Ponencia.php?id=<?=$ponencia->getId()?>');"
-			name="Button" type="button"></td>
+		<td><a href="#" onclick="clear_isset_monitoring();settings.submit();" class="button save">Guardar</a>
+		<a href="#" style="display:block; margin-top:10px;" onclick="clear_isset_monitoring(); go('./Ponencia.php?id=<?=$ponencia->getId()?>');">Cancelar</a></td>
 	</tr>
 </table>
 </form>

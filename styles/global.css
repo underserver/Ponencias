@@ -1204,10 +1204,10 @@ form input.rounded,
 form textarea.rounded{
   font-family: Arial;
   font-size: 13px;
-  border: 1px solid #999;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
+  border: 1px solid #aaa;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
 	margin: -4px 0px 0px 0px;
 	padding: 0px 0px 0px 4px;
 	min-width: 260px;
@@ -1301,6 +1301,16 @@ a.editponencia{
   background-repeat: no-repeat;
 }
 
+
+a.save{
+  width: 124px;
+  height: 29px;
+  background-image: url('img/save.png');
+  background-repeat: no-repeat;
+  float: left;
+}
+
+
 a.evaluateponencia{
   width: 124px;
   height: 24px;
@@ -1353,4 +1363,34 @@ a.file:active{
 	background-color: #FFFFFF;
 	opacity: 0.6;
 	filter: alpha(opacity = 60);
+}
+
+.icon-status{
+	display: block;
+	float: left;
+	background-image: url(img/status.png);
+	margin-top: 2px;
+	width: 12px;
+	height: 12px;
+	margin-right: 5px;
+}
+
+.PS-1{
+	background-position: 0 -72px;
+}
+
+.PS-5{
+	background-position: 0 -36px;
+}
+.PS-2{
+	background-position: 0 -36px;
+}
+.datatable table td .DISABLED{
+	background-position: 0 -12px;
+}
+.PS-4{
+	background-position: 0 -24px;
+}
+.PS-3{
+	background-position: 0 -72px;
 }

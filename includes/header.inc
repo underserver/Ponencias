@@ -19,9 +19,12 @@
         <script type="text/javascript" src="jscripts/jquery.validate.js"></script>
         <script type="text/javascript" src="jscripts/jquery.loading.js"></script>
         <script type="text/javascript" src="jscripts/cpanel.js"></script>
+	<script type="text/javascript" src="jscripts/calendar/calendar.js"></script>
+
         
         <link href='http://fonts.googleapis.com/css?family=Marvel' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Actor' rel='stylesheet' type='text/css'>
+	<link href="styles/calendar.css?random=20051112" rel="stylesheet" type="text/css"></link>
 
     </head>
     <body>   

@@ -143,4 +143,7 @@ $_i18n[ "PONENCIA_STATUS_2" ] = "EN EVALUACION";
 $_i18n[ "PONENCIA_STATUS_3" ] = "EN CORRECCION";
 $_i18n[ "PONENCIA_STATUS_4" ] = "ACEPTADA";
 $_i18n[ "PONENCIA_STATUS_5" ] = "RECHAZADA";
+
+$_i18n[ "personal" ] = "Informacion Personal";
+$_i18n[ "acceso" ] = "Informacion de Acceso";
 ?>

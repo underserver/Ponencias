@@ -12,7 +12,7 @@
 	<tr>
 		<th colspan="3" class="tablebar"><input disabled="disabled"
 			value="Eliminar ponencias" id="deleteB"
-			onclick="removeOne(3); return false;"
+			onclick="removeAll(); return false;"
 			type="button">
 		</th>
 		<th colspan="4" class="tablebar">
@@ -27,7 +27,7 @@
 		<th id="header">Titulo</th>
 		<th id="header">Fecha</th>
 		<th id="header">Eje tematico</th>
-		<th id="header">Acci&oacute;n</th>
+		<th id="header">Estado</th>
 	</tr>
 	<?php for( $i = 0, $subtotal = 0; $i < count($ponencias); $i++){?>
 	<tr class="" id="ARTICLE_COLLECTION_SELECTION_<?=$i?>">
@@ -40,7 +40,7 @@
 			onclick="goto( 'Ponencia.php?id=<?=$ponencias[$i]->getId()?>&action=view' );"><?=$ponencias[$i]->getTitulo()?></a></td>
 		<td><?=$ponencias[$i]->getFecha()?></td>
 		<td><?=$ponencias[$i]->getEjeTematico()?></td>
-		<td style="width: 180px;"><?=$ponencias[$i]->getStatus()?></td>
+		<td style="width: 180px;"><span class="icon-status PS-<?=$ponencias[$i]->getStatus()?>"></span><?=i18n("PONENCIA_STATUS_".$ponencias[$i]->getStatus())?></td>
 	</tr>
 	<?php }
 	if( $i == 0 ){ ?>
@@ -54,7 +54,7 @@
 	<tr>
 		<th colspan="3" class="tablebar"><input disabled="disabled"
 			value="Eliminar ponencias" id="deleteT"
-			onclick="return deleteArticle(deleteItems, './delete.php');"
+			onclick="removeAll(); return false;"
 			type="button"></th>
 		<th colspan="4" class="tablebar">
 			<ul class="inlinelist">
@@ -65,25 +65,27 @@
 	</table>
 </form>
 <script type="text/javascript"> 
-function removeOne(id){
-	$("#content").showLoading();
-	var ponencias = "";
-	for (i=0,n=deleteItems.elements.length;i<n;i++){
-		if (deleteItems.elements[i].name.indexOf('COLLECTION_SELECTION_') !=-1 && deleteItems.elements[i].checked == true){
-			name = deleteItems.elements[i].name;
-			ponencias += name.substring( name.lastIndexOf( "." )+1 ) + ",";
+function removeAll(id){
+	if( confirm("¡Desea eliminar las ponencias seleccionadas?") ){
+		$("#content").showLoading();
+		var ponencias = "";
+		for (i=0,n=deleteItems.elements.length;i<n;i++){
+			if (deleteItems.elements[i].name.indexOf('COLLECTION_SELECTION_') !=-1 && deleteItems.elements[i].checked == true){
+				name = deleteItems.elements[i].name;
+				ponencias += name.substring( name.lastIndexOf( "." )+1 ) + ",";
+			}
 		}
-	}
-	ponencias = ponencias.substring(0, ponencias.length - 1);
-	$.ajax({
-		type: "POST",
-		url: "Ponencia.php?action=removeAll",
-		data: "ids=" + ponencias,
-		success: function(response){
-			$("#content").fadeIn(2000);
-			$("#content").html(response);
+		ponencias = ponencias.substring(0, ponencias.length - 1);
+		$.ajax({
+			type: "POST",
+			url: "Ponencia.php?action=removeAll",
+			data: "ids=" + ponencias,
+			success: function(response){
+				$("#content").fadeIn(2000);
+				$("#content").html(response);
 			$("#content").hideLoading();
-		}
-	});
+			}
+		});
+	}
 }
 </script>

@@ -58,8 +58,7 @@ $().ready(function() {
 	</tr>
 	<tr class="finalrow">
 		<th><input type="hidden" name="id" value="<?=$ponencia->getId()?>"></th>
-		<td><input value="Guardar" name="save"
-			class="mainbutton" onclick="clear_isset_monitoring();" type="submit">
+		<td><a href="#" onclick="clear_isset_monitoring();this.submit();" class="button save">Guardar</a>
 		<input value="Cancelar" class="cancel"
 			onclick="clear_isset_monitoring(); go('./Ponencia.php?id=<?=$ponencia->getId()?>');"
 			name="Button" type="button"></td>
