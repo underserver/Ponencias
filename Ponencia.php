@@ -47,12 +47,45 @@ class ViewPonencia extends PageView{
 			$ponencia->setFecha($this->getPostParameter("fecha"));
 			$ponencia->setResumen($this->getPostParameter("resumen"));
 			$ponencia->setEjeTematico($this->getPostParameter("ejetematico"));
+			$ponencia->setArchivoConNombre("file1");
+			$ponencia->setArchivoSinNombre("file2");
 
 			$ponencia = PonenciaController::guardar($ponencia, $this->getUsuario());
 
 			$this->setContent(new HtmlPage("./view/Ponente/EditPonencia.php"));
 			$this->getMenu()->setSelectedSubItem("inicio");
 			$this->getMenu()->setTitle( $ponencia->getTitulo() );
+		} else if( $action == remove){
+			global $ponencias;
+			$id = $this->getPostParameter("id");
+			$ponencia = PonenciaController::obtener($id);
+
+			PonenciaController::eliminar($ponencia, $this->getUsuario());
+
+			$ponencias = PonenciaController::listar($this->getUsuario());
+
+			$this->setHeader(NULL);
+			$this->setMenu(NULL);
+			$this->setFooter(NULL);
+			$this->setContent(new HtmlPage("./view/Ponente/ListPonencias.php"));
+		} else if( $action == removeAll){
+			global $ponencias;
+			$ids = $this->getPostParameter("ids");
+			
+			$ponenciasIds = explode(",", $ids);
+			foreach( $ponenciasIds as $id ){
+				$ponencia = PonenciaController::obtener($id);
+				if( $ponencia->isWired() ){
+					PonenciaController::eliminar($ponencia, $this->getUsuario());
+				}
+			}
+
+			$ponencias = PonenciaController::listar($this->getUsuario());
+
+			$this->setHeader(NULL);
+			$this->setMenu(NULL);
+			$this->setFooter(NULL);
+			$this->setContent(new HtmlPage("./view/Ponente/ListPonencias.php"));
 		} else {
 			global $ponencia, $evaluacion;
 			$id = $this->getQueryParameter("id");

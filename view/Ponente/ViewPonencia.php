@@ -15,7 +15,7 @@
 	</tr>
 	<tr>
 		<th>Estado:</th>
-		<td><span class="details"><?=$ponencia->getStatus()?></span></td>
+		<td><span class="details"><?=i18n('PONENCIA_STATUS_'.$ponencia->getStatus())?></span></td>
 	</tr>
 	<tr>
 		<th>Resumen:</th>
@@ -31,15 +31,15 @@
 	</tr>
 	<tr>
 		<th>Sala:</th>
-		<td><span class="details"><?=$ponencia->getSala()?></span></td>
+		<td><span class="details"><?=$ponencia->getSala() != NULL ? $ponencia->getSala() : 'Sin Asignar'?></span></td>
 	</tr>
 	<tr>
 		<th>Hora:</th>
-		<td><span class="details"><?=$ponencia->getHora()?></span></td>
+		<td><span class="details"><?=$ponencia->getHora() != NULL ? $ponencia->getHora() : 'Sin Asignar'?></span></td>
 	</tr>
 	<tr>
 		<th>Observaciones:</th>
-		<td><span class="details"><?=$evaluacion->getObservaciones()?></span></td>
+		<td><span class="details"><?=$evaluacion->getObservaciones() != NULL ? $evaluacion->getObservaciones() : 'Sin Observaciones'?></span></td>
 	</tr>
 	<tr>
 		<td colspan="2" align="center"><a href="Ponencia.php?id=<?=$ponencia->getId()?>&action=edit" class="button editponencia">Editar</a></td>

@@ -60,5 +60,6 @@ class Ponencia{
 	public function getEjeTematico(){ return $this->ejeTematico; }
 	public function getSala(){ return $this->sala; }
 	public function getHora(){ return $this->hora; }
+	public function isWired(){ return (!empty($this->id) && $this->id > 0); }
 }
 ?>

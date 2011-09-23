@@ -51,6 +51,6 @@ class Usuario{
 	public function getFechaNacimiento(){ return $rhis->fechaNacimiento; }
 	public function getTelefono(){ return $this->telefono; }
 	public function getDireccion(){ return $this->direccion; }
-	
+	public function isWired(){ return (!empty($this->id) && $this->id > 0); }
 }
 ?>

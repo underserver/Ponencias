@@ -5,19 +5,19 @@ class TransactionException extends GenericException
 {
 	private $entity;
 	public function __construct($message, $entity, $code = 0, Exception $previous = null) {
-        parent::__construct($message, $code, $previous);
-  		 $this->entity = $entity;
+		parent::__construct($message, $code, $previous);
+		$this->entity = $entity;
 	}
 
-    // algo para el desarollador
+	// algo para el desarollador
 	public function __toString() {
-        return __CLASS__ . ": ENTITY TRANSACTION EXCEPTON [{$this->code}]: {$this->message}\n\n".
-        		get_class($entity) . "\n" . $entity;
+		return __CLASS__ . ": ENTITY TRANSACTION EXCEPTON [{$this->code}]: {$this->message}\n\n".
+			get_class($entity) . "\n" . $entity;
 	}
 
 	// algo para el usuario
 	public function i18n() {
-        echo sprintf(i18n("TRANSACTIONEXCEPTION.0x$this->code"), get_class($entity));
+		return sprintf(i18n("TRANSACTIONEXCEPTION.0x$this->code"), get_class($entity));
 	}
 	
 	public static $SAVE_CODE   = 0x1;

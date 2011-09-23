@@ -47,5 +47,6 @@ class Evaluacion{
 		}
 		return new Usuario();
 	}
+	public function isWired(){ return (!empty($this->id) && $this->id > 0); }
 }
 ?>

@@ -1,22 +1,28 @@
+<?php global $ponencia;?>
 <script type="text/javascript">
 $().ready(function() {
 	$("#settings").validate({
 		rules: {
-			titulo: "required",
-			resumen: "required",
-			fecha: "required",
-			ejetematico: "required"
+			titulo: "required"
+			,resumen: "required"
+			,fecha: "required"
+			,ejetematico: "required"
+			<?php if(!$ponencia->isWired()){?>
+			,file1: "required"
+			,file2: "required"
+			<?php }?>
 		},
 		messages: {
 			titulo: "Especifique un titulo de la ponencia",
 			resumen: "Especifique un resumen breve de la ponencia",
 			fecha: "Especifique una fecha de presentacion",
-			ejetematico: "Especifique un eje tematico de la ponencia"
+			ejetematico: "Especifique un eje tematico de la ponencia",
+			file1: "Debe seleccionar el archivo CON nombres",
+			file2: "Debe seleccionar el archivo SIN nombres"
 		}
 	});
 });
 </script>
-<?php global $ponencia;?>
 <form action="Ponencia.php?action=persist" method="post" id="settings" enctype="multipart/form-data">
 <table>
 	<tr>

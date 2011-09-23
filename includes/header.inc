@@ -17,6 +17,7 @@
         <link href="styles/modal-message.css" type="text/css" rel="stylesheet">
         <script type="text/javascript" src="jscripts/jquery.js"></script>
         <script type="text/javascript" src="jscripts/jquery.validate.js"></script>
+        <script type="text/javascript" src="jscripts/jquery.loading.js"></script>
         <script type="text/javascript" src="jscripts/cpanel.js"></script>
         
         <link href='http://fonts.googleapis.com/css?family=Marvel' rel='stylesheet' type='text/css'>

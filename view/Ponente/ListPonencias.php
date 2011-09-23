@@ -10,7 +10,11 @@
 <form id="list" name="deleteItems" action="EvaluarPonencias.php" method="post">
 	<table>
 	<tr>
-		<th colspan="3" class="tablebar"></th>
+		<th colspan="3" class="tablebar"><input disabled="disabled"
+			value="Eliminar ponencias" id="deleteB"
+			onclick="removeOne(3); return false;"
+			type="button">
+		</th>
 		<th colspan="4" class="tablebar">
 			<ul class="inlinelist">
 				<li id="count2"><b>1 - <?=count( $ponencias )?> de <?=count( $ponencias )?></b></li>
@@ -29,7 +33,7 @@
 	<tr class="" id="ARTICLE_COLLECTION_SELECTION_<?=$i?>">
 		<td style="width: 30px;text-align: center"><?=$ponencias[$i]->getId()?></td>
 		<td style="width: 40px"><input value="true"
-			name="COLLECTION_SELECTION_<?=$i?>.<?=base64_encode($ponencias[$i]->getId())?>"
+			name="COLLECTION_SELECTION_<?=$i?>.<?=$ponencias[$i]->getId()?>"
 			onclick="cbTbl.selectOne(this); updateDeleteButtons(this);"
 			type="checkbox"></td>
 		<td><a href="javascript:void(0)"
@@ -48,7 +52,10 @@
 	<?php } ?>
 
 	<tr>
-		<th colspan="3" class="tablebar"></th>
+		<th colspan="3" class="tablebar"><input disabled="disabled"
+			value="Eliminar ponencias" id="deleteT"
+			onclick="return deleteArticle(deleteItems, './delete.php');"
+			type="button"></th>
 		<th colspan="4" class="tablebar">
 			<ul class="inlinelist">
 				<li id="count"><b>1 - <?=count( $ponencias )?> de <?=count( $ponencias )?></b></li>
@@ -57,3 +64,26 @@
 	</tr>
 	</table>
 </form>
+<script type="text/javascript"> 
+function removeOne(id){
+	$("#content").showLoading();
+	var ponencias = "";
+	for (i=0,n=deleteItems.elements.length;i<n;i++){
+		if (deleteItems.elements[i].name.indexOf('COLLECTION_SELECTION_') !=-1 && deleteItems.elements[i].checked == true){
+			name = deleteItems.elements[i].name;
+			ponencias += name.substring( name.lastIndexOf( "." )+1 ) + ",";
+		}
+	}
+	ponencias = ponencias.substring(0, ponencias.length - 1);
+	$.ajax({
+		type: "POST",
+		url: "Ponencia.php?action=removeAll",
+		data: "ids=" + ponencias,
+		success: function(response){
+			$("#content").fadeIn(2000);
+			$("#content").html(response);
+			$("#content").hideLoading();
+		}
+	});
+}
+</script>

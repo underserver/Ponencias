@@ -19,8 +19,8 @@ abstract class PageView extends ViewController{
 	public function __construct(){
 		parent::__construct();
 		
-		$this->header 	 = dirname(__FILE__)."/../includes/header.inc";
-		$this->footer 	 = dirname(__FILE__)."/../includes/footer.inc";
+		$this->header 	 = new HtmlPage(dirname(__FILE__)."/../includes/header.inc");
+		$this->footer 	 = new HtmlPage(dirname(__FILE__)."/../includes/footer.inc");
 		
 		$subInicio = array();
 		$subInicio[] = new SubmenuItem("inicio", 		".", 					UsuarioType::$TODOS);
@@ -49,7 +49,7 @@ abstract class PageView extends ViewController{
 		try{
 			if( $renderable instanceof Renderable ){
 				echo($renderable->getHtml());
-			} else {
+			} else if ( $renderable != NULL ){
 				print $renderable->getComponentId() . " is not renderable";
 			}
 		} catch(ViewException $ve) {
@@ -75,17 +75,22 @@ abstract class PageView extends ViewController{
 		$this->render($this->getFooter());
 	}
 
-	public function getHeader(){ return new HtmlPage($this->header); }
+	public function getHeader(){ return $this->header; }
 	public function getMenu(){	return $this->menu; }
-	public function getSubmenu(){ return $this->getMenu()->getSelectedItem()->getSubmenu(); }
+	public function getSubmenu(){ 
+		if( $this->getMenu() != NULL )
+			return $this->getMenu()->getSelectedItem()->getSubmenu(); 
+		return NULL;
+	}
 	public function getMessages(){ return $this->messages; }
 	public function getContent(){ return $this->content; }
-	public function getFooter(){ return new HtmlPage($this->footer); }
+	public function getFooter(){ return $this->footer; }
 	
 	public function getAction(){
 		return $this->getQueryParameter("action");
 	}
 	
+	public function setHeader($header){ $this->header = $header; }
 	public function setContent($content){ $this->content = $content; }
 	public function setMenu($menu){ $this->menu = $menu; }
 	public function setMessages($messages){ $this->messages = $messages; }

@@ -138,4 +138,9 @@ $_i18n[ "st_0x33" ] = "Ocurrió un problema al subir el archivo %s, por favor int
 $_i18n[ "st_0x34" ] = "El formato del archivo %s no esta permitido.";
 $_i18n[ "st_0x51" ] = "La ponencia no puede ser evaluada.";
 $_i18n[ "st_0x2" ]  = "Debe llenar todos los campos obligatorios.";
+$_i18n[ "PONENCIA_STATUS_1" ] = "SIN ASIGNAR";
+$_i18n[ "PONENCIA_STATUS_2" ] = "EN EVALUACION";
+$_i18n[ "PONENCIA_STATUS_3" ] = "EN CORRECCION";
+$_i18n[ "PONENCIA_STATUS_4" ] = "ACEPTADA";
+$_i18n[ "PONENCIA_STATUS_5" ] = "RECHAZADA";
 ?>
