@@ -92,7 +92,11 @@ class ViewPonencia extends PageView{
 			$ponencia = PonenciaController::obtener($id);
 			$evaluacion = EvaluacionController::obtener($ponencia, $this->getUsuario());
 
-			$this->setContent(new HtmlPage("./view/Ponente/ViewPonencia.php"));
+			if( $this->getUsuario()->getTipo() == UsuarioType::$PONENTE ){
+				$this->setContent(new HtmlPage("./view/Ponente/ViewPonencia.php"));
+			} else if( $this->getUsuario()->getTipo() == UsuarioType::$EVALUADOR ){
+				$this->setContent(new HtmlPage("./view/Evaluador/ViewPonencia.php"));
+			} 
 			$this->getMenu()->setSelectedSubItem("inicio");
 			$this->getMenu()->setTitle( $ponencia->getTitulo() );
 		}

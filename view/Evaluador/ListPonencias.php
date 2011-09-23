@@ -1,16 +1,22 @@
 ﻿<?php global $ponencias;?>
 
-<ul class="inlinelist">
+<!--<ul class="inlinelist">
 	<li class="main1"><a href="#" onclick="document.location='admin_newponencia.php'">Nueva ponencia</a></li>
 	<li><a href="./">Ver otras ponencias</a></li>
 </ul>
 <p>Debe estar registrado como ponente o autor para crear una nueva ponencia</p>
-
+-->
 
 <form id="list" name="deleteItems" action="EvaluarPonencias.php" method="post">
 	<table>
 	<tr>
-		<th colspan="3" class="tablebar"></th>
+		<th colspan="3" class="tablebar"><input disabled="disabled"
+			value="Aprobar" id="deleteB"
+			onclick="return false;"
+			type="button"><input disabled="disabled"
+			value="Rechazar" id="deleteB1"
+			onclick="return false;"
+			type="button"></th>
 		<th colspan="4" class="tablebar">
 			<ul class="inlinelist">
 				<li id="count2"><b>1 - <?=count( $ponencias )?> de <?=count( $ponencias )?></b></li>
@@ -29,11 +35,11 @@
 	<tr class="" id="ARTICLE_COLLECTION_SELECTION_<?=$i?>">
 		<td style="width: 30px;text-align: center"><?=$ponencias[$i]->getId()?></td>
 		<td style="width: 40px"><input value="true"
-			name="COLLECTION_SELECTION_<?=$i?>.<?=base64_encode($ponencias[$i]->getId())?>"
+			name="COLLECTION_SELECTION_<?=$i?>.<?=$ponencias[$i]->getId()?>"
 			onclick="cbTbl.selectOne(this); updateDeleteButtons(this);"
 			type="checkbox"></td>
 		<td><a href="javascript:void(0)"
-			onclick="goto( 'admin_viewponencia.php?id=<?=$ponencias[$i]->getId()?>&action=view' );"><?=$ponencias[$i]->getTitulo()?></a></td>
+			onclick="goto( 'Ponencia.php?id=<?=$ponencias[$i]->getId()?>&action=view' );"><?=$ponencias[$i]->getTitulo()?></a></td>
 		<td><?=$ponencias[$i]->getFecha()?></td>
 		<td><?=$ponencias[$i]->getEjeTematico()?></td>
 		<td style="width: 180px;"><a href="EvaluarPonencias.php?id=<?=$ponencias[$i]->getId()?>&action=evaluate" class="button evaluateponencia">Evaluar</a></td>
@@ -48,7 +54,13 @@
 	<?php } ?>
 
 	<tr>
-		<th colspan="3" class="tablebar"></th>
+		<th colspan="3" class="tablebar"><input disabled="disabled"
+			value="Aprobar" id="deleteT"
+			onclick="return false;"
+			type="button"><input disabled="disabled"
+			value="Rechazar" id="deleteT1"
+			onclick="return false;"
+			type="button"></th>
 		<th colspan="4" class="tablebar">
 			<ul class="inlinelist">
 				<li id="count"><b>1 - <?=count( $ponencias )?> de <?=count( $ponencias )?></b></li>

@@ -25,14 +25,21 @@ class LoginView extends PageView{
 			
 			$login = UsuarioController::inciarSesion($usuario);
 			if( $login == UsuarioController::$LOGIN_OK ){
-				$this->setUsuarioActual(UsuarioController::obtener($usuario));
-				$this->redirect("EvaluarPonencias.php");
+				$usuario = UsuarioController::obtener($usuario);
+				$this->setUsuarioActual($usuario);
+				if( $usuario->getTipo() == UsuarioType::$EVALUADOR ){
+					$this->redirect("EvaluarPonencias.php");
+				} else if( $usuario->getTipo() == UsuarioType::$PONENTE ){
+					$this->redirect("MisPonencias.php");
+				}
 			} else if ( $login == UsuarioController::$LOGIN_NO_USER_EXIST ) {
 				$this->addMessage(new Message("El usuario no existe", Message::$ERROR));
 				$this->setContent(new HtmlPage("./view/index.php"));
+				$this->getMenu()->setSelectedSubItem("inicio");
 			} else if ( $login == UsuarioController::$LOGIN_WRONG_PASSWORD ) {
 				$this->addMessage(new Message("Contraseña incorrecta", Message::$ERROR));
 				$this->setContent(new HtmlPage("./view/index.php"));
+				$this->getMenu()->setSelectedSubItem("inicio");
 			}
 		} else if( $action == logout ){
 			$this->setUsuarioActual(new Usuario());
@@ -43,7 +50,11 @@ class LoginView extends PageView{
 				$this->getMenu()->setSelectedSubItem("inicio");
 				$this->getMenu()->setTitle("Entrar al Sistema");
 			} else {
-				$this->redirect("EvaluarPonencias.php");
+				if( $this->getUsuario()->getTipo() == UsuarioType::$EVALUADOR ){
+					$this->redirect("EvaluarPonencias.php");
+				} else if( $this->getUsuario()->getTipo() == UsuarioType::$PONENTE ){
+					$this->redirect("MisPonencias.php");
+				}
 			}
 		}
 	}

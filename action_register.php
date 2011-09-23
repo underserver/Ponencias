@@ -20,7 +20,7 @@ include_once "./includes/db.php";
 
 $_validator = new Validator();
 $_validator->setMethod( "POST" );
-$_validator->setVars( array( "name:required", "last:required", "email:email", "password:required", "user:required", "institution:required", "type:required" ) );
+$_validator->setVars( array( "name:required", "last:required", "email:email", "password:required", "user:required", "institution:required", "type:required", "sub:required" ) );
 
 $valid  = $_validator->validate();
 $values = $_validator->getValues();
@@ -39,7 +39,7 @@ if( $valid ){
   $sql .= ",'".$values[ "type" ]."')";
   $db->query($sql);
 
-  header( 'Location: ./login.php?id='.base64_encode( "3" ) );
+  header( 'Location: ./UsuarioLogin.php' );
 
 }else{
 	for( $err="", $i = 0; $i < count($e = $_validator->getErrors()); $i++ ){

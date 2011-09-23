@@ -32,7 +32,7 @@ abstract class PageView extends ViewController{
 		$menuitems[] = new MenuItem("adminpanel", 		"AdminPanel.php", 			UsuarioType::$ADMINISTRADOR);
 		$menuitems[] = new MenuItem("evaluar", 			"EvaluarPonencias.php",			UsuarioType::$EVALUADOR);
 		
-		$menuitems[] = new MenuItem("registro", 		"Registro.php", 			UsuarioType::$PUBLICO);
+		$menuitems[] = new MenuItem("registro", 		"register.php", 			UsuarioType::$PUBLICO);
 		
 		$subitem = new MenuItem("cuenta", 			"#",		 			UsuarioType::$REGISTRADO);
 		$subitem = $subitem->addSubitem(new MenuItem("personal","Usuario.php?action=personal", 		UsuarioType::$REGISTRADO));

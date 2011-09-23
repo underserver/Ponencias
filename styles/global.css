@@ -1310,6 +1310,17 @@ a.save{
   float: left;
 }
 
+a.enter{
+  width: 124px;
+  height: 29px;
+  background-image: url('img/enter.png');
+  background-repeat: no-repeat;
+  float: left;
+}
+
+a.enter:hover{
+  background-position: center bottom;
+}
 
 a.evaluateponencia{
   width: 124px;

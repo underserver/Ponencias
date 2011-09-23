@@ -18,7 +18,7 @@
 	</tr>
 	<tr>
 		<th>Estado:</th>
-		<td><span class="details"><?=$ponencia->getStatus()?></span></td>
+		<td><span class="details"><span class="icon-status PS-<?=$ponencia->getStatus()?>"></span><?=i18n('PONENCIA_STATUS_'.$ponencia->getStatus())?></span></td>
 	</tr>
 	<tr>
 		<th>Resumen:</th>

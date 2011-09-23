@@ -59,7 +59,8 @@
 			<div class="">
 			<form action="action_login.php" method="post" name="settings">
 			<div class="section">&nbsp;Entrar al sistema</div>
-			<table style="margin: 15px 0pt 0pt;" border="0" cellpadding="0"
+			<div style="width:100%">
+			<table border="0" cellpadding="0" align="center"
 				cellspacing="0">
 				<tbody>
 					<tr>
@@ -101,7 +102,7 @@
 					</tr>
 				</tbody>
 			</table>
-		
+			</div>
 		</tr>
 	</tbody>
 </table>

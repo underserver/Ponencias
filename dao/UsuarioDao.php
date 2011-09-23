@@ -25,7 +25,12 @@ class UsuarioDao implements Dao{
 		 	$sql .= ",'".$usuario->getAlias()."','".$usuario->getPassword()."'";
 		  	$sql .= ",'".$usuario->getTipo()."')";
 			
-			$db->query($sql);
+			if($db->query($sql)){
+				$persistedInstances = UsuarioDao::findByQuery("usuario_alias='".$usuario->getAlias()."' order by usuario_id DESC");
+				if( count($persistedInstances) > 0){
+					return $persistedInstances[0];
+				}
+			}
 		}catch(Exception $e){
     			throw new TransactionExcepion($e->getMessage(), $usuario, TransactionExcepion::SAVE_CODE, $e);
     		}
@@ -48,6 +53,7 @@ class UsuarioDao implements Dao{
 			$sql .= " where usuario_id=".$usuario->getId();
 			
 			$db->query($sql);
+			return UsuarioDao::findById($usuario->getId());
 		}catch(Exception $e){
     			throw new TransactionExcepion($e->getMessage(), $usuario, TransactionExcepion::UPDATE_CODE, $e);
 		}
@@ -57,9 +63,9 @@ class UsuarioDao implements Dao{
 		try{
 			$id = $usuario->getId();
 			if( empty($id) || $id == 0 ){
-				UsuarioDao::save($usuario);
+				return UsuarioDao::save($usuario);
 			}else{
-				UsuarioDao::update($usuario);
+				return UsuarioDao::update($usuario);
 			}
 		}catch(TransactionException $te){
 			throw $te;

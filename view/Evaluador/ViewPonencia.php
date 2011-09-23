@@ -17,7 +17,7 @@
 	</tr>
 	<tr>
 		<th>Estado:</th>
-		<td><span class="details"><?=$ponencia->getStatus()?></span></td>
+		<td><span class="details"><span class="icon-status PS-<?=$ponencia->getStatus()?>"></span><?=i18n('PONENCIA_STATUS_'.$ponencia->getStatus())?></span></td>
 	</tr>
 	<tr>
 		<th>Resumen:</th>
@@ -44,7 +44,7 @@
 		<td><span class="details"><?=$ponencia->getObservaciones()?></span></td>
 	</tr>
 	<tr>
-		<td colspan="2" align="center"><a href="admin_editponencia.php?pid=<?=$pid?>" class="button editponencia">Editar</a></td>
+		<td colspan="2" align="center"><a href="EvaluarPonencias.php?id=<?=$ponencia->getId()?>&action=evaluate" class="button evaluateponencia">Editar</a></td>
 	</tr>
 </table>
 </form>

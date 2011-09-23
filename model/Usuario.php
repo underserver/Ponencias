@@ -48,7 +48,7 @@ class Usuario{
 	public function getAlias(){ return $this->alias; }
 	public function getPassword(){ return $this->password; }
 	public function getTipo(){ return $this->tipo; }
-	public function getFechaNacimiento(){ return $rhis->fechaNacimiento; }
+	public function getFechaNacimiento(){ return $this->fechaNacimiento; }
 	public function getTelefono(){ return $this->telefono; }
 	public function getDireccion(){ return $this->direccion; }
 	public function isWired(){ return (!empty($this->id) && $this->id > 0); }
