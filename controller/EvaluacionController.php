@@ -11,7 +11,7 @@ class EvaluacionController{
 		if( $evaluacion == NULL ){
 			$evaluacion = new Evaluacion();
 		} else {
-			if( $evaluacion->getEvaluador()->getId() != $usuario->getId() ){
+			if( $evaluacion->getEvaluador()->getId() != $usuario->getId() && $ponencia->getPonente()->getId() != $usuario->getId() ){
 				throw new NoPermissionException("No tiene permisos para evaluar la ponencia");
 			}
 		}
