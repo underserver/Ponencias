@@ -9,20 +9,23 @@ include_once dirname(__FILE__)."/../dao/PonenciaDao.php";
 class PonenciaController{
 
 	public static function listar($usuario){
-		switch( $usuario->getTipo() ){
-			case UsuarioType::$PONENTE:
-				return PonenciaManager::getByPonente($usuario->getId());
-				break;
-			case UsuarioType::$EVALUADOR:
-				return PonenciaManager::getByEvaluador($usuario->getId());
-				break;
-			case UsuarioType::$COAUTOR:
-				return PonenciaManager::getByCoautor($usuario->getId());
-				break;
-			case UsuarioType::$PUBLICO:
-				return PonenciaManager::getByStatus(PonenciaStatus::$ACEPTADA);
-				break;
-
+		try{
+			switch( $usuario->getTipo() ){
+				case UsuarioType::$PONENTE:
+					return PonenciaManager::getByPonente($usuario->getId());
+					break;
+				case UsuarioType::$EVALUADOR:
+					return PonenciaManager::getByEvaluador($usuario->getId());
+					break;
+				case UsuarioType::$COAUTOR:
+					return PonenciaManager::getByCoautor($usuario->getId());
+					break;
+				case UsuarioType::$PUBLICO:
+					return PonenciaManager::getByStatus(PonenciaStatus::$ACEPTADA);
+					break;
+			}
+		} catch(QueryException $qe) {
+			ApplicationContext::addMessage(new Message($qe->i18n(), Message::$ERROR, true, $qe));
 		}
 	}
 
@@ -35,16 +38,21 @@ class PonenciaController{
 			$archivoSinNombre = FileUploadController::upload($ponencia->getArchivoSinNombre(), $ponencia->getPonente());
 			$ponencia->setArchivoConNombre($archivoConNombre);
 			$ponencia->setArchivoSinNombre($archivoSinNombre);
+			return PonenciaManager::guardar($ponencia);
 		} catch(FileUploadException $ex) {
-			throw $ex;
+			ApplicationContext::addMessage(new Message($ex->i18n(), Message::$ERROR, true, $qe));
 		}
-		return PonenciaManager::guardar($ponencia);
+		return $ponencia;
 	}
 
 	public static function obtener($id){
-		$ponencia = new Ponencia();
-		$ponencia->setId($id);
-		return PonenciaManager::obtener($ponencia);
+		try{
+			$ponencia = new Ponencia();
+			$ponencia->setId($id);
+			return PonenciaManager::obtener($ponencia);
+		} catch( QueryException $qe ){
+			throw $qe;
+		}
 	}
 
 	public static function eliminar($ponencia, $usuario){
@@ -57,6 +65,7 @@ class PonenciaController{
 		} catch (TransactionException $te){
 			throw $te;
 		}
+		return false;
 	}
 }
 ?>

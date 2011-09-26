@@ -41,30 +41,38 @@ class UsuarioController{
 	}
 
 	public static function guardar($usuario, $usuarioActual){
-		if( $usuario->getId() != $usuarioActual->getId || $usuarioActual->getTipo() == UsuarioType::$ADMINISTRADOR){	
-			return UsuarioManager::actualizar($usuario);
+		if( $usuario->getId() != $usuarioActual->getId || $usuarioActual->getTipo() == UsuarioType::$ADMINISTRADOR){
+			try{
+				$usuario = UsuarioManager::actualizar($usuario);
+				ApplicationContext::addMessage(i18n("USER.UPDATED"), Message::$INFO);
+				return $usuario;
+			} catch (TransactionException $te){
+				ApplicationContext::addMessage(new Message($te->i18n(), Message::$ERROR, true, $qe));
+			}
 		} else {
 			throw new NoPermissionException("Cant save user", 0x4);
 		}
+		return $usuario;
 	}
     
 	public static function inciarSesion($usuario){
 		try{
 			if( UsuarioManager::alreadyRegistered($usuario->getAlias()) ){
 				if( UsuarioManager::checkPassword($usuario) ){
-					$alias = $usuario->getAlias();
-					$usuarios = UsuarioDao::findByQuery("usuario_alias='$alias'");
-					$_SESSION["usuario_id"] = $usuarios[0]->getId();
-					return UsuarioController::$LOGIN_OK;
+					$usuario = UsuarioManager::getByAlias($usuario->getAlias());
+
+					ApplicationContext::addMessage(sprintf(i18n("LOGIN.OK"), $usuario->getNombre()), Message::$INFO);
+					return $usuario;
 				} else {
-					return UsuarioController::$LOGIN_WRONG_PASSWORD;
+					ApplicationContext::addMessage(i18n("LOGIN.WRONG_PASSWORD"), Message::$WARN);
 				}
 			} else {
-				return UsuarioController::$LOGIN_NO_USER_EXIST;
+				ApplicationContext::addMessage(i18n("LOGIN.NO_USER_EXIST"), Message::$WARN);
 			}
-		}catch(QueryException $qe){
-			throw $qe;
+		} catch(QueryException $qe) {
+			ApplicationContext::addMessage(new Message($qe->i18n(), Message::$ERROR, true, $qe));
 		}
+		return new Usuario();
 	}
 
 	public static function obtener($usuario){
@@ -75,15 +83,7 @@ class UsuarioController{
 		}
 	}
     
-	public static function validar($usuario){
-		
-	}
-    
 	public static $REGISTER_OK		= "REGISTER.OK";
 	public static $REGISTER_USER_EXIST	= "REGISTER.USER_EXIST";
-
-	public static $LOGIN_OK		= "LOGIN.OK";
-	public static $LOGIN_NO_USER_EXIST	= "LOGIN.NO_USER_EXIST";
-	public static $LOGIN_WRONG_PASSWORD	= "LOGIN.WRONG_PASSWORD";
 }
 ?>

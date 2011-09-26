@@ -32,7 +32,7 @@ class UsuarioDao implements Dao{
 				}
 			}
 		}catch(Exception $e){
-    			throw new TransactionExcepion($e->getMessage(), $usuario, TransactionExcepion::SAVE_CODE, $e);
+    			throw new TransactionException($e->getMessage(), $usuario, TransactionException::$SAVE_CODE, $e);
     		}
 	}
 	
@@ -55,7 +55,7 @@ class UsuarioDao implements Dao{
 			$db->query($sql);
 			return UsuarioDao::findById($usuario->getId());
 		}catch(Exception $e){
-    			throw new TransactionExcepion($e->getMessage(), $usuario, TransactionExcepion::UPDATE_CODE, $e);
+    			throw new TransactionException($e->getMessage(), $usuario, TransactionException::$UPDATE_CODE, $e);
 		}
 	}
 	
@@ -78,7 +78,7 @@ class UsuarioDao implements Dao{
 		try {
 			$db->query("delete from usuarios where usuario_id=$usuario->getId()");
 		}catch(Exception $e){
-			throw new TransactionExcepion($e->getMessage(), $usuario, TransactionExcepion::DELETE_CODE, $e);
+			throw new TransactionException($e->getMessage(), $usuario, TransactionException::$DELETE_CODE, $e);
 		}
 	}
 	

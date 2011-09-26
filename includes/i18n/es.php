@@ -147,4 +147,8 @@ $_i18n[ "PONENCIA_STATUS_5" ] = "RECHAZADA";
 
 $_i18n[ "personal" ] = "Informacion Personal";
 $_i18n[ "acceso" ] = "Informacion de Acceso";
+
+$_i18n["LOGIN.NO_USER_EXIST"] = "El usuario no existe";
+$_i18n["LOGIN.WRONG_PASSWORD"] = "La contraseña no es correcta";
+$_i18n["LOGIN.OK"] = "Bienvenid@, %s";
 ?>

@@ -5,7 +5,7 @@ class TransactionException extends GenericException
 {
 	private $entity;
 	public function __construct($message, $entity, $code = 0, Exception $previous = null) {
-		parent::__construct($message, $code, $previous);
+		parent::__construct($message, $code);
 		$this->entity = $entity;
 	}
 

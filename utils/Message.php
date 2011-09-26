@@ -8,6 +8,7 @@ class Message implements Renderable{
 		$this->message 		= $message;
 		$this->type 		= $type;
 		$this->showDetails 	= $showDetails;
+		$this->exception	= $exception;
 	}
 	
 	public function getMessage(){ return $this->message; }
@@ -21,6 +22,9 @@ class Message implements Renderable{
 		$html .= '			<div class="tl">';
 		$html .= '				<div class="tr2">';
 		$html .= 					$this->getMessage();
+		if( $this->showDetails ){
+		$html .= '<br/>	'.				$this->exception;
+		}
 		$html .= '				</div>';
 		$html .= '			</div>';
 		$html .= '		</div>';

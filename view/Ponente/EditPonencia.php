@@ -64,7 +64,7 @@ $().ready(function() {
 	</tr>
 	<tr class="finalrow">
 		<th><input type="hidden" name="id" value="<?=$ponencia->getId()?>"></th>
-		<td><a href="#" onclick="clear_isset_monitoring();settings.submit();" class="button save">Guardar</a>
+		<td><input type="submit" onclick="clear_isset_monitoring();" class="button save" value="Guardar">
 		<a href="#" style="display:block; margin-top:10px;" onclick="clear_isset_monitoring(); go('./Ponencia.php?id=<?=$ponencia->getId()?>');">Cancelar</a></td>
 	</tr>
 </table>

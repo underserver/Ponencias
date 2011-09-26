@@ -5,7 +5,7 @@ class QueryException extends GenericException
 {
 	private $sql;
 	public function __construct($message, $sql, $code = 0, Exception $previous = null) {
-		parent::__construct($message, $code, $previous);
+		parent::__construct($message, $code);
 		$this->sql = $sql;
 	}
 

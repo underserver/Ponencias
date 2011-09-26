@@ -1,5 +1,5 @@
 <?php
-
+	include_once dirname(__FILE__)."/../../../_exceptions/QueryException.php";
 	/**********************************************************************
 	*  Author: Justin Vincent (justin@visunet.ie)
 	*  Web...: http://php.justinvincent.com
@@ -201,8 +201,9 @@
 			{
 				$is_insert = true;
 				$this->register_error($str);
-				$this->show_errors ? trigger_error($str,E_USER_WARNING) : null;
-				return false;
+				//$this->show_errors ? trigger_error($str,E_USER_WARNING) : null;
+				throw new QueryException($str, $query, 2);
+				//return false;
 			}
 
 			// Query was an insert, delete, update, replace

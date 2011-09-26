@@ -1283,18 +1283,19 @@ span.radio{
   float: left;
 }
 
-a.button{
+.button{
   display: block;
   margin: 4px;
   text-indent: -2000px;
   background-position: center top;
+  border-style: none;
 }
 
-a.button:active{
+.button:active{
   background-position: center bottom;
 }
 
-a.editponencia{
+.editponencia{
   width: 124px;
   height: 29px;
   background-image: url('img/editponencia.png');
@@ -1302,7 +1303,7 @@ a.editponencia{
 }
 
 
-a.save{
+.save{
   width: 124px;
   height: 29px;
   background-image: url('img/save.png');
@@ -1310,7 +1311,7 @@ a.save{
   float: left;
 }
 
-a.enter{
+.enter{
   width: 124px;
   height: 29px;
   background-image: url('img/enter.png');
@@ -1318,18 +1319,18 @@ a.enter{
   float: left;
 }
 
-a.enter:hover{
+.enter:hover{
   background-position: center bottom;
 }
 
-a.evaluateponencia{
+.evaluateponencia{
   width: 124px;
   height: 24px;
   background-image: url('img/evaluateponencia.png');
   background-repeat: no-repeat;
 }
 
-a.senddictamen{
+.senddictamen{
   width: 124px;
   height: 29px;
   background-image: url('img/senddictamen.png');
@@ -1358,7 +1359,7 @@ a.file{
   text-decoration: none;
 }
 
-a.file:active{
+.file:active{
   color: #f0f0f0;
 }
 

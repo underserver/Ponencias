@@ -17,7 +17,7 @@
 
 <script type="text/javascript">
 
-	var messageObj = new DHTML_modalMessage();	// We only create one object of this class
+	/*var messageObj = new DHTML_modalMessage();	// We only create one object of this class
 
 	function displayArticle(url)
 	{
@@ -26,7 +26,7 @@
 		messageObj.setCssClassMessageBox(false);
 		messageObj.setSize(300,200);
 		messageObj.display();
-	}
+	}*/
 	</script>
 </body>
 </html>

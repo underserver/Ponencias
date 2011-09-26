@@ -4,9 +4,10 @@ require_once dirname(__FILE__).'/../utils/MenuItem.php';
 require_once dirname(__FILE__).'/../utils/Submenu.php';
 require_once dirname(__FILE__).'/../utils/SubmenuItem.php';
 require_once dirname(__FILE__).'/../utils/HtmlPage.php';
-require_once dirname(__FILE__).'/../_exceptions/ViewException.php';
 require_once dirname(__FILE__).'/../utils/Message.php';
+require_once dirname(__FILE__).'/../_exceptions/ViewException.php';
 require_once dirname(__FILE__).'/../controller/ViewController.php';
+require_once dirname(__FILE__).'/../context/Applicationcontext.php';
 
 abstract class PageView extends ViewController{
 	private $header;
@@ -61,18 +62,22 @@ abstract class PageView extends ViewController{
 	
 	public function renderAll(){
 		try{
-			$this->handleRequest();
+			if($this->handleRequest() == PageView::$REDIRECT){
+				return;
+			}
       		} catch (GenericException $ge) {
 			$this->addMessage( new Message($ge->i18n(), Message::$WARN, true, $ge) );
       		}
 		$this->render($this->getHeader());
 		$this->render($this->getMenu());
 		$this->render($this->getSubmenu());
-		foreach($this->messages as $message){
+		foreach($this->getMessages() as $message){
 			$this->render($message);
-		}		
+		}
 		$this->render($this->getContent());
 		$this->render($this->getFooter());
+
+		ApplicationContext::clearMessages();
 	}
 
 	public function getHeader(){ return $this->header; }
@@ -82,7 +87,7 @@ abstract class PageView extends ViewController{
 			return $this->getMenu()->getSelectedItem()->getSubmenu(); 
 		return NULL;
 	}
-	public function getMessages(){ return $this->messages; }
+	public function getMessages(){ return ApplicationContext::getMessages(); }
 	public function getContent(){ return $this->content; }
 	public function getFooter(){ return $this->footer; }
 	
@@ -94,9 +99,11 @@ abstract class PageView extends ViewController{
 	public function setContent($content){ $this->content = $content; }
 	public function setMenu($menu){ $this->menu = $menu; }
 	public function setMessages($messages){ $this->messages = $messages; }
-	public function addMessage($message){  $this->messages[] = $message; }
+	public function addMessage($message){  ApplicationContext::addMessage($message, NULL); }
 	public function setFooter($footer){ $this->footer = $footer; }
 	
 	abstract protected function handleRequest();
+
+	public static $REDIRECT = 1;
 }
 ?>

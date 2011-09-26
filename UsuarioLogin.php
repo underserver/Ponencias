@@ -23,23 +23,20 @@ class LoginView extends PageView{
 			$usuario->setAlias($this->getPostParameter("userName"));
 			$usuario->setPassword($this->getPostParameter("userPassword"));
 			
-			$login = UsuarioController::inciarSesion($usuario);
-			if( $login == UsuarioController::$LOGIN_OK ){
-				$usuario = UsuarioController::obtener($usuario);
+			$usuario = UsuarioController::inciarSesion($usuario);
+			if( $usuario->isWired() ){
 				$this->setUsuarioActual($usuario);
 				if( $usuario->getTipo() == UsuarioType::$EVALUADOR ){
 					$this->redirect("EvaluarPonencias.php");
+					return PageView::$REDIRECT;
 				} else if( $usuario->getTipo() == UsuarioType::$PONENTE ){
 					$this->redirect("MisPonencias.php");
+					return PageView::$REDIRECT;
 				}
-			} else if ( $login == UsuarioController::$LOGIN_NO_USER_EXIST ) {
-				$this->addMessage(new Message("El usuario no existe", Message::$ERROR));
+			} else {
 				$this->setContent(new HtmlPage("./view/index.php"));
 				$this->getMenu()->setSelectedSubItem("inicio");
-			} else if ( $login == UsuarioController::$LOGIN_WRONG_PASSWORD ) {
-				$this->addMessage(new Message("Contraseña incorrecta", Message::$ERROR));
-				$this->setContent(new HtmlPage("./view/index.php"));
-				$this->getMenu()->setSelectedSubItem("inicio");
+				$this->getMenu()->setTitle("Entrar al Sistema");
 			}
 		} else if( $action == logout ){
 			$this->setUsuarioActual(new Usuario());

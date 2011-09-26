@@ -339,8 +339,10 @@ cbTbl.selectAll = function(cb) {
   // Note: starting loop at 0 here cuz the 1st cb is the 'Select All' 
   // which is the input arg to this method.
   for (var i = 1; i < cbs.length; i++) {
-    cbs[i].checked = cb.checked;
-    cbTbl.highlight(cbs[i]);
+    if( !cbs[i].disabled ){
+     cbs[i].checked = cb.checked;
+     cbTbl.highlight(cbs[i]);
+    }
   }
 };
 
