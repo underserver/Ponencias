@@ -32,6 +32,9 @@ class LoginView extends PageView{
 				} else if( $usuario->getTipo() == UsuarioType::$PONENTE ){
 					$this->redirect("MisPonencias.php");
 					return PageView::$REDIRECT;
+				} else if( $usuario->getTipo() == UsuarioType::$ADMINISTRADOR ){
+					$this->redirect("AdminPanel.php");
+					return PageView::$REDIRECT;
 				}
 			} else {
 				$this->setContent(new HtmlPage("./view/index.php"));

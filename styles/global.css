@@ -838,23 +838,23 @@
 		
 /* content - list type */
 		
-	form#list table {
+	#list table {
 		width:100%;
 		border-collapse:collapse;
 		}
 
-	form#list .tablebar{
+	#list .tablebar{
 		background:#c2cdd8;
 		padding:4px;
 		}
 
-	form#list .tablebar1{
+	#list .tablebar1{
 		background:#DBE1E8;
 		border-top: 1px solid #637C9C;
 		padding:4px;
 		}
 
-	form#list th{
+	#list th{
 		background:url(img/tablebar_bg.png) bottom repeat-x;
 		text-align:left;
 		padding:2px 4px 2px 4px;
@@ -867,16 +867,16 @@
 		padding-right:10px;
 		}	
 		
-	form#list td{
+	#list td{
 		border-bottom:1px solid #ccc;
 		padding:2px 4px 2px 4px;
 		}
 
-	form#list td a:visited{
+	#list td a:visited{
 		color:#59d;
 		}
 
-	form#list tr:hover{
+	#list tr:hover{
 		background:#ffffcc;
 		cursor:pointer;
 		}
@@ -887,11 +887,11 @@
 		}
 	
 	/*for users who have service problems*/
-	form#list tr.prob{
+	#list tr.prob{
 		background:#FFFF99;
 		}
 	
-	form#list table.nobox tr{
+	#list table.nobox tr{
 		height:2em;
 		}
 	
@@ -933,25 +933,25 @@
 		
 		
 	/*highlight without the cursor*/
-	form#list tr.nopoint:hover{
+	#list tr.nopoint:hover{
 		background:#ffffcc;
 		cursor:default;
 		}
 	
-	form#list th:hover{
+	#list th:hover{
 		cursor:auto;
 		}
 		
-	form#list th ul{
+	#list th ul{
 		float:right;
 		}
 	
 	/*define certain list column width*/
-	form#list .tinycol{
+	#list .tinycol{
 		width:3%;
 		}
 		
-	form#list .bigcol1{
+	#list .bigcol1{
 		width:45%;
 		}
 		
@@ -1405,4 +1405,11 @@ a.file{
 }
 .PS-3{
 	background-position: 0 -72px;
+}
+.subtitle{
+	font-family: "Actor", "Myriad Pro";
+	font-size: 16px;
+	font-weight: normal;
+	color: #369;
+	margin: 16px 6px 15px 0;
 }

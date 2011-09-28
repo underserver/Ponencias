@@ -31,7 +31,7 @@
 	</tr>
 	<?php for( $i = 0, $subtotal = 0; $i < count($ponencias); $i++){?>
 	<tr class="" id="ARTICLE_COLLECTION_SELECTION_<?=$i?>">
-		<td style="width: 30px;text-align: center"><?=$ponencias[$i]->getId()?></td>
+		<td style="text-align: center"><?=$ponencias[$i]->getId()?></td>
 		<td style="width: 40px"><input value="true" <?=($ponencias[$i]->getStatus()==PonenciaStatus::$EN_EVALUACION)?"disabled":""?>
 			name="COLLECTION_SELECTION_<?=$i?>.<?=$ponencias[$i]->getId()?>"
 			onclick="cbTbl.selectOne(this); updateDeleteButtons(this);"

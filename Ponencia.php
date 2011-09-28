@@ -87,7 +87,7 @@ class ViewPonencia extends PageView{
 			$this->setFooter(NULL);
 			$this->setContent(new HtmlPage("./view/Ponente/ListPonencias.php"));
 		} else {
-			global $ponencia, $evaluacion;
+			global $ponencia, $evaluaciones;
 			$id = $this->getQueryParameter("id");
 			$ponencia = PonenciaController::obtener($id);
 			$evaluacion = EvaluacionController::obtener($ponencia, $this->getUsuario());

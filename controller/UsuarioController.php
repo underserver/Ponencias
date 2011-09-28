@@ -82,6 +82,18 @@ class UsuarioController{
 			return UsuarioManager::getByAlias($usuario->getAlias());
 		}
 	}
+
+	public static function todos($usuario){
+		if( $usuario->getTipo() == UsuarioType::$ADMINISTRADOR ){
+			return UsuarioManager::listar();
+		} else {
+			throw new NoPermissionException("Cant view all users", 0x5);
+		}
+	}
+
+	public static function getByTipo($tipo){
+		return UsuarioManager::getByTipo($tipo);
+	}
     
 	public static $REGISTER_OK		= "REGISTER.OK";
 	public static $REGISTER_USER_EXIST	= "REGISTER.USER_EXIST";

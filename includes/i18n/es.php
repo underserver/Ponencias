@@ -5,6 +5,7 @@ $_i18n[ "ponencias" ] = "Ponencias";
 $_i18n[ "misponencias" ] = "Mis Ponencias";
 $_i18n[ "cuenta" ] = "Mi Cuenta";
 $_i18n[ "evaluar" ] = "Evaluar Ponencias";
+$_i18n[ "adminpanel" ] = "Administraci&oacute;n";
 $_i18n[ "registro" ] = "Registrarse";
 $_i18n[ "menu41" ] = "Datos personales";
 $_i18n[ "menu42" ] = "Informacion de acceso";

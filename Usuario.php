@@ -64,6 +64,13 @@ class ViewUsuario extends PageView{
 			$this->setContent(new HtmlPage("./view/Usuario/AccountInfo.php"));
 			$this->getMenu()->setSelectedSubItem("inicio");
 			$this->getMenu()->setTitle( "Informacion de la Cuenta" );
+		} else if( $action == all ){
+			global $usuarios;
+			$usuarios = UsuarioController::todos($this->getUsuario());
+
+			$this->setContent(new HtmlPage("./view/Administrador/ListUsers.php"));
+			$this->getMenu()->setSelectedSubItem("inicio");
+			$this->getMenu()->setTitle( "Informacion de la Cuenta" );
 		} else if( $action == personal ){
 			global $usuario;
 			$usuario = $this->getUsuario();
