@@ -1,6 +1,7 @@
 <?php
 include_once dirname(__FILE__)."/Dao.php";
 include_once dirname(__FILE__)."/../model/Evaluacion.php";
+include_once dirname(__FILE__)."/../_exceptions/TransactionException.php";
 
 class EvaluacionDao implements Dao{
 	
@@ -24,7 +25,7 @@ class EvaluacionDao implements Dao{
 			
 			$db->query($sql);
 		}catch(Exception $e){
-    			throw new TransactionExcepion($e->getMessage(), $evaluacion, TransactionExcepion::SAVE_CODE, $e);
+    			throw new TransactionException($e->getMessage(), $evaluacion, TransactionException::SAVE_CODE, $e);
     		}
 	}
 	
@@ -42,7 +43,7 @@ class EvaluacionDao implements Dao{
 			
 			$db->query($sql);
 		}catch(Exception $e){
-    			throw new TransactionExcepion($e->getMessage(), $evaluacion, TransactionExcepion::UPDATE_CODE, $e);
+    			throw new TransactionException($e->getMessage(), $evaluacion, TransactionException::$UPDATE_CODE, $e);
     		}
 	}
 	
@@ -65,7 +66,7 @@ class EvaluacionDao implements Dao{
 			$id = $evaluacion->getId();
 			$db->query("delete from evaluaciones where evaluacion_id=$id");
 		}catch(Exception $e){
-			throw new TransactionExcepion($e->getMessage(), $evaluacion, TransactionExcepion::DELETE_CODE, $e);
+			throw new TransactionExcepion($e->getMessage(), $evaluacion, TransactionExcepion::$DELETE_CODE, $e);
 		}
 	}
 	

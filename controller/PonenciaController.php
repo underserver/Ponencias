@@ -67,5 +67,11 @@ class PonenciaController{
 		}
 		return false;
 	}
+
+	public static function asignarEvaluadores($ponencia, $evaluadores){
+		foreach( $evaluadores as $evaluador ){
+			PonenciaManager::asignarEvaluador($ponencia, $evaluador);
+		}
+	}
 }
 ?>

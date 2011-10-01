@@ -3,13 +3,14 @@ include_once dirname(__FILE__)."/../enums/PonenciaStatus.php";
 include_once dirname(__FILE__)."/../_exceptions/TransactionException.php";
 include_once dirname(__FILE__)."/../_exceptions/QueryException.php";
 include_once dirname(__FILE__)."/../dao/EvaluacionDao.php";
+include_once dirname(__FILE__)."/../services/EvaluacionManager.php";
 include_once dirname(__FILE__)."/../dao/PonenciaDao.php";
 
 class PonenciaManager{
 	
 	public static function asignarEvaluador($ponencia, $evaluador){
 		try{
-			$evaluacion = EvaluacionDao::findByQuery("ponencia_id=$ponencia->getId() and evaluador_id=$evaluador->getId()");
+			$evaluacion = EvaluacionManager::getByPonenciaAndEvaluador($ponencia, $evaluador);
 			if( isset($evaluacion) ){
 				EvaluacionDao::update($evaluacion);
 			} else {

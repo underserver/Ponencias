@@ -20,24 +20,29 @@ class AsignarEvaluadores extends PageView{
 
 		$action = $this->getQueryParameter("action");
 		if( $action == save ){
-			global $ponencia, $evaluaciones;
-			$id = $this->getQueryParameter("id");
-			$ponencia = PonenciaController::obtener($id);
-			$evaluaciones = 
-			$this->setContent(new HtmlPage("./view/Administrador/AsignarEvaluadores.php"));
-			$this->getMenu()->setSelectedSubItem("inicio");
-			$this->getMenu()->setTitle( $ponencia->getTitulo() );
-		} else {
-			global $ponencia, $evaluaciones, $evaluadores;
-			$id = $this->getQueryParameter("id");
-			$ponencia = PonenciaController::obtener($id);
-			$evaluaciones = EvaluacionController::todas($ponencia, $this->getUsuario());
-			$evaluadores = UsuarioController::getByTipo(UsuarioType::$EVALUADOR);
+			$pid = $this->getPostParameter("pid");
+			$eids = $this->getPostParameter("evaluadores");
 
-			$this->setContent(new HtmlPage("./view/Administrador/AsignarEvaluadores.php"));
-			$this->getMenu()->setSelectedSubItem("inicio");
-			$this->getMenu()->setTitle( $ponencia->getTitulo() );
+			$ponencia = PonenciaController::obtener($pid);
+			$evaluadores = array();
+			foreach( $eids as $eid  ){
+				$evaluador = new Usuario();
+				$evaluador->setId($eid);
+				$evaluadores[] = UsuarioController::obtener($evaluador);
+			}
+			PonenciaController::asignarEvaluadores($ponencia, $evaluadores);
 		}
+			
+		global $ponencia, $evaluaciones, $evaluadores;
+		$id = $this->getQueryParameter("id");
+		$ponencia = PonenciaController::obtener($id);
+		$evaluaciones = EvaluacionController::todas($ponencia, $this->getUsuario());
+		$evaluadores = UsuarioController::getByTipo(UsuarioType::$EVALUADOR);
+
+		$this->setContent(new HtmlPage("./view/Administrador/AsignarEvaluadores.php"));
+		$this->getMenu()->setSelectedSubItem("inicio");
+		$this->getMenu()->setTitle( $ponencia->getTitulo() );
+		
 	}
 }
 $view = new AsignarEvaluadores();

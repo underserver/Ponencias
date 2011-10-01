@@ -10,7 +10,7 @@ class EvaluacionManager{
 		try{
 			$pid = $ponencia->getId();
 			$eid = $evaluador->getId();
-			$evaluaciones = EvaluacionDao::findByQuery("ponencia_id=$id and evaluador_id=$eid");
+			$evaluaciones = EvaluacionDao::findByQuery("ponencia_id=1 and evaluador_id=$eid");
 			if( count($evaluaciones) > 0 ){
 				return $evaluaciones[0];
 			} else

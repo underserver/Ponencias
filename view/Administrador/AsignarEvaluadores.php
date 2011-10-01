@@ -28,7 +28,8 @@
 </table>
 </form>
 <div class="subtitle">Seleccionar Evaluadores</div>
-<form action="#" method="post" id="list" enctype="multipart/form-data">
+<form action="AsignarEvaluadores.php?action=save" method="post" id="list" enctype="multipart/form-data">
+<input type="hidden" name="pid" value="<?=$ponencia->getId()?>">
 <table>
 	<tr>
 		<th colspan="4" class="tablebar"></th>
@@ -49,9 +50,9 @@
 			}
 		}
 	?>
-	<tr class="" id="ARTICLE_COLLECTION_SELECTION_<?=$i?>">
-		<td style="width: 40px"><input value="true"
-			name="COLLECTION_SELECTION_<?=$i?>.<?=$evaluadores[$i]->getId()?>"
+	<tr class="" id="ARTICLE_COLLECTION_SELECTION_<?=$i?>" style="background-color:#<?=$seleccionado ? 'ffffdd' : 'ffffff'?>">
+		<td style="width: 40px"><input value="<?=$evaluadores[$i]->getId()?>"
+			name="evaluadores[]"
 			onclick="cbTbl.selectOne(this); updateDeleteButtons(this);"
 			<?=($seleccionado ? 'checked' : '')?>
 			type="checkbox"></td>
@@ -64,7 +65,7 @@
 if( $i == 0 ){
 	?>
 	<tr class="" id="ARTICLE_COLLECTION_SELECTION_0">
-		<td colspan="7" align="center"><em>No existe ningun usuario</em></td>
+		<td colspan="7" align="center"><em>No hay ningun evaluador registrado</em><br><a href="Registro.php?type=4"></a></td>
 	</tr>
 	<?php } ?>
 
@@ -72,4 +73,5 @@ if( $i == 0 ){
 		<th colspan="4" class="tablebar"></th>
 	</tr>
 </table>
+<div align="center"><input type="submit" value="Asignar evaluadores"></div>
 </form>
