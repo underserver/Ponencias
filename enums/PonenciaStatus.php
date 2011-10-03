@@ -5,5 +5,6 @@ class PonenciaStatus{
 	public static $EN_CORRECCION		= 3;
 	public static $ACEPTADA			= 4;
 	public static $RECHAZADA		= 5;
+	public static $CANCELADA		= 0;
 }
 ?>

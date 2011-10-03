@@ -19,8 +19,8 @@ class PonenciaManager{
 				$evaluacion->setEvaluador($evaluador);
 				EvaluacionDao::save($evaluacion);
 			}
-			$ponencia->setStatus(PonenciaStatus::EN_EVALUACION);
-			PonenciaDao::persist($ponencia);
+			$ponencia->setStatus(PonenciaStatus::$EN_EVALUACION);
+			//PonenciaDao::persist($ponencia);
 		}catch(QueryException $qe){
     			throw $qe;
     		}catch(TransactionException $te){

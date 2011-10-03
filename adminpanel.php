@@ -17,6 +17,7 @@ class AdminPanel extends PageView{
 	public function handleRequest(){
 
 		$this->getMenu()->setSelectedItem("adminpanel");
+		$this->getMenu()->setSelectedSubItem("dashboard");
 
 		$this->setContent(new HtmlPage("./view/Administrador/Panel.php"));
 		$this->getMenu()->setSelectedSubItem("inicio");

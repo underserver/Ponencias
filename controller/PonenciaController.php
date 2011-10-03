@@ -29,6 +29,18 @@ class PonenciaController{
 		}
 	}
 
+	public static function getByStatus($status){
+		try{
+			if( empty($staus) ){
+				return PonenciaManager::listar();
+			} else {
+				return PonenciaManager::getByStatus($status);
+			}
+		} catch(QueryException $qe) {
+			ApplicationContext::addMessage(new Message($qe->i18n(), Message::$ERROR, true, $qe));
+		}
+	}
+
 	public static function guardar($ponencia, $usuario){
 		if( $usuario->getTipo() != UsuarioType::$ADMINISTRADOR ){
 			$ponencia->setPonente($usuario);

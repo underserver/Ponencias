@@ -18,6 +18,8 @@ class AsignarEvaluadores extends PageView{
 
 		$this->getMenu()->setSelectedItem("adminpanel");
 
+		global $ponencia, $evaluaciones, $evaluadores;
+
 		$action = $this->getQueryParameter("action");
 		if( $action == save ){
 			$pid = $this->getPostParameter("pid");
@@ -31,11 +33,11 @@ class AsignarEvaluadores extends PageView{
 				$evaluadores[] = UsuarioController::obtener($evaluador);
 			}
 			PonenciaController::asignarEvaluadores($ponencia, $evaluadores);
+		} else {
+			$id = $this->getQueryParameter("id");
+			$ponencia = PonenciaController::obtener($id);
 		}
 			
-		global $ponencia, $evaluaciones, $evaluadores;
-		$id = $this->getQueryParameter("id");
-		$ponencia = PonenciaController::obtener($id);
 		$evaluaciones = EvaluacionController::todas($ponencia, $this->getUsuario());
 		$evaluadores = UsuarioController::getByTipo(UsuarioType::$EVALUADOR);
 

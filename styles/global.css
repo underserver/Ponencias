@@ -64,8 +64,11 @@
 		
 	.clear, .clrflt, .spacer{
 		clear:both;
-		}
-		
+		} 
+	.sx1{
+		display: block;
+		height: 10px;
+	}
 	.divider{
 		clear:both;
 		width:100%;
@@ -400,7 +403,7 @@
 		
 	div#dom_user{
 		float:left;
-		width:47%;
+		/*width:47%;*/
 		padding-right:2%;
 		}
 
@@ -1337,6 +1340,13 @@ span.radio{
   background-repeat: no-repeat;
 }
 
+.asignarevaluadores{
+  width: 140px;
+  height: 35px;
+  background-image: url('img/asignar.png');
+  background-repeat: no-repeat;
+}
+
 a.file{
   width: 122px;
   height: 21px;
@@ -1412,4 +1422,14 @@ a.file{
 	font-weight: normal;
 	color: #369;
 	margin: 16px 6px 15px 0;
+}
+
+.fl
+{
+	float:left;
+	margin-right: 10px;
+}
+.fr{
+	float: right;
+	margin-left: 10px;
 }

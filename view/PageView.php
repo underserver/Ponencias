@@ -25,12 +25,18 @@ abstract class PageView extends ViewController{
 		
 		$subInicio = array();
 		$subInicio[] = new SubmenuItem("inicio", 		".", 					UsuarioType::$TODOS);
+
+
+		$subAdmin = array();
+		$subAdmin[] = new SubmenuItem("dashboard", 	"AdminPanel.php", 			UsuarioType::$ADMINISTRADOR);
+		$subAdmin[] = new SubmenuItem("users", 		"AdminUsuarios.php", 			UsuarioType::$ADMINISTRADOR);
+		$subAdmin[] = new SubmenuItem("ponencias", 	"AdminPonencias.php", 			UsuarioType::$ADMINISTRADOR);
 			
 		$menuitems = array();
 		$menuitems[] = new MenuItem("inicio", 			".", 					UsuarioType::$TODOS, new Submenu($subInicio, ""));
 		$menuitems[] = new MenuItem("ponencias", 		"ponencias.php", 			UsuarioType::$PUBLICO);
 		$menuitems[] = new MenuItem("misponencias", 		"MisPonencias.php", 			UsuarioType::$PONENTE);
-		$menuitems[] = new MenuItem("adminpanel", 		"AdminPanel.php", 			UsuarioType::$ADMINISTRADOR);
+		$menuitems[] = new MenuItem("adminpanel", 		"AdminPanel.php", 			UsuarioType::$ADMINISTRADOR, new Submenu($subAdmin, ""));
 		$menuitems[] = new MenuItem("evaluar", 			"EvaluarPonencias.php",			UsuarioType::$EVALUADOR);
 		
 		$menuitems[] = new MenuItem("registro", 		"register.php", 			UsuarioType::$PUBLICO);

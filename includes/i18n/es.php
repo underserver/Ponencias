@@ -7,6 +7,8 @@ $_i18n[ "cuenta" ] = "Mi Cuenta";
 $_i18n[ "evaluar" ] = "Evaluar Ponencias";
 $_i18n[ "adminpanel" ] = "Administraci&oacute;n";
 $_i18n[ "registro" ] = "Registrarse";
+$_i18n[ "dashboard" ] = "Tablero";
+$_i18n[ "users" ] = "Usuarios";
 $_i18n[ "menu41" ] = "Datos personales";
 $_i18n[ "menu42" ] = "Informacion de acceso";
 $_i18n[ "ponencias" ] = "Ponencias";
@@ -152,4 +154,10 @@ $_i18n[ "acceso" ] = "Informacion de Acceso";
 $_i18n["LOGIN.NO_USER_EXIST"] = "El usuario no existe";
 $_i18n["LOGIN.WRONG_PASSWORD"] = "La contraseña no es correcta";
 $_i18n["LOGIN.OK"] = "Bienvenid@, %s";
+
+$_i18n["USER.1"] = "Administrador";
+$_i18n["USER.2"] = "Ponente";
+$_i18n["USER.3"] = "Coautor";
+$_i18n["USER.4"] = "Evaluador";
+$_i18n["USER.5"] = "Asistente";
 ?>
