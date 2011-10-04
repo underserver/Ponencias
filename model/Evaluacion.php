@@ -17,6 +17,9 @@ class Evaluacion{
 			$this->fecha = $row->evaluacion_fecha;
 			$this->ponencia_id = $row->ponencia_id;
 			$this->evaluador_id = $row->evaluador_id;
+		} else {
+			$this->calificacion = 0.0;
+			$this->fecha = date( 'Y-m-d H:i:s', time() );
 		}
 	}
   	

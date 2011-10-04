@@ -25,7 +25,7 @@ class EvaluacionDao implements Dao{
 			
 			$db->query($sql);
 		}catch(Exception $e){
-    			throw new TransactionException($e->getMessage(), $evaluacion, TransactionException::SAVE_CODE, $e);
+    			throw new TransactionException($e->getMessage(), $evaluacion, TransactionException::$SAVE_CODE, $e);
     		}
 	}
 	

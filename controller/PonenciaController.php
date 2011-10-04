@@ -84,6 +84,7 @@ class PonenciaController{
 		foreach( $evaluadores as $evaluador ){
 			PonenciaManager::asignarEvaluador($ponencia, $evaluador);
 		}
+		ApplicationContext::addMessage("Se han asignado correctamente los evaluadores a la ponencia ".$ponencia->getTitulo(), Message::$INFO);
 	}
 }
 ?>
