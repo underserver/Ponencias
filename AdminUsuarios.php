@@ -43,5 +43,5 @@ class AdminUsuarios extends PageView{
 	}
 }
 $view = new AdminUsuarios();
-$view->renderAll();test
+$view->renderAll();
 ?>
