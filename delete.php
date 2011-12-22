@@ -32,5 +32,5 @@ if( $_validator->validate() ){
 		echo "Necesita <a href='./login.php'><b>iniciar sesion</b></a> para comprar.";
 	}
 }
-
+test
 ?>
