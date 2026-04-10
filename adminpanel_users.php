@@ -104,13 +104,26 @@ $usuarios = $db->get_results("select * from usuarios where usuario_tipo <> 1" );
 			type="checkbox"></th>
 		<th id="header" style="width: 30%"><?=$_i18n["name"]?></th>
 		<th id="header">Tipo</th>
-		<th id="header">Ponencias</th>
+		<th id="header">Correo</th>
 		<th id="header"><?=$_i18n["lastaccess"]?></th>
 	</tr>
 	<?php for( $i = 0;$i < count($usuarios); $i++){
 		$userPonencias = $db->get_results("select * from ponencias where usuario_id=".$usuarios[$i]->usuario_id);
 	?>
 	<tr class="" id="ARTICLE_COLLECTION_SELECTION_<?=$i?>">
+		<td></td>
+		<td><input value="true"
+			name="COLLECTION_SELECTION_<?=$i?>.<?=base64_encode($usuarios[$i]->usuario_id)?>"
+			onclick="cbTbl.selectOne(this); updateDeleteButtons(this);"
+			type="checkbox"></td>
+		<td><a href="javascript:void(0)"
+			onclick="go( 'adminpanel_edituser.php?user=<?=base64_encode($usuarios[$i]->usuario_id)?>' );return false">{{$usuarios[$i]->usuario_alias}}</a></td>
+		<td>{{getTipoUsuario($usuarios[$i]->usuario_tipo)}}</td>
+		<td>{{$usuarios[$i]->usuario_correo}}</td>
+		<td>{{$usuarios[$i]->usuario_telefono}}</td>
+		<td>{{$usuarios[$i]->usuario_direccion}}</td>
+		<td>{{count($userPonencias)}}</td>
+		<td>{{(trim($usuarios[$i]->usuario_ultimoacceso) != "" ? $usuarios[$i]->usuario_ultimoacceso : $_i18n["notavailable"])}}</td>
 		<td></td>
 		<td><input value="true"
 			name="COLLECTION_SELECTION_<?=$i?>.<?=base64_encode($usuarios[$i]->usuario_id)?>"
