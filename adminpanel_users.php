@@ -79,72 +79,14 @@ $fields = " ".base64_decode( $_GET[ "tk" ] );
 </p>
 
 <?php
-$usuarios = $db->get_results("select * from usuarios where usuario_tipo <> 1" );
+
 ?>
 <form id="list" name="deleteItems"
 	action="adminpanel_process.php?sale=<?=base64_decode($values["cid"])?>"
 	method="post">
-<table>
-	<tr>
-		<th colspan="3" class="tablebar"><input disabled="disabled"
-			value="<?=$_i18n["admin.deleteuser"]?>" id="deleteB"
-			onclick="return deleteUser(deleteItems, './adminpanel_deleteuser.php');"
-			type="button"></th>
-		<th colspan="4" class="tablebar">
-		<ul class="inlinelist">
-			<li id="count2"><b>1 - <?=count( $usuarios )?> de <?=count( $usuarios )?></b>
-			</li>
-		</ul>
-		</th>
-	</tr>
-	<tr>
-		<th id="header"></th>
-		<th id="header" style="width: 3%"><input value="" name="select_all"
-			onclick="cbTbl.selectAll(this); updateDeleteButtons(this);"
-			type="checkbox"></th>
-		<th id="header" style="width: 30%"><?=$_i18n["name"]?></th>
-		<th id="header">Tipo</th>
-		<th id="header">Ponencias</th>
-		<th id="header"><?=$_i18n["lastaccess"]?></th>
-	</tr>
-	<?php for( $i = 0;$i < count($usuarios); $i++){
-		$userPonencias = $db->get_results("select * from ponencias where usuario_id=".$usuarios[$i]->usuario_id);
-	?>
-	<tr class="" id="ARTICLE_COLLECTION_SELECTION_<?=$i?>">
-		<td></td>
-		<td><input value="true"
-			name="COLLECTION_SELECTION_<?=$i?>.<?=base64_encode($usuarios[$i]->usuario_id)?>"
-			onclick="cbTbl.selectOne(this); updateDeleteButtons(this);"
-			type="checkbox"></td>
-		<td><a href="javascript:void(0)"
-			onclick="go( 'adminpanel_edituser.php?user=<?=base64_encode($usuarios[$i]->usuario_id)?>' );return false"><?=$usuarios[$i]->usuario_alias?></a></td>
-		<td><?=getTipoUsuario($usuarios[$i]->usuario_tipo)?></td>
-		<td><?=count($userPonencias)?></td>
-		<td><?=(trim($usuarios[$i]->usuario_ultimoacceso) != "" ? $usuarios[$i]->usuario_ultimoacceso : $_i18n["notavailable"])?></td>
-	</tr>
-	<?php
-}
-if( $i == 0 ){
-	?>
-	<tr class="" id="ARTICLE_COLLECTION_SELECTION_0">
-		<td colspan="7" align="center"><em>No existe ningun usuario</em></td>
-	</tr>
-	<?php } ?>
 
-	<tr>
-		<th colspan="3" class="tablebar"><input disabled="disabled"
-			value="<?=$_i18n["admin.deleteuser"]?>" id="deleteT"
-			onclick="return deleteUser(deleteItems, './adminpanel_deleteuser.php');"
-			type="button"></th>
-		<th colspan="4" class="tablebar">
-		<ul class="inlinelist">
-			<li id="count"><b>1 - <?=count( $usuarios )?> de <?=count( $usuarios )?></b>
-			</li>
-		</ul>
 
-		</th>
-	</tr>
-</table>
+	
 </form>
 </div>
 </div>
