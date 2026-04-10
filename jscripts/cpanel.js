@@ -3,6 +3,27 @@ var div1 = null, isloading = false;
 /* highlighting rows */
 function hl(r) {
   r.style.backgroundColor = '#ffffdd';
+function fetchDashboardData() {
+    $.ajax({
+        url: './dashboard_data.php',
+        method: 'GET',
+        success: function(data) {
+            updateDashboard(data);
+        },
+        error: function() {
+            alert('Failed to fetch dashboard data');
+        }
+    });
+}
+
+function updateDashboard(data) {
+    document.getElementById('dash1').innerHTML = data.section1;
+    document.getElementById('dash2').innerHTML = data.section2;
+}
+
+function initializeDashboard() {
+    fetchDashboardData();
+}
 };
 
 function uhl(r) {
