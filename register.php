@@ -4,7 +4,7 @@
  *  Alias  : sxceron
  *  Web    : http://www.dotrow.info
  *  Name   : jShop v1.0
- *  Desc   : Formulario de registro para clientes
+ *  Desc   : Formulario de registro (signup) para clientes
  *
  ***********************************************************************/
 // Include file headers
@@ -14,7 +14,7 @@ include_once "./includes/db.php";
 $type = isset($_GET["type"])?$_GET["type"]:0;
 $sselected = 4; $subtitle = $_i18n["register"]; $selected = $type;
 $items = array( $_i18n["register.submenu2"], $_i18n["register.submenu3"], $_i18n["register.submenu4"], $_i18n["register.submenu5"] ); 
-$links = array( "./register.php?type=0", "./register.php?type=1", "./register.php?type=2", "./register.php?type=3" );
+$links = array( "./signup.php?type=0", "./signup.php?type=1", "./signup.php?type=2", "./signup.php?type=3" );
 include("includes/header.php");
 
 ?>
