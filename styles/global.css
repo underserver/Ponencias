@@ -426,12 +426,14 @@
 		border-bottom:1px solid #ccc;
 		}
 
-	div#dash1 table{
+	div#dash1 table,
+div.user-table{
 		font-size:.9em;
 		border-collapse:collapse;
 		}
 
-	div#dash1 table th.status{
+	div#dash1 table th.status,
+div.user-table th.status{
 		background:url(img/check.gif) no-repeat;
 		padding-left:20px;
 		font-weight:bold;
@@ -439,7 +441,8 @@
 		border-bottom:1px solid #ccc;
 		}
 		
-	div#dash1 table th.warning{
+	div#dash1 table th.warning,
+div.user-table th.warning{
 		background:url(img/warning.gif) no-repeat;
 		padding-left:20px;
 		font-weight:bold;
@@ -447,7 +450,8 @@
 		border-bottom:1px solid #ccc;
 		}		
 		
-	div#dash1 table th.error{
+	div#dash1 table th.error,
+div.user-table th.error{
 		background:url(img/redex.gif) no-repeat;
 		padding-left:20px;
 		font-weight:bold;
@@ -456,17 +460,20 @@
 		}
 
 
-	div#dash1 table th{
+	div#dash1 table th,
+div.user-table th{
 		font-weight:bold;
 		border-bottom:1px solid #ccc;
 		}
 
-	div#dash1 th, div#dash1 td{
+	div#dash1 th, div#dash1 td,
+div.user-table th, div.user-table td{
 		padding:2px 5px 2px 0;
 		text-align:left;
 		}
 	
-	div#dash1 table .tablefooter{
+	div#dash1 table .tablefooter,
+div.user-table .tablefooter{
 		color: #767676;
 		border-top:1px solid #ccc;
 		}
@@ -477,7 +484,8 @@
 		font-weight:bold;
 		}
 
-	div#dash1 table .high, .low{
+	div#dash1 table .high, .low,
+div.user-table .high, .low{
 		color:#009900;
 		text-align:center;
 		}
