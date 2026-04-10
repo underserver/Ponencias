@@ -13,6 +13,45 @@
 		border: 1px #999999 dotted;
 		} */
 
+/* User Table Styles */
+
+.table-user {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.table-user th, .table-user td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  font-size: 0.9em;
+}
+
+.table-user th {
+  background-color: #f4f4f4;
+  color: #333;
+  font-weight: bold;
+}
+
+.table-user tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.table-user tr:hover {
+  background-color: #f1f1f1;
+}
+
+.table-user td a {
+  color: #06c;
+  text-decoration: none;
+}
+
+.table-user td a:hover {
+  color: #c60;
+  text-decoration: underline;
+}
+
 /* global */
 
 	div, h1, h2, h3, h4, p, ul, ol, li, form, fieldset, table, td, th {
