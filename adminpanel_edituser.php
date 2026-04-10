@@ -11,8 +11,8 @@
 include_once "./includes/validator.php";
 include_once "./includes/settings.php";
 include_once "./includes/db.php";
-include_once "./includes/security.php";
-if( $isadmin != 1 ) header( "Location: ./login.php" );
+
+
 
 $_validator = new Validator();
 $_validator->setMethod( "GET" );

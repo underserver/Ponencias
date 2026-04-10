@@ -9,8 +9,8 @@
 ***********************************************************************/
 include_once "./includes/settings.php";
 include_once "./includes/db.php";
-include_once "./includes/security.php";
-//if( $isadmin != 1 ) header( "Location: ./login.php" );
+
+
 
 $sselected = 3; $subtitle = "Panel de administracion";$selected = 0;
 $items = array( $_i18n["menu1"], "Ponencias", "Usuarios", "Nueva ponencia", "Nuevo usuario"  );
