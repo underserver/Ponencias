@@ -22,7 +22,7 @@ include("includes/header.php");$_validator = new Validator();
 $fields = " ".base64_decode( $_GET[ "tk" ] );
 ?>
 
-<div id="content"><?php if( isset( $_GET[ "id" ] ) ){ ?>
+<div id="content">
 <div align="center" class="msg">
 <div class="bl3">
 <div class="br">
@@ -33,12 +33,11 @@ $fields = " ".base64_decode( $_GET[ "tk" ] );
 </div>
 </div>
 </div>
-<?php } ?>
-<ul class="inlinelist">
-	<li class="main1"><b><?=$_i18n["admin.createuser"]?></b></li>
-	</li>
-</ul>
-<p><?=$_i18n["users.info"]?></p>
+
+
+
+
+
 <form action="adminpanel_register.php" method="post" id="settings"><input
 	type="hidden" name="at" value="7cf0ac816f615996-1128ad98933">
 <table>
@@ -78,38 +77,8 @@ $fields = " ".base64_decode( $_GET[ "tk" ] );
 	<hr>
 </p>
 
-<?php
-$usuarios = $db->get_results("select * from usuarios where usuario_tipo <> 1" );
-?>
-<form id="list" name="deleteItems"
-	action="adminpanel_process.php?sale=<?=base64_decode($values["cid"])?>"
-	method="post">
-<table>
-	<tr>
-		<th colspan="3" class="tablebar"><input disabled="disabled"
-			value="<?=$_i18n["admin.deleteuser"]?>" id="deleteB"
-			onclick="return deleteUser(deleteItems, './adminpanel_deleteuser.php');"
-			type="button"></th>
-		<th colspan="4" class="tablebar">
-		<ul class="inlinelist">
-			<li id="count2"><b>1 - <?=count( $usuarios )?> de <?=count( $usuarios )?></b>
-			</li>
-		</ul>
-		</th>
-	</tr>
-	<tr>
-		<th id="header"></th>
-		<th id="header" style="width: 3%"><input value="" name="select_all"
-			onclick="cbTbl.selectAll(this); updateDeleteButtons(this);"
-			type="checkbox"></th>
-		<th id="header" style="width: 30%"><?=$_i18n["name"]?></th>
-		<th id="header">Tipo</th>
-		<th id="header">Ponencias</th>
-		<th id="header"><?=$_i18n["lastaccess"]?></th>
-	</tr>
-	<?php for( $i = 0;$i < count($usuarios); $i++){
-		$userPonencias = $db->get_results("select * from ponencias where usuario_id=".$usuarios[$i]->usuario_id);
-	?>
+
+
 	<tr class="" id="ARTICLE_COLLECTION_SELECTION_<?=$i?>">
 		<td></td>
 		<td><input value="true"
@@ -126,26 +95,9 @@ $usuarios = $db->get_results("select * from usuarios where usuario_tipo <> 1" );
 }
 if( $i == 0 ){
 	?>
-	<tr class="" id="ARTICLE_COLLECTION_SELECTION_0">
-		<td colspan="7" align="center"><em>No existe ningun usuario</em></td>
-	</tr>
-	<?php } ?>
+	
 
-	<tr>
-		<th colspan="3" class="tablebar"><input disabled="disabled"
-			value="<?=$_i18n["admin.deleteuser"]?>" id="deleteT"
-			onclick="return deleteUser(deleteItems, './adminpanel_deleteuser.php');"
-			type="button"></th>
-		<th colspan="4" class="tablebar">
-		<ul class="inlinelist">
-			<li id="count"><b>1 - <?=count( $usuarios )?> de <?=count( $usuarios )?></b>
-			</li>
-		</ul>
-
-		</th>
-	</tr>
-</table>
-</form>
+	
 </div>
 </div>
 	<?php include("./includes/foot.php");?>
