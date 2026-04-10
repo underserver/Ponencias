@@ -1,30 +1,20 @@
 <?php
-/**********************************************************************
- *  Author : Sergio Ceron Figueroa (sxceron@laciudadx.com)
- *  Alias  : sxceron
- *  Web    : http://www.dotrow.info
- *  Name   : jShop v1.0
- *  Desc   : Formulario de registro (signup) para clientes
- *
- ***********************************************************************/
-// Include file headers
 include_once "./includes/settings.php";
 include_once "./includes/db.php";
 
 $type = isset($_GET["type"])?$_GET["type"]:0;
-$sselected = 4; $subtitle = $_i18n["register"]; $selected = $type;
-$items = array( $_i18n["register.submenu2"], $_i18n["register.submenu3"], $_i18n["register.submenu4"], $_i18n["register.submenu5"] ); 
+$sselected = 4; $subtitle = $_i18n["signup"]; $selected = $type;
+$items = array( $_i18n["signup.submenu2"], $_i18n["signup.submenu3"], $_i18n["signup.submenu4"], $_i18n["signup.submenu5"] );
 $links = array( "./signup.php?type=0", "./signup.php?type=1", "./signup.php?type=2", "./signup.php?type=3" );
 include("includes/header.php");
-
-?>
+?
 
 <div id="content"><?php if( isset( $_GET[ "id" ] ) ){ ?>
 <div align="center" class="msg">
 <div class="bl3">
 <div class="br">
 <div class="tl">
-<div class="tr2"><?=$_i18n[ "registere".base64_decode( $_GET[ "id" ] ) ]?>
+<div class="tr2"><?=$_i18n[ "signup".base64_decode( $_GET[ "id" ] ) ]?>
 </div>
 </div>
 </div>
@@ -35,7 +25,7 @@ include("includes/header.php");
 $fields = " ".base64_decode( $_GET[ "tk" ] );
 ?>
 <form action="action_register.php" method="post" id="settings"><input
-	type="hidden" name="at" value="7cf0ac816f615996-1128ad98933">
+type="hidden" name="at" value="7cf0ac816f615996-1128ad98933">
 <table>
 	
 	<tr>
