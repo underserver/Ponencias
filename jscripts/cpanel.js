@@ -57,8 +57,8 @@ function toggleItem(item) {
 /*switch items */
 var currentItem="item1";
 
-function switchItem(which) {
-  switchItem2(currentItem, which);
+function switchItem(which, userTableId) {
+  switchItem2(currentItem, which, userTableId);
   currentItem=which;
 };
 
@@ -166,8 +166,8 @@ function expandone2() {
 var cbTbl = {};
 
 /* Enable or disable the "Delete users" buttons after checkbox click */
-function updateDeleteButtons(cb) {
-  if (cbTbl.numberChecked(cb) == 0) {
+function updateDeleteButtons(cb, userTableId) {
+  if (cbTbl.numberChecked(cb, userTableId) == 0) {
     disAble('deleteT');
     disAble('deleteB');
   } else {
@@ -318,7 +318,7 @@ cbTbl.selectOne = function(cb) {
   // Update status of 'Select All' checkbox appropriately.
   // The first ('Select All') cb should be selected IFF all the 
   // rest are checked,
-  var tbl = cbTbl.findContainingTable(cb);
+  var tbl = document.getElementById(userTableId) || cbTbl.findContainingTable(cb);
   var cbs = cbTbl.findNodes(tbl, cbTbl.isNodeACheckbox);
   var nChecked = 0;
   // Node: starting loop at 1 here cuz the 1st cb is 'Select All'.
