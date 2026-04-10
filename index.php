@@ -76,10 +76,10 @@ include("includes/header.php");
 <div class="section">&nbsp;Registrarse como</div>
 
 <div class="grid-1x5">
-					  <a href="register.php?type=0" class="registro conferencista">Conferencista</a>
-					  <a href="register.php?type=1" class="registro coautor">Coautor</a>
-					  <a href="register.php?type=2" class="registro asistente">Asistente</a>
-					  <a href="register.php?type=3" class="registro evaluador">Evaluador</a>
+					  
+					  
+					  
+					  
 </div>
 
 </div>
