@@ -10,11 +10,13 @@
 include_once "./includes/settings.php";
 include_once "./includes/db.php";
 include_once "./includes/security.php";
+include_once "./includes/session.php";
+include_once "./services/UsuarioManager.php";
 //if( $isadmin != 1 ) header( "Location: ./login.php" );
 
-$sselected = 3; $subtitle = "Panel de administracion";$selected = 0;
+$sselected = 3; $subtitle = "Panel de administración";$selected = 0;
 $items = array( $_i18n["menu1"], "Ponencias", "Usuarios", "Nueva ponencia", "Nuevo usuario"  );
-$links = array( "./adminpanel.php", "./adminpanel_sales.php", "./adminpanel_users.php","./adminpanel_categories.php", "./adminpanel_users.php" );
+$links = array( "./dashboard.php", "./adminpanel_sales.php", "./adminpanel_users.php","./adminpanel_categories.php", "./adminpanel_users.php" );
 include("includes/header.php");
 ?>
 
@@ -39,20 +41,20 @@ $processed = $db->get_var("select count(*) from compras where compra_estado=2");
 
 
 <div id="dash1">
-<h1>CFIE - Panel de Control de Ponencias</h1>
+<h1>CFIE - Dashboard de Ponencias</h1>
 <div id="dom_user">
 <div id="domain">
-<p>Estado de las ponencias</p>
+<p>Dashboard de Ponencias</p>
 <ul class="inlinelist">
-	<li><b> <a href="adminpanel_process.php?all">Ver ponencias pendientes</a>&nbsp;</b>
+	<li><b> <a href="dashboard_process.php?all">Ver todas las ponencias</a>&nbsp;</b>
 	</li>
-	<li><a href="adminpanel_sales.php">Nuevas ponencias</a>&nbsp;
+	<li><a href="adminpanel_newproduct.php">Añadir nueva ponencia</a>&nbsp;
 	</li>
 </ul>
 <div class="clear"></div>
 </div>
 <div id="users">
-<h2><?=$_i18n["admin.usersaccount"]?></h2>
+<h2><?=$_i18n["admin.dashboard.usersaccount"]?></h2>
 <ul class="inlinelist">
 	<li><?=$users?> <?=$_i18n["admin.users"]?> &nbsp;</li>
 	<li><a href="adminpanel_users.php#create">Nuevo usuario</a>&nbsp;
@@ -74,7 +76,7 @@ $processed = $db->get_var("select count(*) from compras where compra_estado=2");
 	<h3><a href="adminpanel_products.php">Ponencias pendientes</a>
 	</h3>
 	<span class="beta"><?=$articles?> </span> <span> - <?=$_i18n["admin.active"]?></span>
-	<p><a href="#" class="greenlink"> Lista de ponencias pendientes de revisi�n </a>
+	<p><a href="#" class="greenlink"> Lista de ponencias para revisión </a>
 	</p>
 	</li>
 	<li class=""><a href="ChatSettings" class="calendar"><span><?=$_i18n["categories.submenu"]?></span></a>
