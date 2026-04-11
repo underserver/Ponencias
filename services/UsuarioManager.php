@@ -3,7 +3,7 @@ class UsuarioManager{
 	public static function registrarAdministrador($usuario){
 		try{
 			$usuario->setTipo(UsuarioType::ADMINISTRADOR);
-			UsuarioDao::persist($usuario);
+			UsuarioDao::persist($usuario, $GLOBALS['db']);
 		}catch(TransactionException $te){
 			throw $te;
 		}
@@ -47,7 +47,7 @@ class UsuarioManager{
 	
 	public static function obtener($id){
 		try{
-			return UsuarioDao::findById($id);
+			return UsuarioDao::findById($id, $GLOBALS['db']);
 		}catch(QueryException $qe){
     		throw $qe;
     	}
@@ -55,7 +55,7 @@ class UsuarioManager{
 	
 	public static function eliminar($usuario){
 		try{
-			UsuarioDao::delete($usuario);
+			UsuarioDao::delete($usuario, $GLOBALS['db']);
 		}catch(TransactionException $te){
 			throw $te;
 		}
@@ -63,7 +63,7 @@ class UsuarioManager{
 	
 	public static function listar(){
 		try{
-			return UsuarioDao::findAll();
+			return UsuarioDao::findAll($GLOBALS['db']);
 		}catch(QueryException $qe){
     		throw $qe;
     	}
@@ -71,7 +71,7 @@ class UsuarioManager{
 	
 	public static function actualizar($usuario){
 		try{
-			return UsuarioDao::persist($usuario);
+			return UsuarioDao::persist($usuario, $GLOBALS['db']);
 		}catch(TransactionException $te){
 			throw $te;
 		}
@@ -79,7 +79,7 @@ class UsuarioManager{
 	
 	public static function alreadyRegistered($alias){
 		try{
-			$usuarios = UsuarioDao::findByQuery("usuario_alias='$alias'");
+			$usuarios = UsuarioDao::findByQuery("usuario_alias='".$GLOBALS['db']->escape($alias)."'", $GLOBALS['db']);
 			if( count($usuarios) > 0 ){
 				return true;
 			}
@@ -91,7 +91,7 @@ class UsuarioManager{
 	
 	public static function checkPassword($_usuario){
 		try{
-			$usuario = UsuarioDao::findByQuery("usuario_alias='$_usuario->getAlias()'");
+			$usuario = UsuarioDao::findByQuery("usuario_alias='".$GLOBALS['db']->escape($_usuario->getAlias())."'", $GLOBALS['db']);
 			if( $usuario->getPassword() == $_usuario->getPassword() ){
 				return true;
 			}
