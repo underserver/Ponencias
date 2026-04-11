@@ -13,6 +13,69 @@
 		border: 1px #999999 dotted;
 		} */
 
+/* login page */
+
+.login-container {
+    width: 360px;
+    margin: 0 auto;
+    padding: 2em;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.login-container h2 {
+    text-align: center;
+    margin-bottom: 1.5em;
+    color: #333333;
+}
+
+.login-container form {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-container label {
+    margin-bottom: 0.5em;
+    color: #555555;
+    font-weight: bold;
+}
+
+.login-container input[type="text"],
+.login-container input[type="password"] {
+    padding: 0.8em;
+    margin-bottom: 1em;
+    border: 1px solid #dddddd;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+.login-container input[type="submit"] {
+    padding: 0.8em;
+    background: #5588dd;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.login-container input[type="submit"]:hover {
+    background: #4477cc;
+}
+
+.login-container a {
+    text-align: center;
+    display: block;
+    margin-top: 1.5em;
+    color: #0066cc;
+    text-decoration: none;
+}
+
+.login-container a:hover {
+    color: #004499;
+}
+
 /* global */
 
 	div, h1, h2, h3, h4, p, ul, ol, li, form, fieldset, table, td, th {
