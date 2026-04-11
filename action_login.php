@@ -23,8 +23,8 @@ $_validator->setVars( array("userName:required", "userPassword:required") );
 if( $_validator->validate() ){
 	$values = $_validator->getValues();
 
-	$user = $db->get_row( "select * from usuarios where usuario_alias='".$values["userName"]."'" );
-	if( $user->usuario_password == md5($values["userPassword"]) ){
+	$user = $db->get_row( "SELECT * FROM usuarios WHERE usuario_alias='".$db->escape($values["userName"])."'" );
+	if( $user && $user->usuario_password === md5($values["userPassword"]) ){
 		$_SESSION[ 'user_id' ] = $user->usuario_id;
 		$_SESSION[ 'user_alias' ] = $user->usuario_alias;
 		$_SESSION[ 'user_role' ] = $user->usuario_tipo;

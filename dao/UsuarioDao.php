@@ -12,7 +12,7 @@ class UsuarioDao implements Dao{
 		}
 	}
 	
-	public static function save($usuario){
+	public static function save($usuario, $db){
 		try{
 			$sql  = "insert into usuarios(usuario_nombre, usuario_apellidos, usuario_correo, usuario_telefono, usuario_direccion, usuario_nacimiento, usuario_alias, usuario_password, usuario_tipo) ";
 		  	$sql .= "values('$usuario->getNombre()','$usuario->getApellidos()' ";
@@ -27,7 +27,7 @@ class UsuarioDao implements Dao{
     	}
 	}
 	
-	public static function update($usuario){
+	public static function update($usuario, $db){
 		try{
 			$sql  = "update usuarios set";
 		  	$sql .= "       usuario_nombre = '$usuario->getNombre()',";
@@ -59,19 +59,19 @@ class UsuarioDao implements Dao{
 	   }		
     } 
 	
-    public static function delete($usuario){
+    public static function delete($usuario, $db){
     	try {
-    		$db->query("delete from usuarios where usuario_id=$usuario->getId()");
+    		$db->query("DELETE FROM usuarios WHERE usuario_id=".$db->escape($usuario->getId()));
     	}catch(Exception $e){
     		throw new TransactionExcepion($e->getMessage(), $usuario, TransactionExcepion::DELETE_CODE, $e);
     	}
     }
 	
-    public static function findByQuery($query){
+    public static function findByQuery($query, $db){
     	$users = array();
     	$sql = "select * from usuarios where $query";
     	try{
-	    	$rows = $db->get_results( $sql );
+	    	$rows = $db->get_results($sql);
 			foreach( $rows as $row ){
 				$users[] = new Usuario($row);
 			}
@@ -95,11 +95,11 @@ class UsuarioDao implements Dao{
 		return $users;
     }
 	
-    public static function findById($id){
+    public static function findById($id, $db){
        $sql = "select * from usuarios where usuario_id=$id";
        $usuario = new Usuario();
     	try{
-	    	$row = $db->get_results( $sql );
+	    	$row = $db->get_row($sql);
 			$usuario = new Usuario($row);
 		}catch(Exception $e){
     		throw new QueryException($e->getMessage(), $sql, 0, $e);
