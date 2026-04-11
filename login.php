@@ -85,14 +85,14 @@ include("includes/header.php");
 		<tr>
 			<td valign="top">
 			<div class="">
-			<form action="action_login.php" method="post" name="settings">
+			<form action="action_login.php" method="post" name="loginForm" id="loginForm">
 			<div class="section">&nbsp;Entrar al sistema</div>
 			<table style="margin: 15px 0pt 0pt;" border="0" cellpadding="0"
 				cellspacing="0">
 				<tbody>
 					<tr>
 						<th align="right" nowrap="nowrap"><?=$_i18n[ "user" ]?> :&nbsp;&nbsp;&nbsp;&nbsp;</th>
-						<td><input name="userName" size="35" type="text" class="rounded"> <?php if( strpos( $fields, 'userName' ) ){?><br>
+						<td><input name="userName" id="userName" size="35" type="text" class="rounded" required autofocus> <?php if( strpos( $fields, 'userName' ) ){?><br>
 						<span class="errormsg" id="errormsg_0"> <?=$_i18n[ "error.required" ]?>
 						</span><?php } ?></td>
 					</tr>
@@ -111,7 +111,7 @@ include("includes/header.php");
 					</tr>
 					<tr>
 						<th align="right" nowrap="nowrap"><?=$_i18n[ "pass" ]?> :&nbsp;&nbsp;&nbsp;&nbsp;</th>
-						<td><input name="userPassword" size="35" type="password" class="rounded"> <?php if( strpos( $fields, 'userPassword' ) ){?><br>
+						<td><input name="userPassword" id="userPassword" size="35" type="password" class="rounded" required> <?php if( strpos( $fields, 'userPassword' ) ){?><br>
 						<span class="errormsg" id="errormsg_0"> <?=$_i18n[ "error.required" ]?>
 						</span><?php } ?></td>
 					</tr>
@@ -124,7 +124,7 @@ include("includes/header.php");
 					</tr>
 					<tr>
 						<td></td>
-						<td><input value="<?=$_i18n[ "access" ]?>" type="submit"></td>
+						<td><button type="submit" class="submitBtn"><?=$_i18n[ "access" ]?></button></td>
 						<td></td>
 					</tr>
 				</tbody>
