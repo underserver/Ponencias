@@ -79,60 +79,28 @@ include("includes/header.php");
 </style>
 
 
-<table border="0" cellpadding="0" style="text-align: center;"
-	cellspacing="0" style="width:200px">
-	<tbody>
-		<tr>
-			<td valign="top">
-			<div class="">
-			<form action="action_login.php" method="post" name="settings">
-			<div class="section">&nbsp;Entrar al sistema</div>
-			<table style="margin: 15px 0pt 0pt;" border="0" cellpadding="0"
-				cellspacing="0">
-				<tbody>
-					<tr>
-						<th align="right" nowrap="nowrap"><?=$_i18n[ "user" ]?> :&nbsp;&nbsp;&nbsp;&nbsp;</th>
-						<td><input name="userName" size="35" type="text" class="rounded"> <?php if( strpos( $fields, 'userName' ) ){?><br>
-						<span class="errormsg" id="errormsg_0"> <?=$_i18n[ "error.required" ]?>
-						</span><?php } ?></td>
-					</tr>
-					<tr>
-						<td></td>
-						<td
-							style="overflow: hidden; color: rgb(68, 68, 68); font-size: 75%;"
-							dir="ltr" align="right"></td>
-						<td></td>
-					</tr>
-					<tr>
-						<td colspan="3" height="8"></td>
-					</tr>
-					<tr>
-						<td colspan="2" height="8"></td>
-					</tr>
-					<tr>
-						<th align="right" nowrap="nowrap"><?=$_i18n[ "pass" ]?> :&nbsp;&nbsp;&nbsp;&nbsp;</th>
-						<td><input name="userPassword" size="35" type="password" class="rounded"> <?php if( strpos( $fields, 'userPassword' ) ){?><br>
-						<span class="errormsg" id="errormsg_0"> <?=$_i18n[ "error.required" ]?>
-						</span><?php } ?></td>
-					</tr>
-					<tr>
-						<td colspan="2" height="8"></td>
-					</tr>
-					<tr>
-						<td colspan="2" height="8"></td>
-						<td></td>
-					</tr>
-					<tr>
-						<td></td>
-						<td><input value="<?=$_i18n[ "access" ]?>" type="submit"></td>
-						<td></td>
-					</tr>
-				</tbody>
-			</table>
-		
-		</tr>
-	</tbody>
-</table>
+<div class="login-container">
+    <form action="action_login.php" method="post" name="settings" class="login-form">
+        <h2 class="section-header">&nbsp;Entrar al sistema</h2>
+        <div class="form-group">
+            <label for="userName" class="form-label"><?=$_i18n[ "user" ]?> :</label>
+            <input id="userName" name="userName" type="text" class="input-text rounded"> 
+            <?php if( strpos( $fields, 'userName' ) ){?>
+            <span class="errormsg" id="errormsg_0"> <?=$_i18n[ "error.required" ]?></span>
+            <?php } ?>
+        </div>
+        <div class="form-group">
+            <label for="userPassword" class="form-label"><?=$_i18n[ "pass" ]?> :</label>
+            <input id="userPassword" name="userPassword" type="password" class="input-text rounded"> 
+            <?php if( strpos( $fields, 'userPassword' ) ){?>
+            <span class="errormsg" id="errormsg_0"> <?=$_i18n[ "error.required" ]?></span>
+            <?php } ?>
+        </div>
+        <div class="form-group">
+            <input value="<?=$_i18n[ "access" ]?>" type="submit" class="submit-button">
+        </div>
+    </form>
+</div>
 </div>
 <script type="text/javascript" language="JavaScript">
 	  <!--
