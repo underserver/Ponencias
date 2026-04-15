@@ -33,16 +33,18 @@
 	html {
 		font-size: 9px;
 		}
-	
-	body {
-		font-family:  Arial, Helvetica, sans-serif;
-		font-size:1.2em;
-		margin:0 auto;
-		padding:.5em 1.5em 1.5em 1.5em;
-		min-width:730px;
-		background:#FFF;
-		behavior:url("csshover2.htc");
-		}		
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.2em;
+    margin: 0;
+    padding: 0;
+    min-width: 320px;
+    background: linear-gradient(to bottom, #f0f4f8, #d9e8ef);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
 		
 	h1{
 		font-size:16px;
@@ -200,9 +202,16 @@
 
 /* header */
 	
-	div#header {
-		min-height:65px;
-		}
+div#header {
+    min-height: 65px;
+    background-color: #317082;
+    color: #fff;
+    font-size: 1.5em;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
 	div#logo{
 		float: left;
@@ -223,9 +232,12 @@
 		}
 	
 	div#header p, div#header form{
-		margin:0 0 0 146px;
-		padding-bottom:2px;
-		}
+div#header p, div#header form {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
 		
 	div#header form label{
 		display:none;
@@ -365,13 +377,14 @@
 
 /* content - general */
 
-	div#content{
-		background-color: #fff;
-    	width:982px;
-		padding:20px 20px;
-		border-left: 1px solid #485C5A;
-		border-right: 1px solid #485C5A;
-	}
+div#content {
+    background-color: #fff;
+    width: 100%;
+    max-width: 500px;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
 		
 	div#content p{
 		padding-bottom:1.5em;
@@ -711,11 +724,12 @@
 
 /* content - settings type */
 	
-	form#settings td{
-		padding:10px 20px 0px 0;
-		margin:0;
-		vertical-align: top;
-		}
+form#settings td {
+    padding: 10px 0;
+    margin: 0;
+    vertical-align: top;
+    width: 100%;
+}
 	
 	form#settings th{
 		text-align:right;
