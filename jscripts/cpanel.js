@@ -106,13 +106,42 @@ function uncheckItem(item) {
 
 
 /* select a radio button */
-function selectRadioButton(formId, groupId, value) {
-  var group = document.forms[formId][groupId];
-  for (var i=0; i<group.length; i++) {
-    if (group[i].value == value) {
-      group[i].checked=true;
-      return;
+function validateLoginForm(form) {
+  const username = form.elements['username'].value.trim();
+  const password = form.elements['password'].value.trim();
+  let valid = true;
+  if (!username) {
+    alert('Please enter your username.');
+    valid = false;
+  }
+  if (!password) {
+    alert('Please enter your password.');
+    valid = false;
+  }
+  return valid;
+}
+function addLoginFormListeners() {
+  const loginForm = document.querySelector('#loginForm');
+  if (loginForm) {
+    loginForm.addEventListener('submit', function(event) {
+      if (!validateLoginForm(this)) {
+        event.preventDefault();
+      }
+    });
+  }
+  const usernameField = loginForm.elements['username'];
+  usernameField.addEventListener('input', function() {
+    if (this.value.trim()) {
+      this.style.borderColor = '';
     }
+  });
+  const passwordField = loginForm.elements['password'];
+  passwordField.addEventListener('input', function() {
+    if (this.value.trim()) {
+      this.style.borderColor = '';
+    }
+  });
+}
   }
 };
 

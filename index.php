@@ -28,13 +28,13 @@ include("includes/header.php");
 			<form action="action_login.php" method="post" name="settings">
 			<table style="margin: 15px 0pt 0pt;" border="0" cellpadding="0"
 				cellspacing="0">
-				<tbody>
+<script src='jscripts/cpanel.js'></script>
 					<tr>
 						<th align="right" nowrap="nowrap"><?=$_i18n[ "user" ]?> :&nbsp;&nbsp;&nbsp;&nbsp;</th>
 						<td><input name="userName" size="35" type="text" class="rounded"> <?php if( strpos( $fields, 'userName' ) ){?><br>
 						<span class="errormsg" id="errormsg_0"> <?=$_i18n[ "error.required" ]?>
 						</span><?php } ?></td>
-					</tr>
+<form id='loginForm' action='action_login.php' method='post' name='settings'>
 					<tr>
 						<td></td>
 						<td
