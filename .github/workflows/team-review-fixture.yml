@@ -1,0 +1,25 @@
+name: team-review-fixture
+on:
+  push:
+    branches: [gitfloppy-fixture/team-review-base]
+permissions:
+  contents: write
+  pull-requests: write
+jobs:
+  open:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Open the fixture pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c gitfloppy-fixture/team-review-head
+          mkdir -p fixture
+          printf 'Team review fixture for GitFloppy.\n' > fixture/team-review.md
+          git add fixture/team-review.md
+          git commit -m "docs: team review fixture"
+          git push origin gitfloppy-fixture/team-review-head
+          gh pr create --base gitfloppy-fixture/team-review-base --head gitfloppy-fixture/team-review-head --title "Team review fixture" --body "Disposable pull request that checks a review asked of a team."
